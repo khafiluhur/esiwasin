@@ -1,0 +1,36 @@
+.bg-red {
+    background-color: #d10102;
+}
+.txt-white {
+    color: white;
+}
+
+.bg-white {
+   background-color: white;
+}
+
+.txt-black {
+    color: black;
+}
+
+.txt-red {
+    color: #d10102;
+}
+
+.nav-main-dark .nav-main-link.active,
+.page-header-dark #page-header .nav-main-link.active,
+.sidebar-dark #sidebar .nav-main-link.active {
+    font-weight: 700;
+}
+
+.nav-main-link.active .nav-main-link-icon {
+    font-weight: 700;
+}
+
+.font-13 {
+    font-size: 13px !important;
+}
+
+.hide {
+    display: none !important;
+}
