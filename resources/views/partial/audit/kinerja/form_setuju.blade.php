@@ -25,7 +25,7 @@
             @else
             <div class="form-group">
                 <label>Anggota Tim</label>
-                <input class="form-control" type="text" id="created_by" name="created_by" value="{{ $data1->users_pembuat }}" disabled>
+                <input class="form-control" type="text" id="created_by" name="created_by" value="{{ $data2->users_pembuat }}" disabled>
             </div>
         @endif
         @endif

@@ -44,7 +44,7 @@
                                             <strong>{{Session::get('alert')}}</strong>
                                         </div>
                                         @endif
-                                        <form class="js-validation-signin" method="POST" action="http://wasint.wantannas.go.id/">
+                                        <form class="js-validation-signin" method="POST" action="{{ route('login') }}">
                                         {{ csrf_field() }}
                                             <div class="py-3">
                                                 <div class="form-group">
