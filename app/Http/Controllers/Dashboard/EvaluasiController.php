@@ -489,7 +489,7 @@ class EvaluasiController extends Controller
         ]);
 
         if($request->has('kirim')) {
-            if($data->id == $request->id) {
+            if($data->evaluasi_sakip == $request->id) {
                 if($data->users_ketua == Auth::user()->id) {
                     DB::table('approvel_evaluasi_sakip')->where('evaluasi_sakip', $request->id)->update([
                     'users_pt' => 2,
@@ -535,7 +535,7 @@ class EvaluasiController extends Controller
                 
             }
         } elseif($request->has('kembali')) {
-            if($data->id == $request->id) {
+            if($data->evaluasi_sakip == $request->id) {
                 if($data->users_ketua == Auth::user()->id) {
                     DB::table('approvel_evaluasi_sakip')->where('evaluasi_sakip', $request->id)->update([
                     'status_pembuat' => 4,
@@ -862,7 +862,7 @@ class EvaluasiController extends Controller
         ]);
 
         if($request->has('kirim')) {
-            if($data->id == $request->id) {
+            if($data->evaluasi_reformasi_birokrasi == $request->id) {
                 if($data->users_ketua == Auth::user()->id) {
                     DB::table('approvel_evaluasi_reformasi_birokrasi')->where('evaluasi_reformasi_birokrasi', $request->id)->update([
                     'users_pt' => 2,
@@ -908,7 +908,7 @@ class EvaluasiController extends Controller
                 
             }
         } elseif($request->has('kembali')) {
-            if($data->id == $request->id) {
+            if($data->evaluasi_reformasi_birokrasi == $request->id) {
                 if($data->users_ketua == Auth::user()->id) {
                     DB::table('approvel_evaluasi_reformasi_birokrasi')->where('evaluasi_reformasi_birokrasi', $request->id)->update([
                     'status_pembuat' => 4,
@@ -1237,7 +1237,7 @@ class EvaluasiController extends Controller
         ]);
 
         if($request->has('kirim')) {
-            if($data->id == $request->id) {
+            if($data->evaluasi_spip == $request->id) {
                 if($data->users_ketua == Auth::user()->id) {
                     DB::table('approvel_evaluasi_spip')->where('evaluasi_spip', $request->id)->update([
                     'users_pt' => 2,
@@ -1283,7 +1283,7 @@ class EvaluasiController extends Controller
                 
             }
         } elseif($request->has('kembali')) {
-            if($data->id == $request->id) {
+            if($data->evaluasi_spip == $request->id) {
                 if($data->users_ketua == Auth::user()->id) {
                     DB::table('approvel_evaluasi_spip')->where('evaluasi_spip', $request->id)->update([
                     'status_pembuat' => 4,
@@ -1607,7 +1607,7 @@ class EvaluasiController extends Controller
         ]);
 
         if($request->has('kirim')) {
-            if($data->id == $request->id) {
+            if($data->evaluasi_iacm == $request->id) {
                 if($data->users_ketua == Auth::user()->id) {
                     DB::table('approvel_evaluasi_iacm')->where('evaluasi_iacm', $request->id)->update([
                     'users_pt' => 2,
@@ -1653,7 +1653,7 @@ class EvaluasiController extends Controller
                 
             }
         } elseif($request->has('kembali')) {
-            if($data->id == $request->id) {
+            if($data->evaluasi_iacm == $request->id) {
                 if($data->users_ketua == Auth::user()->id) {
                     DB::table('approvel_evaluasi_iacm')->where('evaluasi_iacm', $request->id)->update([
                     'status_pembuat' => 4,

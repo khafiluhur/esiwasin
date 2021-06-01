@@ -546,7 +546,7 @@ class AuditController extends Controller
         ]);
 
         if($request->has('kirim')) {
-            if($data->id == $request->id) {
+            if($data->audit_keuangan == $request->id) {
                 if($data->users_ketua == Auth::user()->id) {
                     DB::table('approvel_audit_keuangan')->where('audit_keuangan', $request->id)->update([
                     'users_pt' => 2,
@@ -592,7 +592,7 @@ class AuditController extends Controller
                 
             }
         } elseif($request->has('kembali')) {
-            if($data->id == $request->id) {
+            if($data->audit_keuangan == $request->id) {
                 if($data->users_ketua == Auth::user()->id) {
                     DB::table('approvel_audit_keuangan')->where('audit_keuangan', $request->id)->update([
                     'status_pembuat' => 4,
@@ -768,6 +768,13 @@ class AuditController extends Controller
                     'updated_at' => Carbon::now()
                 ]);
 
+                DB::table('foreign_pkpt')->insert([
+                    'kode' => $request->kode,
+                    'pkpt' => $request->pkpt,
+                    'created_at' => Carbon::now(),
+                    'updated_at' => Carbon::now()
+                ]);
+
                 DB::table('audit')->insert([
                     'created_by' => Auth::user()->id,
                     'audit' => $request->kode,
@@ -832,6 +839,26 @@ class AuditController extends Controller
                     'created_at' => Carbon::now(),
                     'updated_at' => Carbon::now()
                 ]);
+
+                DB::table('foreign_pkpt')->insert([
+                    'kode' => $request->kode,
+                    'pkpt' => $request->pkpt,
+                    'created_at' => Carbon::now(),
+                    'updated_at' => Carbon::now()
+                ]);
+
+                DB::table('audit')->insert([
+                    'created_by' => Auth::user()->id,
+                    'audit' => $request->kode,
+                    'nomor_st' => $request->nomor_st,
+                    'ketua' => $request->ketua,
+                    'tanggal_audit_from' => $request->tanggal_audit_from,
+                    'tanggal_audit_to' => $request->tanggal_audit_to,
+                    'is_prosess' => 1,
+                    'jenis' => 2,
+                    'created_at' => Carbon::now(),
+                    'updated_at' => Carbon::now()
+                ]);
             }
         } else {
             if($request->has('kirim')) {
@@ -879,6 +906,13 @@ class AuditController extends Controller
                     'tanggal_pembuat' => Carbon::now()->format('d/m/yy'),
                     'jam_pembuat' => Carbon::now()->format('H:m'),
                     'komentar_pembuat' => $request->komentar,
+                    'updated_at' => Carbon::now()
+                ]);
+
+                DB::table('foreign_pkpt')->insert([
+                    'kode' => $request->kode,
+                    'pkpt' => $request->pkpt,
+                    'created_at' => Carbon::now(),
                     'updated_at' => Carbon::now()
                 ]);
 
@@ -937,7 +971,7 @@ class AuditController extends Controller
         ]);
 
         if($request->has('kirim')) {
-            if($data->id == $request->id) {
+            if($data->audit_kinerja == $request->id) {
                 if($data->users_ketua == Auth::user()->id) {
                     DB::table('approvel_audit_kinerja')->where('audit_kinerja', $request->id)->update([
                     'users_pt' => 2,
@@ -983,7 +1017,7 @@ class AuditController extends Controller
                 
             }
         } elseif($request->has('kembali')) {
-            if($data->id == $request->id) {
+            if($data->audit_kinerja == $request->id) {
                 if($data->users_ketua == Auth::user()->id) {
                     DB::table('approvel_audit_kinerja')->where('audit_kinerja', $request->id)->update([
                     'status_pembuat' => 4,
@@ -1157,6 +1191,13 @@ class AuditController extends Controller
                     'updated_at' => Carbon::now()
                 ]);
 
+                DB::table('foreign_pkpt')->insert([
+                    'kode' => $request->kode,
+                    'pkpt' => $request->pkpt,
+                    'created_at' => Carbon::now(),
+                    'updated_at' => Carbon::now()
+                ]);
+
                 DB::table('audit')->insert([
                     'created_by' => Auth::user()->id,
                     'audit' => $request->kode,
@@ -1221,6 +1262,13 @@ class AuditController extends Controller
                     'created_at' => Carbon::now(),
                     'updated_at' => Carbon::now()
                 ]);
+
+                DB::table('foreign_pkpt')->insert([
+                    'kode' => $request->kode,
+                    'pkpt' => $request->pkpt,
+                    'created_at' => Carbon::now(),
+                    'updated_at' => Carbon::now()
+                ]);
             }
 
         } else {
@@ -1270,6 +1318,13 @@ class AuditController extends Controller
                     'tanggal_pembuat' => Carbon::now()->format('d/m/yy'),
                     'jam_pembuat' => Carbon::now()->format('H:m'),
                     'komentar_pembuat' => $request->komentar,
+                    'updated_at' => Carbon::now()
+                ]);
+
+                DB::table('foreign_pkpt')->insert([
+                    'kode' => $request->kode,
+                    'pkpt' => $request->pkpt,
+                    'created_at' => Carbon::now(),
                     'updated_at' => Carbon::now()
                 ]);
 
@@ -1329,7 +1384,7 @@ class AuditController extends Controller
         ]);
 
         if($request->has('kirim')) {
-            if($data->id == $request->id) {
+            if($data->audit_tujuan_tertentu == $request->id) {
                 if($data->users_ketua == Auth::user()->id) {
                     DB::table('approvel_audit_tujuan_tertentu')->where('audit_tujuan_tertentu', $request->id)->update([
                     'users_pt' => 2,
@@ -1375,7 +1430,7 @@ class AuditController extends Controller
                 
             }
         } elseif($request->has('kembali')) {
-            if($data->id == $request->id) {
+            if($data->audit_tujuan_tertentu == $request->id) {
                 if($data->users_ketua == Auth::user()->id) {
                     DB::table('approvel_audit_tujuan_tertentu')->where('audit_tujuan_tertentu', $request->id)->update([
                     'status_pembuat' => 4,

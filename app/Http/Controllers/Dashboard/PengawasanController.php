@@ -342,7 +342,7 @@ class PengawasanController extends Controller
         ]);
 
         if($request->has('kirim')) {
-            if($data->id == $request->id) {
+            if($data->konsultasi == $request->id) {
                 if($data->users_anggota == Auth::user()->id) {
                     DB::table('approvel_konsultasi')->where('konsultasi', $request->id)->update([
                     'users_ketua' => $request->ketua,
@@ -396,7 +396,7 @@ class PengawasanController extends Controller
                 
             }
         } elseif($request->has('kembali')) {
-            if($data->id == $request->id) {
+            if($data->konsultasi == $request->id) {
                 if($data->users_anggota == Auth::user()->id) {
                     DB::table('approvel_konsultasi')->where('konsultasi', $request->id)->update([
                     'users_ketua' => $request->ketua,
@@ -592,7 +592,7 @@ class PengawasanController extends Controller
         // ]);
 
         if($request->has('kirim')) {
-            if($data->id == $request->id) {
+            if($data->pelatihan == $request->id) {
                 if($data->users_anggota == Auth::user()->id) {
                     DB::table('approvel_pelatihan')->where('pelatihan', $request->id)->update([
                     'users_ketua' => $request->ketua,
@@ -646,7 +646,7 @@ class PengawasanController extends Controller
                 
             }
         } elseif($request->has('kembali')) {
-            if($data->id == $request->id) {
+            if($data->pelatihan == $request->id) {
                 if($data->users_anggota == Auth::user()->id) {
                     DB::table('approvel_pelatihan')->where('pelatihan', $request->id)->update([
                     'users_ketua' => $request->ketua,
@@ -850,7 +850,7 @@ class PengawasanController extends Controller
         // ]);
 
         if($request->has('kirim')) {
-            if($data->id == $request->id) {
+            if($data->koordinasi == $request->id) {
                 if($data->users_anggota == Auth::user()->id) {
                     DB::table('approvel_koordinasi')->where('koordinasi', $request->id)->update([
                     'users_ketua' => $request->ketua,
@@ -905,7 +905,7 @@ class PengawasanController extends Controller
                 
             }
         } elseif($request->has('kembali')) {
-            if($data->id == $request->id) {
+            if($data->koordinasi == $request->id) {
                 if($data->users_anggota == Auth::user()->id) {
                     DB::table('approvel_koordinasi')->where('koordinasi', $request->id)->update([
                     'users_ketua' => $request->ketua,

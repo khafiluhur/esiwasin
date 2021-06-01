@@ -493,7 +493,7 @@ class ReviewController extends Controller
         ]);
 
         if($request->has('kirim')) {
-            if($data->id == $request->id) {
+            if($data->reviu_laporan_keuangan == $request->id) {
                 if($data->users_ketua == Auth::user()->id) {
                     DB::table('approvel_reviu_laporan_keuangan')->where('reviu_laporan_keuangan', $request->id)->update([
                     'users_pt' => 2,
@@ -539,7 +539,7 @@ class ReviewController extends Controller
                 
             }
         } elseif($request->has('kembali')) {
-            if($data->id == $request->id) {
+            if($data->reviu_laporan_keuangan == $request->id) {
                 if($data->users_ketua == Auth::user()->id) {
                     DB::table('approvel_reviu_laporan_keuangan')->where('reviu_laporan_keuangan', $request->id)->update([
                     'status_pembuat' => 4,
@@ -863,7 +863,7 @@ class ReviewController extends Controller
         ]);
 
         if($request->has('kirim')) {
-            if($data->id == $request->id) {
+            if($data->reviu_kegiatan_anggaran == $request->id) {
                 if($data->users_ketua == Auth::user()->id) {
                     DB::table('approvel_reviu_kegiatan_anggaran')->where('reviu_kegiatan_anggaran', $request->id)->update([
                     'users_pt' => 2,
@@ -909,7 +909,7 @@ class ReviewController extends Controller
                 
             }
         } elseif($request->has('kembali')) {
-            if($data->id == $request->id) {
+            if($data->reviu_kegiatan_anggaran == $request->id) {
                 if($data->users_ketua == Auth::user()->id) {
                     DB::table('approvel_reviu_kegiatan_anggaran')->where('reviu_kegiatan_anggaran', $request->id)->update([
                     'status_pembuat' => 4,
@@ -1231,7 +1231,7 @@ class ReviewController extends Controller
 
         if($request->has('kirim')) {
             
-            if($data->id == $request->id) {
+            if($data->reviu_lakip == $request->id) {
                 if($data->users_ketua == Auth::user()->id) {
                     DB::table('approvel_reviu_lakip')->where('reviu_lakip', $request->id)->update([
                     'users_pt' => 2,
@@ -1277,7 +1277,7 @@ class ReviewController extends Controller
                 
             }
         } elseif($request->has('kembali')) {
-            if($data->id == $request->id) {
+            if($data->reviu_lakip == $request->id) {
                 if($data->users_ketua == Auth::user()->id) {
                     DB::table('approvel_reviu_lakip')->where('reviu_lakip', $request->id)->update([
                     'status_pembuat' => 4,
@@ -1603,7 +1603,7 @@ class ReviewController extends Controller
         ]);
 
         if($request->has('kirim')) {
-            if($data->id == $request->id) {
+            if($data->reviu_rkbm == $request->id) {
                 if($data->users_ketua == Auth::user()->id) {
                     DB::table('approvel_reviu_rkbmn')->where('reviu_rkbmn', $request->id)->update([
                     'users_pt' => 2,
@@ -1649,7 +1649,7 @@ class ReviewController extends Controller
                 
             }
         } elseif($request->has('kembali')) {
-            if($data->id == $request->id) {
+            if($data->reviu_rkbm == $request->id) {
                 if($data->users_ketua == Auth::user()->id) {
                     DB::table('approvel_reviu_rkbmn')->where('reviu_rkbmn', $request->id)->update([
                     'status_pembuat' => 4,
