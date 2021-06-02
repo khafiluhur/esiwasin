@@ -82,8 +82,7 @@ class LaporanController extends Controller
 
        if($id == "cari") {
 
-        if($request->ketua_audit && $request->periode_from_audit && $request->periode_to_audit == null)
-        {   
+        if($request->ketua_audit && $request->periode_from_audit && $request->periode_to_audit == null) {   
             $anggota = DB::table('users')
                 ->get();
 
@@ -120,7 +119,6 @@ class LaporanController extends Controller
             $pesan = "Data Tidak Di Temukan";
 
         } else {
-
             $ketua = $request->ketua_audit;
             $periode_from = $request->periode_from_audit;
             $periode_to = $request->periode_to_audit;
@@ -230,6 +228,7 @@ class LaporanController extends Controller
                     ->leftjoin('users as upm', 'upm.id', '=', 'aak.users_pm')
                     ->leftjoin('status as spm', 'spm.id', '=', 'aak.status_pm')
                     ->where('ak.kode', $id)
+                    ->where('ak.is_publish', 1)
                     ->orderBy('created_at')
                     ->first(); 
                     
@@ -269,9 +268,8 @@ class LaporanController extends Controller
                     ->leftjoin('status as spt', 'spt.id', '=', 'aak.status_pt')
                     ->leftjoin('users as upm', 'upm.id', '=', 'aak.users_pm')
                     ->leftjoin('status as spm', 'spm.id', '=', 'aak.status_pm')
-                    ->where('ak.is_prosess', 1)
+                    ->where('ak.kode', $checkjenis->audit)
                     ->where('ak.is_publish', 1)
-                    ->where('ak.kode', $id)
                     ->orderBy('created_at')
                     ->first();
         } else {
@@ -310,16 +308,14 @@ class LaporanController extends Controller
                     ->leftjoin('status as spt', 'spt.id', '=', 'aak.status_pt')
                     ->leftjoin('users as upm', 'upm.id', '=', 'aak.users_pm')
                     ->leftjoin('status as spm', 'spm.id', '=', 'aak.status_pm')
-                    ->where('ak.is_prosess', 1)
                     ->where('ak.is_publish', 1)
                     ->where('ak.kode', $id)
                     ->orderBy('created_at')
                     ->first();
             }
+            $page = "laporan";
+            return view('partial.audit.detail', compact('page', 'audit', 'title', 'anggota', 'permission'));
         }
-
-        $page = "laporan";
-        return view('partial.audit.detail', compact('page', 'audit', 'title', 'anggota', 'permission'));
     }
 
     public function downloadGet1($id)
@@ -343,7 +339,7 @@ class LaporanController extends Controller
                     ->select('kak.*', 'a.jenis')
                     ->join('audit as a', 'a.audit', '=', 'kak.kode_audit_kinerja')
                     ->where('kode_audit_kinerja', $checkkode->kode)
-                    ->get_class();
+                    ->get();
         } else {
             $checkkode = DB::table('audit_tujuan_tertentu')->select('kode')->where('kode', $checkjenis->audit)->first();
             $data = DB::table('kertas_audit_tujuan_tertntus as kak')
@@ -715,8 +711,7 @@ class LaporanController extends Controller
 
         // if($id == "cari") {
 
-        if($request->ketua_audit && $request->periode_from_audit && $request->periode_to_audit == null)
-        {   
+        if($request->ketua_audit && $request->periode_from_audit && $request->periode_to_audit == null) {   
             $anggota = DB::table('users')
                 ->get();
 
@@ -807,7 +802,7 @@ class LaporanController extends Controller
         } else {
             $page = "laporan"; 
             return view('dashboard.reviu',compact('page', 'audit', 'reviu', 'evaluasi', 'pengawasan', 'anggota', 'notullen', 'permission'))->with(['success' => $pesan]);
-       }
+        }
 
        $checkjenis = DB::table('reviu')->where('reviu', $id)->first();
        
@@ -856,7 +851,6 @@ class LaporanController extends Controller
                 ->leftjoin('status as spt', 'spt.id', '=', 'aak.status_pt')
                 ->leftjoin('users as upm', 'upm.id', '=', 'aak.users_pm')
                 ->leftjoin('status as spm', 'spm.id', '=', 'aak.status_pm')
-                ->where('ak.is_prosess', 1)
                 ->where('ak.is_publish', 1)
                 ->where('ak.kode', $id)
                 ->orderBy('created_at')
@@ -897,7 +891,6 @@ class LaporanController extends Controller
                 ->leftjoin('status as spt', 'spt.id', '=', 'aak.status_pt')
                 ->leftjoin('users as upm', 'upm.id', '=', 'aak.users_pm')
                 ->leftjoin('status as spm', 'spm.id', '=', 'aak.status_pm')
-                ->where('ak.is_prosess', 1)
                 ->where('ak.is_publish', 1)
                 ->where('ak.kode', $id)
                 ->orderBy('created_at')
@@ -939,7 +932,6 @@ class LaporanController extends Controller
                 ->leftjoin('status as spt', 'spt.id', '=', 'aak.status_pt')
                 ->leftjoin('users as upm', 'upm.id', '=', 'aak.users_pm')
                 ->leftjoin('status as spm', 'spm.id', '=', 'aak.status_pm')
-                ->where('ak.is_prosess', 1)
                 ->where('ak.is_publish', 1)
                 ->where('ak.kode', $id)
                 ->orderBy('created_at')
@@ -980,7 +972,6 @@ class LaporanController extends Controller
                 ->leftjoin('status as spt', 'spt.id', '=', 'aak.status_pt')
                 ->leftjoin('users as upm', 'upm.id', '=', 'aak.users_pm')
                 ->leftjoin('status as spm', 'spm.id', '=', 'aak.status_pm')
-                ->where('ak.is_prosess', 1)
                 ->where('ak.is_publish', 1)
                 ->where('ak.kode', $id)
                 ->orderBy('created_at')
@@ -1448,7 +1439,6 @@ class LaporanController extends Controller
                 ->leftjoin('status as spt', 'spt.id', '=', 'aak.status_pt')
                 ->leftjoin('users as upm', 'upm.id', '=', 'aak.users_pm')
                 ->leftjoin('status as spm', 'spm.id', '=', 'aak.status_pm')
-                ->where('ak.is_prosess', 1)
                 ->where('ak.is_publish', 1)
                 ->where('ak.kode', $id)
                 ->orderBy('created_at')
@@ -1489,7 +1479,6 @@ class LaporanController extends Controller
                 ->leftjoin('status as spt', 'spt.id', '=', 'aak.status_pt')
                 ->leftjoin('users as upm', 'upm.id', '=', 'aak.users_pm')
                 ->leftjoin('status as spm', 'spm.id', '=', 'aak.status_pm')
-                ->where('ak.is_prosess', 1)
                 ->where('ak.is_publish', 1)
                 ->where('ak.kode', $id)
                 ->orderBy('created_at')
@@ -1530,7 +1519,6 @@ class LaporanController extends Controller
                 ->leftjoin('status as spt', 'spt.id', '=', 'aak.status_pt')
                 ->leftjoin('users as upm', 'upm.id', '=', 'aak.users_pm')
                 ->leftjoin('status as spm', 'spm.id', '=', 'aak.status_pm')
-                ->where('ak.is_prosess', 1)
                 ->where('ak.is_publish', 1)
                 ->where('ak.kode', $id)
                 ->orderBy('created_at')
@@ -1571,7 +1559,6 @@ class LaporanController extends Controller
                 ->leftjoin('status as spt', 'spt.id', '=', 'aak.status_pt')
                 ->leftjoin('users as upm', 'upm.id', '=', 'aak.users_pm')
                 ->leftjoin('status as spm', 'spm.id', '=', 'aak.status_pm')
-                ->where('ak.is_prosess', 1)
                 ->where('ak.is_publish', 1)
                 ->where('ak.kode', $id)
                 ->orderBy('created_at')
