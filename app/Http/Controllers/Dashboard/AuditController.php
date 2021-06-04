@@ -378,8 +378,7 @@ class AuditController extends Controller
 
                 ## Form Kertas Kerja ##
                 'kertas_kerja' => 'required',
-                'kertas_kerja.*' => 'mimes:doc,pdf,docx,zip',
-                'kertas_kerja.*' => 'max:20000'
+                'kertas_kerja.*' => 'max:2000000'
                 ],
                 [
                     'ketua.required' => 'Belum memlih Ketua Tim',
@@ -802,7 +801,6 @@ class AuditController extends Controller
 
                 ## Form Kertas Kerja ##
                 'kertas_kerja' => 'required',
-                'kertas_kerja.*' => 'mimes:doc,pdf,docx,zip',
                 ]);
 
                 foreach ($request->kertas_kerja as $photo) {
@@ -1102,7 +1100,6 @@ class AuditController extends Controller
 
                 ## Form Kertas Kerja ##
                 'kertas_kerja' => 'required',
-                'kertas_kerja.*' => 'mimes:doc,pdf,docx,zip',
 
                 ## Form Comment ##
                 'komentar' => 'required'
@@ -1225,7 +1222,6 @@ class AuditController extends Controller
 
                 ## Form Kertas Kerja ##
                 'kertas_kerja' => 'required',
-                'kertas_kerja.*' => 'mimes:doc,pdf,docx,zip',
                 ]);
 
                 foreach ($request->kertas_kerja as $photo) {

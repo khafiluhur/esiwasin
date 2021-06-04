@@ -245,7 +245,6 @@ class EvaluasiController extends Controller
 
                 ## Form Kertas Kerja ##
                 'kertas_kerja' => 'required',
-                'kertas_kerja.*' => 'mimes:doc,pdf,docx,zip',
 
                 ## Form Comment ##
                 'komentar' => 'required'
@@ -341,7 +340,6 @@ class EvaluasiController extends Controller
 
                 ## Form Kertas Kerja ##
                 'kertas_kerja' => 'required',
-                'kertas_kerja.*' => 'mimes:doc,pdf,docx,zip',
                 ]);
 
                 foreach ($request->kertas_kerja as $photo) {
@@ -616,7 +614,6 @@ class EvaluasiController extends Controller
 
                 ## Form Kertas Kerja ##
                 'kertas_kerja' => 'required',
-                'kertas_kerja.*' => 'mimes:doc,pdf,docx,zip',
 
                 ## Form Comment ##
                 'komentar' => 'required'
@@ -712,7 +709,6 @@ class EvaluasiController extends Controller
 
                 ## Form Kertas Kerja ##
                 'kertas_kerja' => 'required',
-                'kertas_kerja.*' => 'mimes:doc,pdf,docx,zip',
 
                 ## Form Comment ##
                 'komentar' => 'required'
@@ -990,7 +986,6 @@ class EvaluasiController extends Controller
 
                 ## Form Kertas Kerja ##
                 'kertas_kerja' => 'required',
-                'kertas_kerja.*' => 'mimes:doc,pdf,docx,zip',
 
                 ## Form Comment ##
                 'komentar' => 'required'
@@ -1086,7 +1081,6 @@ class EvaluasiController extends Controller
 
                 ## Form Kertas Kerja ##
                 'kertas_kerja' => 'required',
-                'kertas_kerja.*' => 'mimes:doc,pdf,docx,zip',
 
                 ## Form Comment ##
                 'komentar' => 'required'
@@ -1364,7 +1358,6 @@ class EvaluasiController extends Controller
 
                 ## Form Kertas Kerja ##
                 'kertas_kerja' => 'required',
-                'kertas_kerja.*' => 'mimes:doc,pdf,docx,zip',
 
                 ## Form Comment ##
                 'komentar' => 'required'
@@ -1460,7 +1453,6 @@ class EvaluasiController extends Controller
 
                 ## Form Kertas Kerja ##
                 'kertas_kerja' => 'required',
-                'kertas_kerja.*' => 'mimes:doc,pdf,docx,zip',
 
                 ## Form Comment ##
                 'komentar' => 'required'

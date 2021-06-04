@@ -247,7 +247,6 @@ class ReviewController extends Controller
 
                 ## Form Kertas Kerja ##
                 'kertas_kerja' => 'required',
-                'kertas_kerja.*' => 'mimes:doc,pdf,docx,zip',
 
                 ## Form Comment ##
                 'komentar' => 'required'
@@ -343,7 +342,6 @@ class ReviewController extends Controller
 
                 ## Form Kertas Kerja ##
                 'kertas_kerja' => 'required',
-                'kertas_kerja.*' => 'mimes:doc,pdf,docx,zip',
                 ]);
 
                 foreach ($request->kertas_kerja as $photo) {
@@ -620,7 +618,6 @@ class ReviewController extends Controller
 
                 ## Form Kertas Kerja ##
                 'kertas_kerja' => 'required',
-                'kertas_kerja.*' => 'mimes:doc,pdf,docx,zip',
 
                 ## Form Comment ##
                 'komentar' => 'required'
@@ -716,7 +713,6 @@ class ReviewController extends Controller
 
                 ## Form Kertas Kerja ##
                 'kertas_kerja' => 'required',
-                'kertas_kerja.*' => 'mimes:doc,pdf,docx,zip',
                 ]);
 
                 foreach ($request->kertas_kerja as $photo) {
@@ -990,7 +986,6 @@ class ReviewController extends Controller
 
                 ## Form Kertas Kerja ##
                 'kertas_kerja' => 'required',
-                'kertas_kerja.*' => 'mimes:doc,pdf,docx,zip',
 
                 ## Form Comment ##
                 'komentar' => 'required'
@@ -1086,7 +1081,6 @@ class ReviewController extends Controller
 
                 ## Form Kertas Kerja ##
                 'kertas_kerja' => 'required',
-                'kertas_kerja.*' => 'mimes:doc,pdf,docx,zip',
                 ]);
 
                 foreach ($request->kertas_kerja as $photo) {
@@ -1359,7 +1353,6 @@ class ReviewController extends Controller
 
                 ## Form Kertas Kerja ##
                 'kertas_kerja' => 'required',
-                'kertas_kerja.*' => 'mimes:doc,pdf,docx,zip',
 
                 ## Form Comment ##
                 'komentar' => 'required'
@@ -1455,7 +1448,7 @@ class ReviewController extends Controller
 
                 ## Form Kertas Kerja ##
                 'kertas_kerja' => 'required',
-                'kertas_kerja.*' => 'mimes:doc,pdf,docx,zip',
+                'kertas_kerja.*' => 'max:2000000',
                 ]);
 
                 foreach ($request->kertas_kerja as $photo) {
