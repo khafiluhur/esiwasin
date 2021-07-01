@@ -89,7 +89,7 @@
                         </div>
                         <div class="block-content">
                             <form action="{{ route('change.password') }}" method="POST">
-                                @csrf
+                                {{ csrf_field() }}
                                 <div class="row push">
                                     <div class="col-lg-4">
                                         
