@@ -276,10 +276,10 @@ class AuditController extends Controller
                     $extension = $photo->getClientOriginalExtension();
                     $name = explode(".",$photo->getClientOriginalName());
                     $photoname = $name[0].rand(10000,99999).'.'.$extension;
-                    // dd($photoname);
-                    $folder = 'storage/upload/audit/keuangan';
+                    
+                    $folder = 'audit/keuangan';
                     $photopath = $folder.$photoname;
-                    $photo->move(public_path($folder),$photoname);
+                    $photo->move($folder,$photoname);
                     $data[] = $photoname;
                     KertasAuditKeuangan::create([
                         'audit_keuangan' => 0,
