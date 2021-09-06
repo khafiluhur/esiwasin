@@ -54,7 +54,7 @@
                         <tr>
                             <td class="text-center font-size-sm">{{$key+1}}</td>
                             <td class="font-w600 font-size-sm">{{ $u->keterangan }}</td>
-                            <td class="d-none d-sm-table-cell font-size-sm"><a href="{{ route('pemantauan.bpk.download', ['file' => $u->id ]) }}"" class="">{{ $u->berkas_temuan }}</a></td>
+                            <td class="d-none d-sm-table-cell font-size-sm"><a href="{{ route('pemantauan.bpk.download', ['file' => $u->berkas_temuan ]) }}"" class="">{{ $u->berkas_temuan }}</a></td>
                             <td class="d-none d-sm-table-cell font-size-sm">{{ $u->tanggal }}</td>
                             <td class="d-none d-sm-table-cell font-size-sm">{{ $u->tahun }}</td>
                             @if($u->status == 1)
