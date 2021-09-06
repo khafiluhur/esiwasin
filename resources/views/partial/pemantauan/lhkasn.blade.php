@@ -57,7 +57,7 @@
                             <td class="font-w600 font-size-sm">{{ $u->keterangan }}</td>
                             <td class="">{{ $u->pangkat }}</td>
                             <td class="">{{ $u->golongan }}</td>
-                            <td class=""><a href="{{ route('pemantauan.bpk.download', ['file' => $u->berkas_temuan ]) }}"" class="">{{ $u->berkas_temuan }}</a></td>
+                            <td class=""><a href="{{ route('pemantauan.lhkasn.download', ['file' => $u->berkas_temuan ]) }}"" class="">{{ $u->berkas_temuan }}</a></td>
                             <td class="">{{ $u->tanggal }}</td>
                             <td class="">{{ $u->tahun }}</td>
                         </tr>
