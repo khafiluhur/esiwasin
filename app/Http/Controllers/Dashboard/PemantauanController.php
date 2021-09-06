@@ -55,7 +55,7 @@ class PemantauanController extends Controller
         // if($request->berkas as $photo){
         $photo = $request->file('berkas');
         $extension = $photo->getClientOriginalExtension();
-        $photoname = $photo->getClientOriginalName().rand(10000,99999).'.'.$extension;
+        $photoname = $photo->getClientOriginalName();
         $folder = 'storage/upload/pemantauan/bpk';
         $photopath = $folder.$photoname;
         $photo->move(public_path($folder),$photoname);
@@ -111,7 +111,7 @@ class PemantauanController extends Controller
 
         $photo = $request->file('berkas');
         $extension = $photo->getClientOriginalExtension();
-        $photoname = $photo->getClientOriginalName().rand(10000,99999).'.'.$extension;
+        $photoname = $photo->getClientOriginalName();
         $folder = 'storage/upload/pemantauan/lha';
         $photopath = $folder.$photoname;
         $photo->move(public_path($folder),$photoname);
@@ -163,7 +163,7 @@ class PemantauanController extends Controller
 
         $photo = $request->file('berkas');
         $extension = $photo->getClientOriginalExtension();
-        $photoname = $photo->getClientOriginalName().rand(10000,99999).'.'.$extension;
+        $photoname = $photo->getClientOriginalName();
         $folder = 'storage/upload/pemantauan/spip';
         $photopath = $folder.$photoname;
         $photo->move(public_path($folder),$photoname);
@@ -217,7 +217,7 @@ class PemantauanController extends Controller
 
         $photo = $request->file('berkas');
         $extension = $photo->getClientOriginalExtension();
-        $photoname = $photo->getClientOriginalName().rand(10000,99999).'.'.$extension;
+        $photoname = $photo->getClientOriginalName();
         $folder = 'storage/upload/pemantauan/lhkasn';
         $photopath = $folder.$photoname;
         $photo->move(public_path($folder),$photoname);
