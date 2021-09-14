@@ -127,9 +127,9 @@
                                                 @foreach ($audit as $u)
                                                 <tr>
                                                     <td class="text-center font-size-sm">
-                                                        <a href="{{route('detail.pkpt.dokumentasi', ['id' => $u->id_pkpt])}}">
+                                                        {{--  <a href="{{route('detail.pkpt.dokumentasi', ['id' => $u->id_pkpt])}}">
                                                             {{ $u->nama_pkpt }}
-                                                        </a>
+                                                        </a>  --}}
                                                     </td>
                                                     <td class="font-w600 font-size-sm">{{ $u->tanggal_audit_from }} s/d {{$u->tanggal_audit_to}}</td>
                                                     <td class="d-none d-sm-table-cell font-size-sm">{{ $u->created_by }}</td>
@@ -211,9 +211,9 @@
                                                 @foreach ($reviu as $u)
                                                 <tr>
                                                     <td class="text-center font-size-sm">
-                                                        <a href="{{route('detail.pkpt.dokumentasi', ['id' => $u->id_pkpt])}}">
+                                                        {{--  <a href="{{route('detail.pkpt.dokumentasi', ['id' => $u->id_pkpt])}}">
                                                             {{ $u->nama_pkpt }}
-                                                        </a>
+                                                        </a>  --}}
                                                     </td>
                                                     <td class="font-w600 font-size-sm">{{ $u->tanggal_reviu_from }} s/d {{$u->tanggal_reviu_to}}</td>
                                                     <td class="d-none d-sm-table-cell font-size-sm">{{ $u->created_by }}</td>
@@ -296,9 +296,9 @@
                                                 @foreach ($evaluasi as $u)
                                                 <tr>
                                                     <td class="text-center font-size-sm">
-                                                        <a href="{{route('detail.pkpt.dokumentasi', ['id' => $u->id_pkpt])}}">
+                                                        {{--  <a href="{{route('detail.pkpt.dokumentasi', ['id' => $u->id_pkpt])}}">
                                                             {{ $u->nama_pkpt }}
-                                                        </a>
+                                                        </a>  --}}
                                                     </td>
                                                     <td class="font-w600 font-size-sm">{{ $u->tanggal_evaluasi_from }} s/d {{$u->tanggal_evaluasi_to}}</td>
                                                     <td class="d-none d-sm-table-cell font-size-sm">{{ $u->created_by }}</td>
@@ -379,9 +379,9 @@
                                                 @foreach ($pemantauan as $u)
                                                 <tr>
                                                     <td class="text-center font-size-sm">
-                                                        <a href="{{route('detail.pkpt.dokumentasi', ['id' => $u->id_pkpt])}}">
+                                                        {{--  <a href="{{route('detail.pkpt.dokumentasi', ['id' => $u->id_pkpt])}}">
                                                             {{ $u->nama_pkpt }}
-                                                        </a>
+                                                        </a>  --}}
                                                     </td>
                                                     <td class="font-w600 font-size-sm">{{ $u->tanggal_pemantauan_from }} s/d {{$u->tanggal_pemantauan_to}}</td>
                                                     <td class="d-none d-sm-table-cell font-size-sm">{{ $u->created_by }}</td>
@@ -461,9 +461,9 @@
                                                 @foreach ($pengawasan as $u)
                                                 <tr>
                                                     <td class="text-center font-size-sm">
-                                                        <a href="{{route('detail.pkpt.dokumentasi', ['id' => $u->id_pkpt])}}">
+                                                        {{--  <a href="{{route('detail.pkpt.dokumentasi', ['id' => $u->id_pkpt])}}">
                                                             {{ $u->nama_pkpt }}
-                                                        </a>
+                                                        </a>  --}}
                                                     </td>
                                                     <td class="font-w600 font-size-sm">{{ $u->tanggal_pengawasan_from }} s/d {{$u->tanggal_pengawasan_to}}</td>
                                                     <td class="d-none d-sm-table-cell font-size-sm">{{ $u->created_by }}</td>
@@ -543,9 +543,9 @@
                                                 @foreach ($notullen as $u)
                                                 <tr>
                                                     <td class="text-center font-size-sm">
-                                                        <a href="{{route('detail.pkpt.dokumentasi', ['id' => $u->id_pkpt])}}">
+                                                        {{--  <a href="{{route('detail.pkpt.dokumentasi', ['id' => $u->id_pkpt])}}">
                                                             {{ $u->nama_pkpt }}
-                                                        </a>
+                                                        </a>  --}}
                                                     </td>
                                                     <td class="font-w600 font-size-sm">{{ $u->tanggal }}</td>
                                                     <td class="d-none d-sm-table-cell font-size-sm">{{ $u->created_by }}</td>

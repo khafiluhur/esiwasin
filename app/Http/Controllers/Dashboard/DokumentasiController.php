@@ -572,6 +572,7 @@ class DokumentasiController extends Controller
     ## Dokumentasi Detail PKPT##
     public function getById($id)
     {
+        dd($id);
         $permission = DB::table('users as u')
                 ->select('u.*', 'p.*')
                 ->join('permission as p', 'p.nip', '=', 'u.nip')
