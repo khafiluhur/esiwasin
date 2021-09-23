@@ -1,4 +1,4 @@
-<form action="{{ route('keuangan.audit') }}" method="POST" enctype="multipart/form-data">
+<form action="{{ url('/audit/keuangan/') }}" method="POST" enctype="multipart/form-data">
 {{ csrf_field() }}
 
 <h3 style="text-align: center">Audit Keuangan</h3>

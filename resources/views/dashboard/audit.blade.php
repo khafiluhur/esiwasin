@@ -51,7 +51,7 @@
 
                     <div class="tab-pane active" id="audit_keuangan" role="tabpanel">
                     @if(!$pkpt_keuangan->isEmpty())
-                        @if($data1)
+                        @if($data1 != null)
                             @if($data1->ketua == Auth::user()->id)
                                 @if($data1->id_status_ketua == 2)
                                     @include('partial.audit.keuangan.form_default') 

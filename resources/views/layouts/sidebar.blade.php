@@ -40,7 +40,7 @@
             @if($permission->audit == 1)
             @else
             <li class="nav-main-item">
-                <a <?php if($page == "audit") echo "class='nav-main-link active'";?>  class="nav-main-link" href="{{ route('audit') }}">
+                <a <?php if($page == "audit") echo "class='nav-main-link active'";?>  class="nav-main-link" href="{{ url('/audit1') }}">
                     <i class="nav-main-link-icon si si-notebook text-white"></i>
                     <span class="nav-main-link-name text-white">Audit</span>
                 </a>

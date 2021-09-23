@@ -74,9 +74,9 @@ class PengawasanController extends Controller
                     'aak.tanggal_pm',
                     'aak.jam_pm',
                     'aak.komentar_pm')
-                ->join('approvel_konsultasi as aak', 'aak.konsultasi', '=', 'ak.id')
-                ->join('users as up', 'up.id', '=', 'aak.users_pembuat')
-                ->join('status as sp', 'sp.id', '=', 'aak.status_pembuat')
+                ->join('approvel_konsultasi as aak', 'aak.konsultasi', '=', 'ak.kode')
+                ->leftjoin('users as up', 'up.id', '=', 'aak.users_pembuat')
+                ->leftjoin('status as sp', 'sp.id', '=', 'aak.status_pembuat')
                 ->leftjoin('users as uag', 'uag.id', '=', 'aak.users_anggota')
                 ->leftjoin('status as sag', 'sag.id', '=', 'aak.status_anggota')
                 ->leftjoin('users as ua', 'ua.id', '=', 'aak.users_ketua')
@@ -89,7 +89,7 @@ class PengawasanController extends Controller
                 ->leftjoin('status as spm', 'spm.id', '=', 'aak.status_pm')
                 ->where('ak.is_prosess', 1)
                 ->orderBy('created_at')
-                ->first();  
+                ->first();
         
         ## Pengaawasan Pelatiahan ##
         $data2 = DB::table('pelatihan as ak')
@@ -124,7 +124,7 @@ class PengawasanController extends Controller
                     'aak.tanggal_pm',
                     'aak.jam_pm',
                     'aak.komentar_pm')
-                ->join('approvel_pelatihan as aak', 'aak.pelatihan', '=', 'ak.id')
+                ->join('approvel_pelatihan as aak', 'aak.pelatihan', '=', 'ak.kode')
                 ->join('users as up', 'up.id', '=', 'aak.users_pembuat')
                 ->join('status as sp', 'sp.id', '=', 'aak.status_pembuat')
                 ->leftjoin('users as uag', 'uag.id', '=', 'aak.users_anggota')
@@ -172,7 +172,7 @@ class PengawasanController extends Controller
                     'aak.tanggal_pm',
                     'aak.jam_pm',
                     'aak.komentar_pm')
-                ->join('approvel_koordinasi as aak', 'aak.koordinasi', '=', 'ak.id')
+                ->join('approvel_koordinasi as aak', 'aak.koordinasi', '=', 'ak.kode')
                 ->join('users as up', 'up.id', '=', 'aak.users_pembuat')
                 ->join('status as sp', 'sp.id', '=', 'aak.status_pembuat')
                 ->leftjoin('users as uag', 'uag.id', '=', 'aak.users_anggota')

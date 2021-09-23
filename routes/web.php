@@ -71,7 +71,7 @@ Route::prefix('useradmin')->group(function () {
     Route::get('/ubah/{id}', 'Dashboard\UsersAdminController@detail')->name('ubah.useradmin');
     Route::post('/ubah/{id}', 'Dashboard\UsersAdminController@ubah')->name('edit.useradmin');
 });
-Route::group(['prefix' => 'audit'], function() {
+Route::group(['prefix' => 'audit1'], function() {
     Route::get('/', 'Dashboard\AuditController@index')->name('audit')->middleware('auth');
     Route::prefix('keuangan')->group(function () {
         Route::post('/', 'Dashboard\AuditController@post1')->name('keuangan.audit');
