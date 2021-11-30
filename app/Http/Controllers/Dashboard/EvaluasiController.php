@@ -64,7 +64,7 @@ class EvaluasiController extends Controller
                     'aak.tanggal_pm',
                     'aak.jam_pm',
                     'aak.komentar_pm')
-                ->join('approvel_evaluasi_sakip as aak', 'aak.evaluasi_sakip', '=', 'ak.id')
+                ->join('approvel_evaluasi_sakip as aak', 'aak.evaluasi_sakip', '=', 'ak.kode')
                 ->join('users as up', 'up.id', '=', 'aak.users_pembuat')
                 ->join('status as sp', 'sp.id', '=', 'aak.status_pembuat')
                 ->leftjoin('users as uk', 'uk.id', '=', 'aak.users_ketua')
@@ -74,7 +74,7 @@ class EvaluasiController extends Controller
                 ->leftjoin('users as upm', 'upm.id', '=', 'aak.users_pm')
                 ->leftjoin('status as spm', 'spm.id', '=', 'aak.status_pm')
                 ->where('ak.is_prosess', 1)
-                ->orderBy('created_at')
+                ->orderBy('ak.created_at', 'desc')
                 ->first(); 
         if($data1) {
             $file1 = DB::table('kertas_evaluasi_sakips')
@@ -110,7 +110,7 @@ class EvaluasiController extends Controller
                     'aak.tanggal_pm',
                     'aak.jam_pm',
                     'aak.komentar_pm')
-                ->join('approvel_evaluasi_reformasi_birokrasi as aak', 'aak.evaluasi_reformasi_birokrasi', '=', 'ak.id')
+                ->join('approvel_evaluasi_reformasi_birokrasi as aak', 'aak.evaluasi_reformasi_birokrasi', '=', 'ak.kode')
                 ->join('users as up', 'up.id', '=', 'aak.users_pembuat')
                 ->join('status as sp', 'sp.id', '=', 'aak.status_pembuat')
                 ->leftjoin('users as uk', 'uk.id', '=', 'aak.users_ketua')
@@ -120,7 +120,7 @@ class EvaluasiController extends Controller
                 ->leftjoin('users as upm', 'upm.id', '=', 'aak.users_pm')
                 ->leftjoin('status as spm', 'spm.id', '=', 'aak.status_pm')
                 ->where('ak.is_prosess', 1)
-                ->orderBy('created_at')
+                ->orderBy('ak.created_at', 'desc')
                 ->first();
         if($data2) {
             $file2 = DB::table('kertas_evaluasi_reformasis')
@@ -156,7 +156,7 @@ class EvaluasiController extends Controller
                     'aak.tanggal_pm',
                     'aak.jam_pm',
                     'aak.komentar_pm')
-                ->join('approvel_evaluasi_spip as aak', 'aak.evaluasi_spip', '=', 'ak.id')
+                ->join('approvel_evaluasi_spip as aak', 'aak.evaluasi_spip', '=', 'ak.kode')
                 ->join('users as up', 'up.id', '=', 'aak.users_pembuat')
                 ->join('status as sp', 'sp.id', '=', 'aak.status_pembuat')
                 ->leftjoin('users as uk', 'uk.id', '=', 'aak.users_ketua')
@@ -166,7 +166,7 @@ class EvaluasiController extends Controller
                 ->leftjoin('users as upm', 'upm.id', '=', 'aak.users_pm')
                 ->leftjoin('status as spm', 'spm.id', '=', 'aak.status_pm')
                 ->where('ak.is_prosess', 1)
-                ->orderBy('created_at')
+                ->orderBy('ak.created_at', 'desc')
                 ->first();
         if($data3) {
             $file3 = DB::table('kertas_evaluasi_spips')
@@ -202,7 +202,7 @@ class EvaluasiController extends Controller
                     'aak.tanggal_pm',
                     'aak.jam_pm',
                     'aak.komentar_pm')
-                ->join('approvel_evaluasi_iacm as aak', 'aak.evaluasi_iacm', '=', 'ak.id')
+                ->join('approvel_evaluasi_iacm as aak', 'aak.evaluasi_iacm', '=', 'ak.kode')
                 ->join('users as up', 'up.id', '=', 'aak.users_pembuat')
                 ->join('status as sp', 'sp.id', '=', 'aak.status_pembuat')
                 ->leftjoin('users as uk', 'uk.id', '=', 'aak.users_ketua')
@@ -212,7 +212,7 @@ class EvaluasiController extends Controller
                 ->leftjoin('users as upm', 'upm.id', '=', 'aak.users_pm')
                 ->leftjoin('status as spm', 'spm.id', '=', 'aak.status_pm')
                 ->where('ak.is_prosess', 1)
-                ->orderBy('created_at')
+                ->orderBy('ak.created_at', 'desc')
                 ->first();
         if($data4) {
             $file4 = DB::table('kertas_evaluasi_iacms')
@@ -230,7 +230,7 @@ class EvaluasiController extends Controller
     public function post1(Request $request)
     {
         $checkdata = DB::table('evaluasi_sakip')
-                    ->where('id', $request->id)
+                    ->where('kode', $request->kode)
                     ->first();
         
         if($checkdata == null) {
@@ -250,17 +250,20 @@ class EvaluasiController extends Controller
                 'komentar' => 'required'
                 ]);
 
-                foreach ($request->kertas_kerja as $photo) {
-                    $extension = $photo->getClientOriginalExtension();
-                    $photoname = $photo->getClientOriginalName().rand(10000,99999).'.'.$extension;
-                    $folder = 'storage/upload/evaluasi/sakip';
-                    $photopath = $folder.$photoname;
-                    $photo->move(public_path($folder),$photoname);
-                    $data[] = $photoname;
-                    KertasEvaluasiSakip::create([
-                        'kode_evaluasi_sakip' => $request->kode,
-                        'filename' => $photoname
-                    ]);
+                if($request->kertas_kerja == null) {
+                } else {
+                    foreach ($request->kertas_kerja as $photo) {
+                        $extension = $photo->getClientOriginalExtension();
+                        $photoname = $photo->getClientOriginalName().rand(10000,99999).'.'.$extension;
+                        $folder = 'storage/upload/evaluasi/sakip';
+                        $photopath = $folder.$photoname;
+                        $photo->move(public_path($folder),$photoname);
+                        $data[] = $photoname;
+                        KertasEvaluasiSakip::create([
+                            'kode_evaluasi_sakip' => $request->kode,
+                            'filename' => $photoname
+                        ]);
+                    }
                 }
 
                 DB::table('evaluasi_sakip')->insert([
@@ -280,12 +283,12 @@ class EvaluasiController extends Controller
                 ]);
 
                 $data = DB::table('evaluasi_sakip')
-                        ->select('id')
+                        ->select('kode')
                         ->where('kode', $request->kode)
                         ->first();                        
 
                 DB::table('approvel_evaluasi_sakip')->insert([
-                    'evaluasi_sakip' => $data->id,
+                    'evaluasi_sakip' => $data->kode,
                     'users_pembuat' => Auth::user()->id,
                     'status_pembuat' => 1,
                     'tanggal_pembuat' => Carbon::now()->format('d/m/yy'),
@@ -342,17 +345,20 @@ class EvaluasiController extends Controller
                 'kertas_kerja' => 'required',
                 ]);
 
-                foreach ($request->kertas_kerja as $photo) {
-                    $extension = $photo->getClientOriginalExtension();
-                    $photoname = $photo->getClientOriginalName().rand(10000,99999).'.'.$extension;
-                    $folder = 'storage/upload/evaluasi/sakip';
-                    $photopath = $folder.$photoname;
-                    $photo->move(public_path($folder),$photoname);
-                    $data[] = $photoname;
-                    KertasEvaluasiSakip::create([
-                        'kode_evaluasi_sakip' => $request->kode,
-                        'filename' => $photoname
-                    ]);
+                if($request->kertas_kerja == null) {
+                } else {
+                    foreach ($request->kertas_kerja as $photo) {
+                        $extension = $photo->getClientOriginalExtension();
+                        $photoname = $photo->getClientOriginalName().rand(10000,99999).'.'.$extension;
+                        $folder = 'storage/upload/evaluasi/sakip';
+                        $photopath = $folder.$photoname;
+                        $photo->move(public_path($folder),$photoname);
+                        $data[] = $photoname;
+                        KertasEvaluasiSakip::create([
+                            'kode_evaluasi_sakip' => $request->kode,
+                            'filename' => $photoname
+                        ]);
+                    }
                 }
 
                 DB::table('evaluasi_sakip')->insert([
@@ -381,7 +387,7 @@ class EvaluasiController extends Controller
         } else {
             if($request->has('kirim')) {
                 $datacheck = DB::table('evaluasi_sakip')
-                ->where('id', $request->id)
+                ->where('kode', $request->kode)
                 ->first();
 
             $this->validate($request, 
@@ -389,6 +395,8 @@ class EvaluasiController extends Controller
                 'komentar' => 'required',
             ]);
             
+            if($request->kertas_kerja == null) {
+            } else {
             foreach ($request->kertas_kerja as $photo) {
                     $extension = $photo->getClientOriginalExtension();
                     $photoname = $photo->getClientOriginalName().rand(10000,99999).'.'.$extension;
@@ -401,8 +409,9 @@ class EvaluasiController extends Controller
                         'filename' => $photoname
                     ]);
                 }
+            }
 
-            DB::table('evaluasi_sakip')->where('id', $request->id)->update([
+            DB::table('evaluasi_sakip')->where('kode', $request->kode)->update([
                 'ketua' => $request->ketua,
                 'nomor_st' => $request->nomor_st,
                 'tanggal_evaluasi_from' => $request->tanggal_audit_from,
@@ -414,7 +423,7 @@ class EvaluasiController extends Controller
                 'updated_at' => Carbon::now()
                 ]); 
 
-            DB::table('approvel_evaluasi_sakip')->where('evaluasi_sakip', $request->id)->update([
+            DB::table('approvel_evaluasi_sakip')->where('evaluasi_sakip', $request->kode)->update([
                 'status_pembuat' => 1,
                 'tanggal_pembuat' => Carbon::now()->format('d/m/yy'),
                 'jam_pembuat' => Carbon::now()->format('H:m'),
@@ -429,7 +438,7 @@ class EvaluasiController extends Controller
                     'updated_at' => Carbon::now()
                 ]);
 
-            DB::table('evaluasi')->where('evaluasi', $request->id)->update([
+            DB::table('evaluasi')->where('evaluasi', $request->kode)->update([
                 'is_prosess' => 1,
                 'jenis' => 1,
                 'created_at' => Carbon::now(),
@@ -437,6 +446,8 @@ class EvaluasiController extends Controller
             ]);
             } elseif($request->has('simpan')) {
             
+            if($request->kertas_kerja == null) {
+            } else {
             foreach ($request->kertas_kerja as $photo) {
                     $extension = $photo->getClientOriginalExtension();
                     $photoname = $photo->getClientOriginalName().rand(10000,99999).'.'.$extension;
@@ -449,8 +460,9 @@ class EvaluasiController extends Controller
                         'filename' => $photoname
                     ]);
                 }
+            }
 
-            DB::table('evaluasi_sakip')->where('id', $request->id)->update([
+            DB::table('evaluasi_sakip')->where('kode', $request->kode)->update([
                 'ketua' => $request->ketua,
                 'nomor_st' => $request->nomor_st,
                 'tanggal_evaluasi_from' => $request->tanggal_audit_from,
@@ -478,7 +490,7 @@ class EvaluasiController extends Controller
     public function approve1(Request $request)
     {
         $data =  DB::table('approvel_evaluasi_sakip as auk')
-                ->where('auk.evaluasi_sakip', $request->id)
+                ->where('auk.evaluasi_sakip', $request->kode)
                 ->first();
 
         $this->validate($request, 
@@ -487,9 +499,9 @@ class EvaluasiController extends Controller
         ]);
 
         if($request->has('kirim')) {
-            if($data->evaluasi_sakip == $request->id) {
+            if($data->evaluasi_sakip == $request->kode) {
                 if($data->users_ketua == Auth::user()->id) {
-                    DB::table('approvel_evaluasi_sakip')->where('evaluasi_sakip', $request->id)->update([
+                    DB::table('approvel_evaluasi_sakip')->where('evaluasi_sakip', $request->kode)->update([
                     'users_pt' => 2,
                     'users_pm' => 3,
                     'status_ketua' => 2,
@@ -500,7 +512,7 @@ class EvaluasiController extends Controller
                     ]);
                      return redirect(route('evaluasi'))->with(['success' => 'Evaluasi SAKIP Berhasil di Setujui']);
                 }elseif($data->users_pt == Auth::user()->id) {
-                    DB::table('approvel_evaluasi_sakip')->where('evaluasi_sakip', $request->id)->update([
+                    DB::table('approvel_evaluasi_sakip')->where('evaluasi_sakip', $request->kode)->update([
                     'status_pt' => 2,
                     'tanggal_pt' => Carbon::now()->format('d/m/yy'),
                     'jam_pt' => Carbon::now()->format('H:m'),
@@ -509,20 +521,20 @@ class EvaluasiController extends Controller
                     ]);
                      return redirect(route('evaluasi'))->with(['success' => 'Evaluasi SAKIP Berhasil di Setujui']);
                 }elseif($data->users_pm == Auth::user()->id) {
-                    DB::table('approvel_evaluasi_sakip')->where('evaluasi_sakip', $request->id)->update([
+                    DB::table('approvel_evaluasi_sakip')->where('evaluasi_sakip', $request->kode)->update([
                     'status_pm' => 2,
                     'tanggal_pm' => Carbon::now()->format('d/m/yy'),
                     'jam_pm' => Carbon::now()->format('H:m'),
                     'komentar_pm' => $request->komentar,
                     'updated_at' => Carbon::now()
                     ]);
-                     DB::table('evaluasi')->where('evaluasi', $request->id)->update([
+                     DB::table('evaluasi')->where('evaluasi', $request->kode)->update([
                         'is_prosess' => 2,
                         'jenis' => 1,
                         'created_at' => Carbon::now(),
                         'updated_at' => Carbon::now()
                     ]);
-                    DB::table('evaluasi_sakip')->where('id', $request->id)->update([
+                    DB::table('evaluasi_sakip')->where('kode', $request->kode)->update([
                         'is_prosess' => 2,
                         'updated_at' => Carbon::now()
                     ]);
@@ -533,9 +545,9 @@ class EvaluasiController extends Controller
                 
             }
         } elseif($request->has('kembali')) {
-            if($data->evaluasi_sakip == $request->id) {
+            if($data->evaluasi_sakip == $request->kode) {
                 if($data->users_ketua == Auth::user()->id) {
-                    DB::table('approvel_evaluasi_sakip')->where('evaluasi_sakip', $request->id)->update([
+                    DB::table('approvel_evaluasi_sakip')->where('evaluasi_sakip', $request->kode)->update([
                     'status_pembuat' => 4,
                     'users_pt' => 2,
                     'users_pm' => 3,
@@ -545,13 +557,13 @@ class EvaluasiController extends Controller
                     'komentar_ketua' => $request->komentar,
                     'updated_at' => Carbon::now()
                     ]);
-                    DB::table('evaluasi_sakip')->where('id', $request->id)->update([
+                    DB::table('evaluasi_sakip')->where('kode', $request->kode)->update([
                         'is_status' => 0,
                         'updated_at' => Carbon::now()
                     ]);
                      return redirect(route('evaluasi'))->with(['success' => 'Evaluasi SAKIP Berhasil di Setujui']);
                 }elseif($data->users_pt == Auth::user()->id) {
-                    DB::table('approvel_evaluasi_sakip')->where('evaluasi_sakip', $request->id)->update([
+                    DB::table('approvel_evaluasi_sakip')->where('evaluasi_sakip', $request->kode)->update([
                     'status_ketua' => 4,
                     'status_pt' => 3,
                     'tanggal_pt' => Carbon::now()->format('d/m/yy'),
@@ -561,7 +573,7 @@ class EvaluasiController extends Controller
                     ]);
                      return redirect(route('evaluasi'))->with(['success' => 'Evaluasi SAKIP Berhasil di Setujui']);
                 }elseif($data->users_pm == Auth::user()->id) {
-                    DB::table('approvel_evaluasi_sakip')->where('evaluasi_sakip', $request->id)->update([
+                    DB::table('approvel_evaluasi_sakip')->where('evaluasi_sakip', $request->kode)->update([
                     'status_pt' => 4,
                     'status_pm' => 3,
                     'tanggal_pm' => Carbon::now()->format('d/m/yy'),
@@ -569,13 +581,13 @@ class EvaluasiController extends Controller
                     'komentar_pm' => $request->komentar,
                     'updated_at' => Carbon::now()
                     ]);
-                    DB::table('evaluasi')->where('evaluasi', $request->id)->update([
+                    DB::table('evaluasi')->where('evaluasi', $request->kode)->update([
                         'is_prosess' => 2,
                         'jenis' => 1,
                         'created_at' => Carbon::now(),
                         'updated_at' => Carbon::now()
                     ]);
-                    DB::table('evaluasi_sakip')->where('id', $request->id)->update([
+                    DB::table('evaluasi_sakip')->where('kode', $request->kode)->update([
                         'is_status' => 1,
                         'updated_at' => Carbon::now()
                     ]);
@@ -599,7 +611,7 @@ class EvaluasiController extends Controller
     public function post2(Request $request)
     {
         $checkdata = DB::table('evaluasi_reformasi_birokrasi')
-                    ->where('id', $request->id)
+                    ->where('kode', $request->kode)
                     ->first();
         
         if($checkdata == null) {
@@ -619,17 +631,20 @@ class EvaluasiController extends Controller
                 'komentar' => 'required'
                 ]);
 
-                foreach ($request->kertas_kerja as $photo) {
-                    $extension = $photo->getClientOriginalExtension();
-                    $photoname = $photo->getClientOriginalName().rand(10000,99999).'.'.$extension;
-                    $folder = 'storage/upload/evaluasi/reformasi';
-                    $photopath = $folder.$photoname;
-                    $photo->move(public_path($folder),$photoname);
-                    $data[] = $photoname;
-                    KertasEvaluasiReformasi::create([
-                        'kode_evaluasi_reformasi' => $request->kode,
-                        'filename' => $photoname
-                    ]);
+                if($request->kertas_kerja == null) {
+                } else {
+                    foreach ($request->kertas_kerja as $photo) {
+                        $extension = $photo->getClientOriginalExtension();
+                        $photoname = $photo->getClientOriginalName().rand(10000,99999).'.'.$extension;
+                        $folder = 'storage/upload/evaluasi/reformasi';
+                        $photopath = $folder.$photoname;
+                        $photo->move(public_path($folder),$photoname);
+                        $data[] = $photoname;
+                        KertasEvaluasiReformasi::create([
+                            'kode_evaluasi_reformasi' => $request->kode,
+                            'filename' => $photoname
+                        ]);
+                    }
                 }
 
                 DB::table('evaluasi_reformasi_birokrasi')->insert([
@@ -649,12 +664,12 @@ class EvaluasiController extends Controller
                 ]);
 
                 $data = DB::table('evaluasi_reformasi_birokrasi')
-                        ->select('id')
+                        ->select('kode')
                         ->where('kode', $request->kode)
                         ->first();                        
 
                 DB::table('approvel_evaluasi_reformasi_birokrasi')->insert([
-                    'evaluasi_reformasi_birokrasi' => $data->id,
+                    'evaluasi_reformasi_birokrasi' => $data->kode,
                     'users_pembuat' => Auth::user()->id,
                     'status_pembuat' => 1,
                     'tanggal_pembuat' => Carbon::now()->format('d/m/yy'),
@@ -714,17 +729,20 @@ class EvaluasiController extends Controller
                 'komentar' => 'required'
                 ]);
 
-               foreach ($request->kertas_kerja as $photo) {
-                    $extension = $photo->getClientOriginalExtension();
-                    $photoname = $photo->getClientOriginalName().rand(10000,99999).'.'.$extension;
-                    $folder = 'storage/upload/evaluasi/reformasi';
-                    $photopath = $folder.$photoname;
-                    $photo->move(public_path($folder),$photoname);
-                    $data[] = $photoname;
-                    KertasEvaluasiReformasi::create([
-                        'kode_evaluasi_reformasi' => $request->kode,
-                        'filename' => $photoname
-                    ]);
+                if($request->kertas_kerja == null) {
+                } else {
+                foreach ($request->kertas_kerja as $photo) {
+                        $extension = $photo->getClientOriginalExtension();
+                        $photoname = $photo->getClientOriginalName().rand(10000,99999).'.'.$extension;
+                        $folder = 'storage/upload/evaluasi/reformasi';
+                        $photopath = $folder.$photoname;
+                        $photo->move(public_path($folder),$photoname);
+                        $data[] = $photoname;
+                        KertasEvaluasiReformasi::create([
+                            'kode_evaluasi_reformasi' => $request->kode,
+                            'filename' => $photoname
+                        ]);
+                    }
                 }
 
                 DB::table('evaluasi_reformasi_birokrasi')->insert([
@@ -758,20 +776,23 @@ class EvaluasiController extends Controller
                     'komentar' => 'required',
                 ]);
                 
-                foreach ($request->kertas_kerja as $photo) {
-                    $extension = $photo->getClientOriginalExtension();
-                    $photoname = $photo->getClientOriginalName().rand(10000,99999).'.'.$extension;
-                    $folder = 'storage/upload/evaluasi/reformasi';
-                    $photopath = $folder.$photoname;
-                    $photo->move(public_path($folder),$photoname);
-                    $data[] = $photoname;
-                    KertasEvaluasiReformasi::create([
-                        'kode_evaluasi_reformasi' => $request->kode,
-                        'filename' => $photoname
-                    ]);
+                if($request->kertas_kerja == null) {
+                } else {
+                    foreach ($request->kertas_kerja as $photo) {
+                        $extension = $photo->getClientOriginalExtension();
+                        $photoname = $photo->getClientOriginalName().rand(10000,99999).'.'.$extension;
+                        $folder = 'storage/upload/evaluasi/reformasi';
+                        $photopath = $folder.$photoname;
+                        $photo->move(public_path($folder),$photoname);
+                        $data[] = $photoname;
+                        KertasEvaluasiReformasi::create([
+                            'kode_evaluasi_reformasi' => $request->kode,
+                            'filename' => $photoname
+                        ]);
+                    }
                 }
 
-                DB::table('evaluasi_reformasi_birokrasi')->where('id', $request->id)->update([
+                DB::table('evaluasi_reformasi_birokrasi')->where('kode', $request->kode)->update([
                     'ketua' => $request->ketua,
                     'nomor_st' => $request->nomor_st,
                     'tanggal_evaluasi_from' => $request->tanggal_audit_from,
@@ -798,7 +819,7 @@ class EvaluasiController extends Controller
                     'updated_at' => Carbon::now()
                 ]);
 
-                DB::table('evaluasi')->where('evaluasi', $request->id)->update([
+                DB::table('evaluasi')->where('evaluasi', $request->kode)->update([
                     'is_prosess' => 1,
                     'jenis' => 2,
                     'created_at' => Carbon::now(),
@@ -806,23 +827,26 @@ class EvaluasiController extends Controller
                 ]);
             } elseif($request->has('simpan')) {
                 $datacheck = DB::table('evaluasi_reformasi_birokrasi')
-                ->where('id', $request->id)
+                ->where('kode', $request->kode)
                 ->first();
                 
-                foreach ($request->kertas_kerja as $photo) {
-                    $extension = $photo->getClientOriginalExtension();
-                    $photoname = $photo->getClientOriginalName().rand(10000,99999).'.'.$extension;
-                    $folder = 'storage/upload/evaluasi/reformasi';
-                    $photopath = $folder.$photoname;
-                    $photo->move(public_path($folder),$photoname);
-                    $data[] = $photoname;
-                    KertasEvaluasiReformasi::create([
-                        'kode_evaluasi_reformasi' => $request->kode,
-                        'filename' => $photoname
-                    ]);
+                if($request->kertas_kerja == null) {
+                } else {
+                    foreach ($request->kertas_kerja as $photo) {
+                        $extension = $photo->getClientOriginalExtension();
+                        $photoname = $photo->getClientOriginalName().rand(10000,99999).'.'.$extension;
+                        $folder = 'storage/upload/evaluasi/reformasi';
+                        $photopath = $folder.$photoname;
+                        $photo->move(public_path($folder),$photoname);
+                        $data[] = $photoname;
+                        KertasEvaluasiReformasi::create([
+                            'kode_evaluasi_reformasi' => $request->kode,
+                            'filename' => $photoname
+                        ]);
+                    }
                 }
 
-                DB::table('evaluasi_reformasi_birokrasi')->where('id', $request->id)->update([
+                DB::table('evaluasi_reformasi_birokrasi')->where('kode', $request->kode)->update([
                     'ketua' => $request->ketua,
                     'nomor_st' => $request->nomor_st,
                     'tanggal_evaluasi_from' => $request->tanggal_audit_from,
@@ -849,7 +873,7 @@ class EvaluasiController extends Controller
     public function approve2(Request $request)
     {
         $data =  DB::table('approvel_evaluasi_reformasi_birokrasi as auk')
-                ->where('auk.evaluasi_reformasi_birokrasi', $request->id)
+                ->where('auk.evaluasi_reformasi_birokrasi', $request->kdoe)
                 ->first();
 
         $this->validate($request, 
@@ -858,9 +882,9 @@ class EvaluasiController extends Controller
         ]);
 
         if($request->has('kirim')) {
-            if($data->evaluasi_reformasi_birokrasi == $request->id) {
+            if($data->evaluasi_reformasi_birokrasi == $request->kode) {
                 if($data->users_ketua == Auth::user()->id) {
-                    DB::table('approvel_evaluasi_reformasi_birokrasi')->where('evaluasi_reformasi_birokrasi', $request->id)->update([
+                    DB::table('approvel_evaluasi_reformasi_birokrasi')->where('evaluasi_reformasi_birokrasi', $request->kode)->update([
                     'users_pt' => 2,
                     'users_pm' => 3,
                     'status_ketua' => 2,
@@ -871,7 +895,7 @@ class EvaluasiController extends Controller
                     ]);
                      return redirect(route('evaluasi'))->with(['success' => 'Evaluasi Reformasi Birokrasi Berhasil di Setujui']);
                 }elseif($data->users_pt == Auth::user()->id) {
-                    DB::table('approvel_evaluasi_reformasi_birokrasi')->where('evaluasi_sakip', $request->id)->update([
+                    DB::table('approvel_evaluasi_reformasi_birokrasi')->where('evaluasi_sakip', $request->kode)->update([
                     'status_pt' => 2,
                     'tanggal_pt' => Carbon::now()->format('d/m/yy'),
                     'jam_pt' => Carbon::now()->format('H:m'),
@@ -880,20 +904,20 @@ class EvaluasiController extends Controller
                     ]);
                      return redirect(route('evaluasi'))->with(['success' => 'Evaluasi Reformasi Birokrasi Berhasil di Setujui']);
                 }elseif($data->users_pm == Auth::user()->id) {
-                    DB::table('approvel_evaluasi_reformasi_birokrasi')->where('evaluasi_sakip', $request->id)->update([
+                    DB::table('approvel_evaluasi_reformasi_birokrasi')->where('evaluasi_sakip', $request->kode)->update([
                     'status_pm' => 2,
                     'tanggal_pm' => Carbon::now()->format('d/m/yy'),
                     'jam_pm' => Carbon::now()->format('H:m'),
                     'komentar_pm' => $request->komentar,
                     'updated_at' => Carbon::now()
                     ]);
-                     DB::table('evaluasi')->where('evaluasi', $request->id)->update([
+                     DB::table('evaluasi')->where('evaluasi', $request->kode)->update([
                         'is_prosess' => 2,
                         'jenis' => 2,
                         'created_at' => Carbon::now(),
                         'updated_at' => Carbon::now()
                     ]);
-                    DB::table('evaluasi_reformasi_birokrasi')->where('id', $request->id)->update([
+                    DB::table('evaluasi_reformasi_birokrasi')->where('kode', $request->kode)->update([
                         'is_prosess' => 2,
                         'updated_at' => Carbon::now()
                     ]);
@@ -904,9 +928,9 @@ class EvaluasiController extends Controller
                 
             }
         } elseif($request->has('kembali')) {
-            if($data->evaluasi_reformasi_birokrasi == $request->id) {
+            if($data->evaluasi_reformasi_birokrasi == $request->kode) {
                 if($data->users_ketua == Auth::user()->id) {
-                    DB::table('approvel_evaluasi_reformasi_birokrasi')->where('evaluasi_reformasi_birokrasi', $request->id)->update([
+                    DB::table('approvel_evaluasi_reformasi_birokrasi')->where('evaluasi_reformasi_birokrasi', $request->kode)->update([
                     'status_pembuat' => 4,
                     'users_pt' => 2,
                     'users_pm' => 3,
@@ -916,13 +940,13 @@ class EvaluasiController extends Controller
                     'komentar_ketua' => $request->komentar,
                     'updated_at' => Carbon::now()
                     ]);
-                    DB::table('evaluasi_reformasi_birokrasi')->where('id', $request->id)->update([
+                    DB::table('evaluasi_reformasi_birokrasi')->where('kode', $request->kode)->update([
                         'is_status' => 0,
                         'updated_at' => Carbon::now()
                     ]);
                      return redirect(route('evaluasi'))->with(['success' => 'Evaluasi Reformasi Birokrasi Berhasil di Setujui']);
                 }elseif($data->users_pt == Auth::user()->id) {
-                    DB::table('approvel_evaluasi_reformasi_birokrasi')->where('evaluasi_reformasi_birokrasi', $request->id)->update([
+                    DB::table('approvel_evaluasi_reformasi_birokrasi')->where('evaluasi_reformasi_birokrasi', $request->kode)->update([
                     'status_ketua' => 4,
                     'status_pt' => 3,
                     'tanggal_pt' => Carbon::now()->format('d/m/yy'),
@@ -932,7 +956,7 @@ class EvaluasiController extends Controller
                     ]);
                      return redirect(route('evaluasi'))->with(['success' => 'Evaluasi Reformasi Birokrasi Berhasil di Setujui']);
                 }elseif($data->users_pm == Auth::user()->id) {
-                    DB::table('approvel_evaluasi_reformasi_birokrasi')->where('evaluasi_reformasi_birokrasi', $request->id)->update([
+                    DB::table('approvel_evaluasi_reformasi_birokrasi')->where('evaluasi_reformasi_birokrasi', $request->kode)->update([
                     'status_pt' => 4,
                     'status_pm' => 3,
                     'tanggal_pm' => Carbon::now()->format('d/m/yy'),
@@ -940,13 +964,13 @@ class EvaluasiController extends Controller
                     'komentar_pm' => $request->komentar,
                     'updated_at' => Carbon::now()
                     ]);
-                    DB::table('evaluasi')->where('evaluasi', $request->id)->update([
+                    DB::table('evaluasi')->where('evaluasi', $request->kode)->update([
                         'is_prosess' => 2,
                         'jenis' => 2,
                         'created_at' => Carbon::now(),
                         'updated_at' => Carbon::now()
                     ]);
-                    DB::table('evaluasi_reformasi_birokrasi')->where('id', $request->id)->update([
+                    DB::table('evaluasi_reformasi_birokrasi')->where('kode', $request->kode)->update([
                         'is_status' => 1,
                         'updated_at' => Carbon::now()
                     ]);
@@ -971,7 +995,7 @@ class EvaluasiController extends Controller
     public function post3(Request $request)
     {
         $checkdata = DB::table('evaluasi_spip')
-                    ->where('id', $request->id)
+                    ->where('kode', $request->kode)
                     ->first();
         
         if($checkdata == null) {
@@ -991,17 +1015,20 @@ class EvaluasiController extends Controller
                 'komentar' => 'required'
                 ]);
 
-                foreach ($request->kertas_kerja as $photo) {
-                    $extension = $photo->getClientOriginalExtension();
-                    $photoname = $photo->getClientOriginalName().rand(10000,99999).'.'.$extension;
-                    $folder = 'storage/upload/evaluasi/spip';
-                    $photopath = $folder.$photoname;
-                    $photo->move(public_path($folder),$photoname);
-                    $data[] = $photoname;
-                    KertasEvaluasiSpip::create([
-                        'kode_evaluasi_spip' => $request->kode,
-                        'filename' => $photoname
-                    ]);
+                if($request->kertas_kerja == null) {
+                } else {
+                    foreach ($request->kertas_kerja as $photo) {
+                        $extension = $photo->getClientOriginalExtension();
+                        $photoname = $photo->getClientOriginalName().rand(10000,99999).'.'.$extension;
+                        $folder = 'storage/upload/evaluasi/spip';
+                        $photopath = $folder.$photoname;
+                        $photo->move(public_path($folder),$photoname);
+                        $data[] = $photoname;
+                        KertasEvaluasiSpip::create([
+                            'kode_evaluasi_spip' => $request->kode,
+                            'filename' => $photoname
+                        ]);
+                    }
                 }
 
                 DB::table('evaluasi_spip')->insert([
@@ -1026,7 +1053,7 @@ class EvaluasiController extends Controller
                         ->first();                        
 
                 DB::table('approvel_evaluasi_spip')->insert([
-                    'evaluasi_spip' => $data->id,
+                    'evaluasi_spip' => $data->kode,
                     'users_pembuat' => Auth::user()->id,
                     'status_pembuat' => 1,
                     'tanggal_pembuat' => Carbon::now()->format('d/m/yy'),
@@ -1086,17 +1113,20 @@ class EvaluasiController extends Controller
                 'komentar' => 'required'
                 ]);
 
-                foreach ($request->kertas_kerja as $photo) {
-                    $extension = $photo->getClientOriginalExtension();
-                    $photoname = $photo->getClientOriginalName().rand(10000,99999).'.'.$extension;
-                    $folder = 'storage/upload/evaluasi/spip';
-                    $photopath = $folder.$photoname;
-                    $photo->move(public_path($folder),$photoname);
-                    $data[] = $photoname;
-                    KertasEvaluasiSpip::create([
-                        'kode_evaluasi_spip' => $request->kode,
-                        'filename' => $photoname
-                    ]);
+                if($request->kertas_kerja == null) {
+                } else {
+                    foreach ($request->kertas_kerja as $photo) {
+                        $extension = $photo->getClientOriginalExtension();
+                        $photoname = $photo->getClientOriginalName().rand(10000,99999).'.'.$extension;
+                        $folder = 'storage/upload/evaluasi/spip';
+                        $photopath = $folder.$photoname;
+                        $photo->move(public_path($folder),$photoname);
+                        $data[] = $photoname;
+                        KertasEvaluasiSpip::create([
+                            'kode_evaluasi_spip' => $request->kode,
+                            'filename' => $photoname
+                        ]);
+                    }
                 }
 
                 DB::table('evaluasi_spip')->insert([
@@ -1126,7 +1156,7 @@ class EvaluasiController extends Controller
             if($request->has('kirim')) {
 
                 $datacheck = DB::table('evaluasi_spip')
-                ->where('id', $request->id)
+                ->where('kdoe', $request->kode)
                 ->first();
 
                 $this->validate($request, 
@@ -1134,20 +1164,23 @@ class EvaluasiController extends Controller
                     'komentar' => 'required',
                 ]);
                 
-                foreach ($request->kertas_kerja as $photo) {
-                    $extension = $photo->getClientOriginalExtension();
-                    $photoname = $photo->getClientOriginalName().rand(10000,99999).'.'.$extension;
-                    $folder = 'storage/upload/evaluasi/spip';
-                    $photopath = $folder.$photoname;
-                    $photo->move(public_path($folder),$photoname);
-                    $data[] = $photoname;
-                    KertasEvaluasiSpip::create([
-                        'kode_evaluasi_spip' => $request->kode,
-                        'filename' => $photoname
-                    ]);
+                if($request->kertas_kerja == null) {
+                } else {
+                    foreach ($request->kertas_kerja as $photo) {
+                        $extension = $photo->getClientOriginalExtension();
+                        $photoname = $photo->getClientOriginalName().rand(10000,99999).'.'.$extension;
+                        $folder = 'storage/upload/evaluasi/spip';
+                        $photopath = $folder.$photoname;
+                        $photo->move(public_path($folder),$photoname);
+                        $data[] = $photoname;
+                        KertasEvaluasiSpip::create([
+                            'kode_evaluasi_spip' => $request->kode,
+                            'filename' => $photoname
+                        ]);
+                    }
                 }
 
-                DB::table('evaluasi_spip')->where('id', $request->id)->update([
+                DB::table('evaluasi_spip')->where('kode', $request->kode)->update([
                     'ketua' => $request->ketua,
                     'nomor_st' => $request->nomor_st,
                     'tanggal_evaluasi_from' => $request->tanggal_audit_from,
@@ -1159,7 +1192,7 @@ class EvaluasiController extends Controller
                     'updated_at' => Carbon::now()
                 ]); 
 
-                DB::table('approvel_evaluasi_spip')->where('evaluasi_spip', $request->id)->update([
+                DB::table('approvel_evaluasi_spip')->where('evaluasi_spip', $request->kode)->update([
                     'status_pembuat' => 1,
                     'tanggal_pembuat' => Carbon::now()->format('d/m/yy'),
                     'jam_pembuat' => Carbon::now()->format('H:m'),
@@ -1174,7 +1207,7 @@ class EvaluasiController extends Controller
                     'updated_at' => Carbon::now()
                 ]);
 
-                DB::table('evaluasi')->where('evaluasi', $request->id)->update([
+                DB::table('evaluasi')->where('evaluasi', $request->kode)->update([
                     'is_prosess' => 1,
                     'jenis' => 3,
                     'created_at' => Carbon::now(),
@@ -1182,20 +1215,23 @@ class EvaluasiController extends Controller
                 ]);
             } elseif($request->has('simpan')) {
 
-                foreach ($request->kertas_kerja as $photo) {
-                    $extension = $photo->getClientOriginalExtension();
-                    $photoname = $photo->getClientOriginalName().rand(10000,99999).'.'.$extension;
-                    $folder = 'storage/upload/evaluasi/spip';
-                    $photopath = $folder.$photoname;
-                    $photo->move(public_path($folder),$photoname);
-                    $data[] = $photoname;
-                    KertasEvaluasiSpip::create([
-                        'kode_evaluasi_spip' => $request->kode,
-                        'filename' => $photoname
-                    ]);
+                if($request->kertas_kerja == null) {
+                } else {
+                    foreach ($request->kertas_kerja as $photo) {
+                        $extension = $photo->getClientOriginalExtension();
+                        $photoname = $photo->getClientOriginalName().rand(10000,99999).'.'.$extension;
+                        $folder = 'storage/upload/evaluasi/spip';
+                        $photopath = $folder.$photoname;
+                        $photo->move(public_path($folder),$photoname);
+                        $data[] = $photoname;
+                        KertasEvaluasiSpip::create([
+                            'kode_evaluasi_spip' => $request->kode,
+                            'filename' => $photoname
+                        ]);
+                    }
                 }
 
-                DB::table('evaluasi_spip')->where('id', $request->id)->update([
+                DB::table('evaluasi_spip')->where('kode', $request->kode)->update([
                     'ketua' => $request->ketua,
                     'nomor_st' => $request->nomor_st,
                     'tanggal_evaluasi_from' => $request->tanggal_audit_from,
@@ -1222,7 +1258,7 @@ class EvaluasiController extends Controller
     public function approve3(Request $request)
     {
         $data =  DB::table('approvel_evaluasi_spip as auk')
-                ->where('auk.evaluasi_spip', $request->id)
+                ->where('auk.evaluasi_spip', $request->kode)
                 ->first();
 
         $this->validate($request, 
@@ -1231,9 +1267,9 @@ class EvaluasiController extends Controller
         ]);
 
         if($request->has('kirim')) {
-            if($data->evaluasi_spip == $request->id) {
+            if($data->evaluasi_spip == $request->kode) {
                 if($data->users_ketua == Auth::user()->id) {
-                    DB::table('approvel_evaluasi_spip')->where('evaluasi_spip', $request->id)->update([
+                    DB::table('approvel_evaluasi_spip')->where('evaluasi_spip', $request->kode)->update([
                     'users_pt' => 2,
                     'users_pm' => 3,
                     'status_ketua' => 2,
@@ -1244,7 +1280,7 @@ class EvaluasiController extends Controller
                     ]);
                      return redirect(route('evaluasi'))->with(['success' => 'Evaluasi SPIP Berhasil di Setujui']);
                 }elseif($data->users_pt == Auth::user()->id) {
-                    DB::table('approvel_evaluasi_spip')->where('evaluasi_spip', $request->id)->update([
+                    DB::table('approvel_evaluasi_spip')->where('evaluasi_spip', $request->kode)->update([
                     'status_pt' => 2,
                     'tanggal_pt' => Carbon::now()->format('d/m/yy'),
                     'jam_pt' => Carbon::now()->format('H:m'),
@@ -1253,20 +1289,20 @@ class EvaluasiController extends Controller
                     ]);
                      return redirect(route('evaluasi'))->with(['success' => 'Evaluasi SPIP Berhasil di Setujui']);
                 }elseif($data->users_pm == Auth::user()->id) {
-                    DB::table('approvel_evaluasi_spip')->where('evaluasi_spip', $request->id)->update([
+                    DB::table('approvel_evaluasi_spip')->where('evaluasi_spip', $request->kode)->update([
                     'status_pm' => 2,
                     'tanggal_pm' => Carbon::now()->format('d/m/yy'),
                     'jam_pm' => Carbon::now()->format('H:m'),
                     'komentar_pm' => $request->komentar,
                     'updated_at' => Carbon::now()
                     ]);
-                     DB::table('evaluasi')->where('evaluasi', $request->id)->update([
+                     DB::table('evaluasi')->where('evaluasi', $request->kode)->update([
                         'is_prosess' => 2,
                         'jenis' => 3,
                         'created_at' => Carbon::now(),
                         'updated_at' => Carbon::now()
                     ]);
-                    DB::table('evaluasi_evaluasi_spip')->where('id', $request->id)->update([
+                    DB::table('evaluasi_evaluasi_spip')->where('kode', $request->kode)->update([
                         'is_prosess' => 2,
                         'updated_at' => Carbon::now()
                     ]);
@@ -1277,9 +1313,9 @@ class EvaluasiController extends Controller
                 
             }
         } elseif($request->has('kembali')) {
-            if($data->evaluasi_spip == $request->id) {
+            if($data->evaluasi_spip == $request->kode) {
                 if($data->users_ketua == Auth::user()->id) {
-                    DB::table('approvel_evaluasi_spip')->where('evaluasi_spip', $request->id)->update([
+                    DB::table('approvel_evaluasi_spip')->where('evaluasi_spip', $request->kode)->update([
                     'status_pembuat' => 4,
                     'users_pt' => 2,
                     'users_pm' => 3,
@@ -1289,13 +1325,13 @@ class EvaluasiController extends Controller
                     'komentar_ketua' => $request->komentar,
                     'updated_at' => Carbon::now()
                     ]);
-                    DB::table('evaluasi_spip')->where('id', $request->id)->update([
+                    DB::table('evaluasi_spip')->where('kode', $request->kode)->update([
                         'is_status' => 0,
                         'updated_at' => Carbon::now()
                     ]);
                      return redirect(route('evaluasi'))->with(['success' => 'Evaluasi SPIP Berhasil di Setujui']);
                 }elseif($data->users_pt == Auth::user()->id) {
-                    DB::table('approvel_evaluasi_evaluasi_spip')->where('evaluasi_spip', $request->id)->update([
+                    DB::table('approvel_evaluasi_evaluasi_spip')->where('evaluasi_spip', $request->kode)->update([
                     'status_ketua' => 4,
                     'status_pt' => 3,
                     'tanggal_pt' => Carbon::now()->format('d/m/yy'),
@@ -1305,7 +1341,7 @@ class EvaluasiController extends Controller
                     ]);
                      return redirect(route('evaluasi'))->with(['success' => 'Evaluasi SPIP Berhasil di Setujui']);
                 }elseif($data->users_pm == Auth::user()->id) {
-                    DB::table('approvel_evaluasi_spip')->where('evaluasi_spip', $request->id)->update([
+                    DB::table('approvel_evaluasi_spip')->where('evaluasi_spip', $request->kode)->update([
                     'status_pt' => 4,
                     'status_pm' => 3,
                     'tanggal_pm' => Carbon::now()->format('d/m/yy'),
@@ -1313,13 +1349,13 @@ class EvaluasiController extends Controller
                     'komentar_pm' => $request->komentar,
                     'updated_at' => Carbon::now()
                     ]);
-                    DB::table('evaluasi')->where('evaluasi', $request->id)->update([
+                    DB::table('evaluasi')->where('evaluasi', $request->kode)->update([
                         'is_prosess' => 2,
                         'jenis' => 3,
                         'created_at' => Carbon::now(),
                         'updated_at' => Carbon::now()
                     ]);
-                    DB::table('evaluasi_spip')->where('id', $request->id)->update([
+                    DB::table('evaluasi_spip')->where('kode', $request->kode)->update([
                         'is_status' => 1,
                         'updated_at' => Carbon::now()
                     ]);
@@ -1343,7 +1379,7 @@ class EvaluasiController extends Controller
     public function post4(Request $request)
     {
         $checkdata = DB::table('evaluasi_iacm')
-                    ->where('id', $request->id)
+                    ->where('kode', $request->kode)
                     ->first();
         
         if($checkdata == null) {
@@ -1363,17 +1399,20 @@ class EvaluasiController extends Controller
                 'komentar' => 'required'
                 ]);
 
-                foreach ($request->kertas_kerja as $photo) {
-                    $extension = $photo->getClientOriginalExtension();
-                    $photoname = $photo->getClientOriginalName().rand(10000,99999).'.'.$extension;
-                    $folder = 'storage/upload/evaluasi/iacm';
-                    $photopath = $folder.$photoname;
-                    $photo->move(public_path($folder),$photoname);
-                    $data[] = $photoname;
-                    KertasEvaluasiIacm::create([
-                        'kode_evaluasi_iacm' => $request->kode,
-                        'filename' => $photoname
-                    ]);
+                if($request->kertas_kerja == null) {
+                } else {
+                    foreach ($request->kertas_kerja as $photo) {
+                        $extension = $photo->getClientOriginalExtension();
+                        $photoname = $photo->getClientOriginalName().rand(10000,99999).'.'.$extension;
+                        $folder = 'storage/upload/evaluasi/iacm';
+                        $photopath = $folder.$photoname;
+                        $photo->move(public_path($folder),$photoname);
+                        $data[] = $photoname;
+                        KertasEvaluasiIacm::create([
+                            'kode_evaluasi_iacm' => $request->kode,
+                            'filename' => $photoname
+                        ]);
+                    }
                 }
 
                 DB::table('evaluasi_iacm')->insert([
@@ -1393,12 +1432,12 @@ class EvaluasiController extends Controller
                 ]);
 
                 $data = DB::table('evaluasi_iacm')
-                        ->select('id')
+                        ->select('kode')
                         ->where('kode', $request->kode)
                         ->first();                        
 
                 DB::table('approvel_evaluasi_iacm')->insert([
-                    'evaluasi_iacm' => $data->id,
+                    'evaluasi_iacm' => $data->kode,
                     'users_pembuat' => Auth::user()->id,
                     'status_pembuat' => 1,
                     'tanggal_pembuat' => Carbon::now()->format('d/m/yy'),
@@ -1458,17 +1497,20 @@ class EvaluasiController extends Controller
                 'komentar' => 'required'
                 ]);
 
-                foreach ($request->kertas_kerja as $photo) {
-                    $extension = $photo->getClientOriginalExtension();
-                    $photoname = $photo->getClientOriginalName().rand(10000,99999).'.'.$extension;
-                    $folder = 'storage/upload/evaluasi/iacm';
-                    $photopath = $folder.$photoname;
-                    $photo->move(public_path($folder),$photoname);
-                    $data[] = $photoname;
-                    KertasEvaluasiIacm::create([
-                        'kode_evaluasi_iacm' => $request->kode,
-                        'filename' => $photoname
-                    ]);
+                if($request->kertas_kerja == null) {
+                } else {
+                    foreach ($request->kertas_kerja as $photo) {
+                        $extension = $photo->getClientOriginalExtension();
+                        $photoname = $photo->getClientOriginalName().rand(10000,99999).'.'.$extension;
+                        $folder = 'storage/upload/evaluasi/iacm';
+                        $photopath = $folder.$photoname;
+                        $photo->move(public_path($folder),$photoname);
+                        $data[] = $photoname;
+                        KertasEvaluasiIacm::create([
+                            'kode_evaluasi_iacm' => $request->kode,
+                            'filename' => $photoname
+                        ]);
+                    }
                 }
 
                 DB::table('evaluasi_iacm')->insert([
@@ -1502,20 +1544,23 @@ class EvaluasiController extends Controller
                     'komentar' => 'required',
                 ]);
                 
-                foreach ($request->kertas_kerja as $photo) {
-                    $extension = $photo->getClientOriginalExtension();
-                    $photoname = $photo->getClientOriginalName().rand(10000,99999).'.'.$extension;
-                    $folder = 'storage/upload/evaluasi/iacm';
-                    $photopath = $folder.$photoname;
-                    $photo->move(public_path($folder),$photoname);
-                    $data[] = $photoname;
-                    KertasEvaluasiIacm::create([
-                        'kode_evaluasi_iacm' => $request->kode,
-                        'filename' => $photoname
-                    ]);
+                if($request->kertas_kerja == null) {
+                } else {
+                    foreach ($request->kertas_kerja as $photo) {
+                        $extension = $photo->getClientOriginalExtension();
+                        $photoname = $photo->getClientOriginalName().rand(10000,99999).'.'.$extension;
+                        $folder = 'storage/upload/evaluasi/iacm';
+                        $photopath = $folder.$photoname;
+                        $photo->move(public_path($folder),$photoname);
+                        $data[] = $photoname;
+                        KertasEvaluasiIacm::create([
+                            'kode_evaluasi_iacm' => $request->kode,
+                            'filename' => $photoname
+                        ]);
+                    }
                 }
 
-                DB::table('evaluasi_iacm')->where('id', $request->id)->update([
+                DB::table('evaluasi_iacm')->where('kode', $request->kode)->update([
                     'ketua' => $request->ketua,
                     'nomor_st' => $request->nomor_st,
                     'tanggal_evaluasi_from' => $request->tanggal_audit_from,
@@ -1527,7 +1572,7 @@ class EvaluasiController extends Controller
                     'updated_at' => Carbon::now()
                 ]); 
 
-                DB::table('approvel_evaluasi_iacm')->where('evaluasi_iacm', $request->id)->update([
+                DB::table('approvel_evaluasi_iacm')->where('evaluasi_iacm', $request->kode)->update([
                     'status_pembuat' => 1,
                     'tanggal_pembuat' => Carbon::now()->format('d/m/yy'),
                     'jam_pembuat' => Carbon::now()->format('H:m'),
@@ -1542,7 +1587,7 @@ class EvaluasiController extends Controller
                     'updated_at' => Carbon::now()
                 ]);
 
-                DB::table('evaluasi')->where('evaluasi', $request->id)->update([
+                DB::table('evaluasi')->where('evaluasi', $request->kode)->update([
                     'is_prosess' => 1,
                     'jenis' => 4,
                     'created_at' => Carbon::now(),
@@ -1550,20 +1595,23 @@ class EvaluasiController extends Controller
                 ]);
             } elseif($request->has('simpan')) {
 
-                foreach ($request->kertas_kerja as $photo) {
-                    $extension = $photo->getClientOriginalExtension();
-                    $photoname = $photo->getClientOriginalName().rand(10000,99999).'.'.$extension;
-                    $folder = 'storage/upload/evaluasi/iacm';
-                    $photopath = $folder.$photoname;
-                    $photo->move(public_path($folder),$photoname);
-                    $data[] = $photoname;
-                    KertasEvaluasiIacm::create([
-                        'kode_evaluasi_iacm' => $request->kode,
-                        'filename' => $photoname
-                    ]);
+                if($request->kertas_kerja == null) {
+                } else {
+                    foreach ($request->kertas_kerja as $photo) {
+                        $extension = $photo->getClientOriginalExtension();
+                        $photoname = $photo->getClientOriginalName().rand(10000,99999).'.'.$extension;
+                        $folder = 'storage/upload/evaluasi/iacm';
+                        $photopath = $folder.$photoname;
+                        $photo->move(public_path($folder),$photoname);
+                        $data[] = $photoname;
+                        KertasEvaluasiIacm::create([
+                            'kode_evaluasi_iacm' => $request->kode,
+                            'filename' => $photoname
+                        ]);
+                    }
                 }
 
-                DB::table('evaluasi_iacm')->where('id', $request->id)->update([
+                DB::table('evaluasi_iacm')->where('kode', $request->kode)->update([
                     'ketua' => $request->ketua,
                     'nomor_st' => $request->nomor_st,
                     'tanggal_evaluasi_from' => $request->tanggal_audit_from,
@@ -1590,7 +1638,7 @@ class EvaluasiController extends Controller
     public function approve4(Request $request)
     {
         $data =  DB::table('approvel_evaluasi_iacm as auk')
-                ->where('auk.evaluasi_iacm', $request->id)
+                ->where('auk.evaluasi_iacm', $request->kode)
                 ->first();
 
         $this->validate($request, 
@@ -1599,9 +1647,9 @@ class EvaluasiController extends Controller
         ]);
 
         if($request->has('kirim')) {
-            if($data->evaluasi_iacm == $request->id) {
+            if($data->evaluasi_iacm == $request->kode) {
                 if($data->users_ketua == Auth::user()->id) {
-                    DB::table('approvel_evaluasi_iacm')->where('evaluasi_iacm', $request->id)->update([
+                    DB::table('approvel_evaluasi_iacm')->where('evaluasi_iacm', $request->kode)->update([
                     'users_pt' => 2,
                     'users_pm' => 3,
                     'status_ketua' => 2,
@@ -1612,7 +1660,7 @@ class EvaluasiController extends Controller
                     ]);
                      return redirect(route('evaluasi'))->with(['success' => 'Evaluasi IACM Berhasil di Setujui']);
                 }elseif($data->users_pt == Auth::user()->id) {
-                    DB::table('approvel_evaluasi_iacm')->where('evaluasi_iacm', $request->id)->update([
+                    DB::table('approvel_evaluasi_iacm')->where('evaluasi_iacm', $request->kode)->update([
                     'status_pt' => 2,
                     'tanggal_pt' => Carbon::now()->format('d/m/yy'),
                     'jam_pt' => Carbon::now()->format('H:m'),
@@ -1621,20 +1669,20 @@ class EvaluasiController extends Controller
                     ]);
                      return redirect(route('evaluasi'))->with(['success' => 'Evaluasi IACM Berhasil di Setujui']);
                 }elseif($data->users_pm == Auth::user()->id) {
-                    DB::table('approvel_evaluasi_iacm')->where('evaluasi_iacm', $request->id)->update([
+                    DB::table('approvel_evaluasi_iacm')->where('evaluasi_iacm', $request->kode)->update([
                     'status_pm' => 2,
                     'tanggal_pm' => Carbon::now()->format('d/m/yy'),
                     'jam_pm' => Carbon::now()->format('H:m'),
                     'komentar_pm' => $request->komentar,
                     'updated_at' => Carbon::now()
                     ]);
-                     DB::table('evaluasi')->where('evaluasi', $request->id)->update([
+                     DB::table('evaluasi')->where('evaluasi', $request->kode)->update([
                         'is_prosess' => 2,
                         'jenis' => 3,
                         'created_at' => Carbon::now(),
                         'updated_at' => Carbon::now()
                     ]);
-                    DB::table('evaluasi_evaluasi_iacm')->where('id', $request->id)->update([
+                    DB::table('evaluasi_evaluasi_iacm')->where('kode', $request->kode)->update([
                         'is_prosess' => 2,
                         'updated_at' => Carbon::now()
                     ]);
@@ -1645,9 +1693,9 @@ class EvaluasiController extends Controller
                 
             }
         } elseif($request->has('kembali')) {
-            if($data->evaluasi_iacm == $request->id) {
+            if($data->evaluasi_iacm == $request->kode) {
                 if($data->users_ketua == Auth::user()->id) {
-                    DB::table('approvel_evaluasi_iacm')->where('evaluasi_iacm', $request->id)->update([
+                    DB::table('approvel_evaluasi_iacm')->where('evaluasi_iacm', $request->kode)->update([
                     'status_pembuat' => 4,
                     'users_pt' => 2,
                     'users_pm' => 3,
@@ -1657,13 +1705,13 @@ class EvaluasiController extends Controller
                     'komentar_ketua' => $request->komentar,
                     'updated_at' => Carbon::now()
                     ]);
-                    DB::table('evaluasi_iacm')->where('id', $request->id)->update([
+                    DB::table('evaluasi_iacm')->where('kode', $request->kode)->update([
                         'is_status' => 0,
                         'updated_at' => Carbon::now()
                     ]);
                      return redirect(route('evaluasi'))->with(['success' => 'Evaluasi IACM Berhasil di Setujui']);
                 }elseif($data->users_pt == Auth::user()->id) {
-                    DB::table('approvel_evaluasi_evaluasi_iacm')->where('evaluasi_iacm', $request->id)->update([
+                    DB::table('approvel_evaluasi_evaluasi_iacm')->where('evaluasi_iacm', $request->kode)->update([
                     'status_ketua' => 4,
                     'status_pt' => 3,
                     'tanggal_pt' => Carbon::now()->format('d/m/yy'),
@@ -1673,7 +1721,7 @@ class EvaluasiController extends Controller
                     ]);
                      return redirect(route('evaluasi'))->with(['success' => 'Evaluasi IACM Berhasil di Setujui']);
                 }elseif($data->users_pm == Auth::user()->id) {
-                    DB::table('approvel_evaluasi_iacm')->where('evaluasi_iacm', $request->id)->update([
+                    DB::table('approvel_evaluasi_iacm')->where('evaluasi_iacm', $request->kode)->update([
                     'status_pt' => 4,
                     'status_pm' => 3,
                     'tanggal_pm' => Carbon::now()->format('d/m/yy'),
@@ -1681,13 +1729,13 @@ class EvaluasiController extends Controller
                     'komentar_pm' => $request->komentar,
                     'updated_at' => Carbon::now()
                     ]);
-                    DB::table('evaluasi')->where('evaluasi', $request->id)->update([
+                    DB::table('evaluasi')->where('evaluasi', $request->kode)->update([
                         'is_prosess' => 2,
                         'jenis' => 4,
                         'created_at' => Carbon::now(),
                         'updated_at' => Carbon::now()
                     ]);
-                    DB::table('evaluasi_iacm')->where('id', $request->id)->update([
+                    DB::table('evaluasi_iacm')->where('kode', $request->kode)->update([
                         'is_status' => 1,
                         'updated_at' => Carbon::now()
                     ]);

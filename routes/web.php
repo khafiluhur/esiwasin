@@ -199,40 +199,46 @@ Route::group(['prefix' => 'dokumentasi'], function() {
 });
 
 Route::group(['prefix' => 'laporan'], function() {
-    Route::get('/', 'Dashboard\LaporanController@index')->name('laporan')->middleware('auth');
+    // Route::get('/', 'Dashboard\LaporanController@index')->name('laporan')->middleware('auth');
     Route::prefix('laporan_audit')->group(function () {
-        Route::get('/{id}', 'Dashboard\LaporanController@get1')->name('audit.laporan')->middleware('auth');
-        Route::get('/cari', 'Dashboard\LaporanController@cari1')->name('audit.cari.laporan')->middleware('auth');
+        Route::get('/', 'Dashboard\LaporanController@laporanAudit')->name('table.audit.laporan')->middleware('auth');
+        // Route::get('/{id}', 'Dashboard\LaporanController@get1')->name('audit.laporan')->middleware('auth');
+        Route::get('/cari', 'Dashboard\LaporanController@cariLaporanAudit')->name('audit.cari.laporan')->middleware('auth');
         Route::get('/laporan/audit/{id}', 'Dashboard\LaporanController@downloadLaporan1')->name('audit.download')->middleware('auth');
         Route::get('/downloadAudit/{id}', 'Dashboard\LaporanController@downloadGet1')->name('audit.download.laporan')->middleware('auth');
     });
     Route::prefix('laporan_reviu')->group(function () {
-        Route::get('/{id}', 'Dashboard\LaporanController@get2')->name('reviu.laporan')->middleware('auth');
-        Route::get('/cari', 'Dashboard\LaporanController@cari2')->name('reviu.cari.laporan')->middleware('auth');
+        Route::get('/', 'Dashboard\LaporanController@laporanReviu')->name('table.reviu.laporan')->middleware('auth');
+        // Route::get('/{id}', 'Dashboard\LaporanController@get2')->name('reviu.laporan')->middleware('auth');
+        Route::get('/cari', 'Dashboard\LaporanController@cariLaporanReviu')->name('reviu.cari.laporan')->middleware('auth');
         Route::get('/laporan/reviu/{id}', 'Dashboard\LaporanController@downloadLaporan2')->name('reviu.download')->middleware('auth');
         Route::get('/downloadReviu/{id}', 'Dashboard\LaporanController@downloadGet2')->name('reviu.download.laporan')->middleware('auth');
     });
     Route::prefix('laporan_evaluasi')->group(function () {
-        Route::get('/{id}', 'Dashboard\LaporanController@get3')->name('evaluasi.laporan')->middleware('auth');
-        Route::get('/cari', 'Dashboard\LaporanController@cari3')->name('evaluasi.cari.laporan')->middleware('auth');
+        Route::get('/', 'Dashboard\LaporanController@laporanEvaluasi')->name('table.evaluasi.laporan')->middleware('auth');
+        // Route::get('/{id}', 'Dashboard\LaporanController@get3')->name('evaluasi.laporan')->middleware('auth');
+        Route::get('/cari', 'Dashboard\LaporanController@cariLaporanEvaluasi')->name('evaluasi.cari.laporan')->middleware('auth');
         Route::get('/laporan/evaluasi/{id}', 'Dashboard\LaporanController@downloadLaporan3')->name('evaluasi.download')->middleware('auth');
         Route::get('/downloadEvaluasi/{id}', 'Dashboard\LaporanController@downloadGet3')->name('evaluasi.download.laporan')->middleware('auth');
     });
     Route::prefix('laporan_pemantauan')->group(function () {
-        Route::get('/{id}', 'Dashboard\LaporanController@get4')->name('pemantauan.laporan')->middleware('auth');
-        Route::get('/cari', 'Dashboard\LaporanController@cari4')->name('pemantauan.cari.laporan')->middleware('auth');
+        Route::get('/', 'Dashboard\LaporanController@laporanPemantauan')->name('table.pemantauan.laporan')->middleware('auth');
+        // Route::get('/{id}', 'Dashboard\LaporanController@get4')->name('pemantauan.laporan')->middleware('auth');
+        Route::get('/cari', 'Dashboard\LaporanController@cariLaporanPemantauan')->name('pemantauan.cari.laporan')->middleware('auth');
         Route::get('/laporan/pemantauan/{id}', 'Dashboard\LaporanController@downloadLaporan4')->name('pemantauan.download')->middleware('auth');
         Route::get('/downloadPemantauan/{id}', 'Dashboard\LaporanController@downloadGet4')->name('pemantauan.download.laporan')->middleware('auth');
     });
     Route::prefix('laporan_pengawasan')->group(function () {
-        Route::get('/{id}', 'Dashboard\LaporanController@get6')->name('pengawasan.laporan')->middleware('auth');
-        Route::get('/cari', 'Dashboard\LaporanController@cari6')->name('pengawasan.cari.laporan')->middleware('auth');
+        Route::get('/', 'Dashboard\LaporanController@laporanPengawasan')->name('table.pengawasan.laporan')->middleware('auth');
+        // Route::get('/{id}', 'Dashboard\LaporanController@get6')->name('pengawasan.laporan')->middleware('auth');
+        Route::get('/cari', 'Dashboard\LaporanController@cariLaporanPengawasan')->name('pengawasan.cari.laporan')->middleware('auth');
         Route::get('/laporan/pengawasan/{id}', 'Dashboard\LaporanController@downloadLaporan6')->name('pengawasan.download')->middleware('auth');
         Route::get('/downloadPengawasan/{id}', 'Dashboard\LaporanController@downloadGet6')->name('pengawasan.download.laporan')->middleware('auth');
     });
     Route::prefix('notulensi')->group(function () {
-        Route::get('/{id}', 'Dashboard\LaporanController@get5')->name('notulensi.laporan')->middleware('auth');
-        Route::get('/cari', 'Dashboard\LaporanController@cari5')->name('notulensi.cari.laporan')->middleware('auth');
+        Route::get('/', 'Dashboard\LaporanController@laporanNotulensi')->name('table.notulensi.laporan')->middleware('auth');
+        // Route::get('/{id}', 'Dashboard\LaporanController@get5')->name('notulensi.laporan')->middleware('auth');
+        Route::get('/cari', 'Dashboard\LaporanController@cariLaporanNotulensi')->name('notulensi.cari.laporan')->middleware('auth');
         Route::get('/laporan/notulensi/{id}', 'Dashboard\LaporanController@downloadLaporan5')->name('notulensi.download')->middleware('auth');
         Route::get('/downloadNotulensi/{id}', 'Dashboard\LaporanController@downloadGet5')->name('notulensi.download.laporan')->middleware('auth');
     });

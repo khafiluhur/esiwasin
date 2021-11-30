@@ -16,7 +16,7 @@
         <div class="form-group">
             <label for="nomor_st">Nomor ST</label><span class="text-danger">*</span>
             <input class="form-control" type="text" id="nomor_st" name="nomor_st" value="{{ $data2->nomor_st }}">
-            <input class="form-control" type="hidden" id="id" name="id" value="{{ $data2->id }}">
+            <input class="form-control" type="hidden" id="kode2" name="kode" value="{{ $data2->kode }}">
         </div>
     </div>
     <div class="col-6 float-right">
@@ -47,7 +47,7 @@
                     </div>
                 </div>
                 <div class="input-group-btn col-2 float-left"> 
-                    <a href="{{ route('delete.sakip', ['id' => $u->id ]) }}" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
+                    <a href="{{ route('delete.sakip', ['id' => $u->kode_evaluasi_reformasi ]) }}" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
                     <input class="form-control" type="hidden" id="kode" name="kode" value="{{ $u->kode_evaluasi_reformasi }}">
                 </div> 
                 @endforeach

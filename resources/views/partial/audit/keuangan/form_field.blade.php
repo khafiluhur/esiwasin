@@ -1,5 +1,5 @@
-<form action="{{ url('/audit/keuangan/') }}" method="POST" enctype="multipart/form-data">
-    @csrf
+<form action="{{ route('keuangan.audit') }}" method="POST" enctype="multipart/form-data">
+    {{ csrf_field() }}
     <h3 style="text-align: center">Audit Keuangan</h3>
 
     <div class="col-12">
@@ -16,7 +16,7 @@
             <div class="form-group">
                 <label for="nomor_st">Nomor ST</label><span class="text-danger">*</span>
                 <input class="form-control" type="text" id="nomor_st" name="nomor_st" value="{{ $data1->nomor_st }}">
-                <input class="form-control" type="hidden" id="id" name="id" value="{{ $data1->id }}">
+                <input class="form-control" type="hidden" id="kode" name="kode" value="{{ $data1->kode }}">
             </div>
         </div>
         <div class="col-6 float-right">
@@ -51,8 +51,8 @@
                     
                     @else
                     <div class="input-group-btn col-2 float-left"> 
-                        <a href="{{ route('delete.keuangan', ['id' => $u->id ]) }}" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
-                        <input class="form-control" type="hidden" id="kode" name="kode" value="{{ $u->kode_audit_keuangan }}">
+                        <a href="{{ route('delete.keuangan', ['id' => $u->kode_audit_keuangan ]) }}" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
+                        <input class="form-control" type="hidden" id="kode2" name="kode" value="{{ $u->kode_audit_keuangan }}">
                     </div> 
                     @endif
                     @endforeach

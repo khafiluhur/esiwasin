@@ -32,7 +32,7 @@
                     <input type="text" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" value="{{ $u->dasar }}"  aria-describedby="basic-addon2" disabled>
                 </div>
             @endforeach
-            <div class="input-group custom-file hdtuto control-group lst increment" >
+            {{-- <div class="input-group custom-file hdtuto control-group lst increment" >
                 <div class="col-10 float-left pl-0">
                     <input class="form-control" type="text" id="dasar" name="dasar[]" placeholder="Dasar Nodin">
                 </div>  
@@ -47,8 +47,15 @@
                 <div class="input-group-btn col-2 float-left"> 
                     <button class="btn btn-danger" type="button"><i class="fas fa-minus"></i></button>
                 </div>
-            </div>
-            
+            </div> --}}
+
+            <table class="table table-bordered" id="dynamicAddRemove">
+                <tr>
+                    <td><input type="text" name="dasar[0]" placeholder="Dasar Nodin" class="form-control" />
+                    </td>
+                    <td><button name="add" id="dynamic-ar" class="btn btn-success" type="button"><i class="fas fa-plus"></i></button></td>
+                </tr>
+            </table>
         </div>
     </div>
     <div class="col-6 float-right">
@@ -116,3 +123,18 @@
     </div>
 </div>
 </form>
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"></script>
+<script type="text/javascript">
+    var i = 0;
+    $("#dynamic-ar").click(function () {
+        ++i;
+        $("#dynamicAddRemove").append('<tr><td><input type="text" name="dasar[' + i +
+            ']" placeholder="Enter subject" class="form-control" /></td><td> <button class="btn btn-danger" type="button"><i class="fas fa-minus remove-input-field"></i></button></td></tr>'
+            );
+    });
+    $(document).on('click', '.remove-input-field', function () {
+        $(this).parents('tr').remove();
+    });
+</script>

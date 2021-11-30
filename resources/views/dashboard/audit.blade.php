@@ -63,7 +63,7 @@
                             @elseif($data1->id_pm == Auth::user()->id)
                                 @include('partial.audit.keuangan.form_setuju')      
                             @elseif($data1->created_by == Auth::user()->id)
-                                @if($data1->is_prosess == 1)
+                                @if($data1->is_status == 1)
                                     @include('partial.audit.keuangan.form_default') 
                                 @else
                                     @include('partial.audit.keuangan.form_field')
@@ -89,7 +89,7 @@
                             @elseif($data2->id_pm == Auth::user()->id)
                                 @include('partial.audit.kinerja.form_setuju')      
                             @elseif($data2->created_by == Auth::user()->id)
-                                @if($data2->is_prosess == 1)
+                                @if($data2->is_status == 1)
                                     @include('partial.audit.kinerja.form_default') 
                                 @else
                                     @include('partial.audit.kinerja.form_field')
@@ -115,7 +115,7 @@
                             @elseif($data3->id_pm == Auth::user()->id)
                                 @include('partial.audit.tujuan_tertentu.form_setuju')      
                             @elseif($data3->created_by == Auth::user()->id)
-                                @if($data3->is_prosess == 1)
+                                @if($data3->is_status == 1)
                                     @include('partial.audit.tujuan_tertentu.form_default') 
                                 @else
                                     @include('partial.audit.tujuan_tertentu.form_field')

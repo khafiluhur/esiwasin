@@ -1,5 +1,5 @@
 <form action="{{ route('laporan.review') }}" method="POST" enctype="multipart/form-data">
-@csrf
+    {{ csrf_field() }}
 <h3 style="text-align: center">Reviu Laporan Keuangan</h3>
 
 <div class="col-12">
@@ -16,7 +16,7 @@
         <div class="form-group">
             <label for="nomor_st">Nomor ST</label><span class="text-danger">*</span>
             <input class="form-control" type="text" id="nomor_st" name="nomor_st" value="{{ $data1->nomor_st }}">
-            <input class="form-control" type="hidden" id="id" name="id" value="{{ $data1->id }}">
+            <input class="form-control" type="hidden" id="kode2" name="kode" value="{{ $data1->kode }}">
         </div>
     </div>
     <div class="col-6 float-right">
@@ -47,7 +47,7 @@
                     </div>
                 </div>
                 <div class="input-group-btn col-2 float-left"> 
-                    <a href="{{ route('delete.laporan', ['id' => $u->id ]) }}" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
+                    <a href="{{ route('delete.laporan', ['id' => $u->kode_reviu_keuangan ]) }}" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
                     <input class="form-control" type="hidden" id="kode4" name="kode" value="{{ $u->kode_reviu_keuangan }}">
                 </div> 
                 @endforeach

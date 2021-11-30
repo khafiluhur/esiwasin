@@ -41,11 +41,11 @@ class PengawasanController extends Controller
         $pkpt_rbzi = DB::table('input_pkpt')->where('jenis', 19)->get();
         $pkpt_sakip = DB::table('input_pkpt')->where('jenis', 20)->get();
 
-        ## Pengaawasan Konsultasi ##
         $data1 = DB::table('konsultasi as ak')
                 ->select(
                     'ak.*', 
                     'up.nama as users_pembuat', 
+                    'sp.id as id_status_pembuat',
                     'sp.nama as status_pembuat', 
                     'aak.tanggal_pembuat',
                     'aak.jam_pembuat',
@@ -56,14 +56,16 @@ class PengawasanController extends Controller
                     'aak.tanggal_anggota',
                     'aak.jam_anggota',
                     'aak.komentar_anggota',
-                    'aak.users_ketua as id_ketua',
+                    'uk.id as id_users_ketua',
                     'uk.nama as users_ketua', 
+                    'sk.id as id_status_ketua',
                     'sk.nama as status_ketua', 
                     'aak.tanggal_ketua',
                     'aak.jam_ketua',
                     'aak.komentar_ketua',
                     'aak.users_pt as id_pt',
                     'upt.nama as users_pt', 
+                    'spt.id as id_status_pt',
                     'spt.nama as status_pt', 
                     'aak.tanggal_pt',
                     'aak.jam_pt',
@@ -75,12 +77,10 @@ class PengawasanController extends Controller
                     'aak.jam_pm',
                     'aak.komentar_pm')
                 ->join('approvel_konsultasi as aak', 'aak.konsultasi', '=', 'ak.kode')
-                ->leftjoin('users as up', 'up.id', '=', 'aak.users_pembuat')
-                ->leftjoin('status as sp', 'sp.id', '=', 'aak.status_pembuat')
+                ->join('users as up', 'up.id', '=', 'aak.users_pembuat')
+                ->join('status as sp', 'sp.id', '=', 'aak.status_pembuat')
                 ->leftjoin('users as uag', 'uag.id', '=', 'aak.users_anggota')
                 ->leftjoin('status as sag', 'sag.id', '=', 'aak.status_anggota')
-                ->leftjoin('users as ua', 'ua.id', '=', 'aak.users_ketua')
-                ->leftjoin('status as sa', 'sa.id', '=', 'aak.status_ketua')
                 ->leftjoin('users as uk', 'uk.id', '=', 'aak.users_ketua')
                 ->leftjoin('status as sk', 'sk.id', '=', 'aak.status_ketua')
                 ->leftjoin('users as upt', 'upt.id', '=', 'aak.users_pt')
@@ -88,14 +88,14 @@ class PengawasanController extends Controller
                 ->leftjoin('users as upm', 'upm.id', '=', 'aak.users_pm')
                 ->leftjoin('status as spm', 'spm.id', '=', 'aak.status_pm')
                 ->where('ak.is_prosess', 1)
-                ->orderBy('created_at')
+                ->orderBy('ak.created_at', 'desc')
                 ->first();
-        
         ## Pengaawasan Pelatiahan ##
         $data2 = DB::table('pelatihan as ak')
                 ->select(
                     'ak.*', 
                     'up.nama as users_pembuat', 
+                    'sp.id as id_status_pembuat',
                     'sp.nama as status_pembuat', 
                     'aak.tanggal_pembuat',
                     'aak.jam_pembuat',
@@ -106,14 +106,16 @@ class PengawasanController extends Controller
                     'aak.tanggal_anggota',
                     'aak.jam_anggota',
                     'aak.komentar_anggota',
-                    'aak.users_ketua as id_ketua',
+                    'uk.id as id_users_ketua',
                     'uk.nama as users_ketua', 
+                    'sk.id as id_status_ketua',
                     'sk.nama as status_ketua', 
                     'aak.tanggal_ketua',
                     'aak.jam_ketua',
                     'aak.komentar_ketua',
                     'aak.users_pt as id_pt',
                     'upt.nama as users_pt', 
+                    'spt.id as id_status_pt',
                     'spt.nama as status_pt', 
                     'aak.tanggal_pt',
                     'aak.jam_pt',
@@ -136,7 +138,7 @@ class PengawasanController extends Controller
                 ->leftjoin('users as upm', 'upm.id', '=', 'aak.users_pm')
                 ->leftjoin('status as spm', 'spm.id', '=', 'aak.status_pm')
                 ->where('ak.is_prosess', 1)
-                ->orderBy('created_at')
+                ->orderBy('ak.created_at', 'desc')
                 ->first();
                 
         ## Pengaawasan Koordinasi ##
@@ -144,6 +146,7 @@ class PengawasanController extends Controller
                 ->select(
                     'ak.*', 
                     'up.nama as users_pembuat', 
+                    'sp.id as id_status_pembuat',
                     'sp.nama as status_pembuat', 
                     'aak.tanggal_pembuat',
                     'aak.jam_pembuat',
@@ -154,14 +157,16 @@ class PengawasanController extends Controller
                     'aak.tanggal_anggota',
                     'aak.jam_anggota',
                     'aak.komentar_anggota',
-                    'aak.users_ketua as id_ketua',
+                    'uk.id as id_users_ketua',
                     'uk.nama as users_ketua', 
+                    'sk.id as id_status_ketua',
                     'sk.nama as status_ketua', 
                     'aak.tanggal_ketua',
                     'aak.jam_ketua',
                     'aak.komentar_ketua',
                     'aak.users_pt as id_pt',
                     'upt.nama as users_pt', 
+                    'spt.id as id_status_pt',
                     'spt.nama as status_pt', 
                     'aak.tanggal_pt',
                     'aak.jam_pt',
@@ -184,7 +189,7 @@ class PengawasanController extends Controller
                 ->leftjoin('users as upm', 'upm.id', '=', 'aak.users_pm')
                 ->leftjoin('status as spm', 'spm.id', '=', 'aak.status_pm')
                 ->where('ak.is_prosess', 1)
-                ->orderBy('created_at')
+                ->orderBy('ak.created_at', 'desc')
                 ->first();
 
         $page = "pengawasan"; 
@@ -330,10 +335,11 @@ class PengawasanController extends Controller
 
     public function approve1(Request $request)
     {
+        // dd($request);
         $data =  DB::table('approvel_konsultasi as auk')
-                ->where('auk.konsultasi', $request->id)
+                ->where('auk.konsultasi', $request->kode)
                 ->first();
-
+        
         $this->validate($request, 
         [
             'ketua' => 'required',
@@ -342,9 +348,9 @@ class PengawasanController extends Controller
         ]);
 
         if($request->has('kirim')) {
-            if($data->konsultasi == $request->id) {
+            if($data->konsultasi == $request->kode) {
                 if($data->users_anggota == Auth::user()->id) {
-                    DB::table('approvel_konsultasi')->where('konsultasi', $request->id)->update([
+                    DB::table('approvel_konsultasi')->where('konsultasi', $request->kode)->update([
                     'users_ketua' => $request->ketua,
                     'status_anggota' => 2,
                     'tanggal_anggota' => Carbon::now()->format('d/m/yy'),
@@ -352,13 +358,13 @@ class PengawasanController extends Controller
                     'komentar_anggota' => $request->komentar,
                     'updated_at' => Carbon::now()
                     ]);
-                    DB::table('konsultasi')->where('id', $request->id)->update([
+                    DB::table('konsultasi')->where('kode', $request->kode)->update([
                         'nomor_st' => $request->nomor_st,
                         'updated_at' => Carbon::now()
                     ]);
                      return redirect(route('pengawasan'))->with(['success' => 'Konsultasi Berhasil di Setujui']);
                 }elseif($data->users_ketua == Auth::user()->id) {
-                    DB::table('approvel_konsultasi')->where('konsultasi', $request->id)->update([
+                    DB::table('approvel_konsultasi')->where('konsultasi', $request->kode)->update([
                     'users_pt' => 2,
                     'users_pm' => 3,
                     'status_ketua' => 2,
@@ -369,7 +375,7 @@ class PengawasanController extends Controller
                     ]);
                      return redirect(route('pengawasan'))->with(['success' => 'Konsultasi Berhasil di Setujui']);
                 }elseif($data->users_pt == Auth::user()->id) {
-                    DB::table('approvel_konsultasi')->where('konsultasi', $request->id)->update([
+                    DB::table('approvel_konsultasi')->where('konsultasi', $request->kode)->update([
                     'status_pt' => 2,
                     'tanggal_pt' => Carbon::now()->format('d/m/yy'),
                     'jam_pt' => Carbon::now()->format('H:m'),
@@ -378,14 +384,14 @@ class PengawasanController extends Controller
                     ]);
                      return redirect(route('pengawasan'))->with(['success' => 'Konsultasi Berhasil di Setujui']);
                 }elseif($data->users_pm == Auth::user()->id) {
-                    DB::table('approvel_konsultasi')->where('konsultasi', $request->id)->update([
+                    DB::table('approvel_konsultasi')->where('konsultasi', $request->kode)->update([
                     'status_pm' => 2,
                     'tanggal_pm' => Carbon::now()->format('d/m/yy'),
                     'jam_pm' => Carbon::now()->format('H:m'),
                     'komentar_pm' => $request->komentar,
                     'updated_at' => Carbon::now()
                     ]);
-                    DB::table('konsultasi')->where('id', $request->id)->update([
+                    DB::table('konsultasi')->where('kode', $request->kode)->update([
                         'is_prosess' => 2,
                         'updated_at' => Carbon::now()
                     ]);
@@ -396,9 +402,9 @@ class PengawasanController extends Controller
                 
             }
         } elseif($request->has('kembali')) {
-            if($data->konsultasi == $request->id) {
+            if($data->konsultasi == $request->kode) {
                 if($data->users_anggota == Auth::user()->id) {
-                    DB::table('approvel_konsultasi')->where('konsultasi', $request->id)->update([
+                    DB::table('approvel_konsultasi')->where('konsultasi', $request->kode)->update([
                     'users_ketua' => $request->ketua,
                     'status_pembuat' => 4,
                     'status_anggota' => 3,
@@ -407,13 +413,13 @@ class PengawasanController extends Controller
                     'komentar_anggota' => $request->komentar,
                     'updated_at' => Carbon::now()
                     ]);
-                    DB::table('konsultasi')->where('id', $request->id)->update([
+                    DB::table('konsultasi')->where('kode', $request->kode)->update([
                         'nomor_st' => $request->nomor_st,
                         'updated_at' => Carbon::now()
                     ]);
                      return redirect(route('pengawasan'))->with(['success' => 'Konsultasi Berhasil di Setujui']);
                 }elseif($data->users_ketua == Auth::user()->id) {
-                    DB::table('approvel_konsultasi')->where('konsultasi', $request->id)->update([
+                    DB::table('approvel_konsultasi')->where('konsultasi', $request->kode)->update([
                     'status_pembuat' => 4,
                     'users_pt' => 2,
                     'users_pm' => 3,
@@ -423,13 +429,13 @@ class PengawasanController extends Controller
                     'komentar_ketua' => $request->komentar,
                     'updated_at' => Carbon::now()
                     ]);
-                    DB::table('konsultasi')->where('id', $request->id)->update([
+                    DB::table('konsultasi')->where('kode', $request->kode)->update([
                         'is_status' => 0,
                         'updated_at' => Carbon::now()
                     ]);
                      return redirect(route('pengawasan'))->with(['success' => 'Konsultan Berhasil di Setujui']);
                 }elseif($data->users_pt == Auth::user()->id) {
-                    DB::table('approvel_konsultasi')->where('konsultasi', $request->id)->update([
+                    DB::table('approvel_konsultasi')->where('konsultasi', $request->kode)->update([
                     'status_ketua' => 4,
                     'status_pt' => 3,
                     'tanggal_pt' => Carbon::now()->format('d/m/yy'),
@@ -439,7 +445,7 @@ class PengawasanController extends Controller
                     ]);
                      return redirect(route('pengawasan'))->with(['success' => 'Konsultan Berhasil di Setujui']);
                 }elseif($data->users_pm == Auth::user()->id) {
-                    DB::table('approvel_konsultasi')->where('konsultasi', $request->id)->update([
+                    DB::table('approvel_konsultasi')->where('konsultasi', $request->kode)->update([
                     'status_pt' => 4,
                     'status_pm' => 3,
                     'tanggal_pm' => Carbon::now()->format('d/m/yy'),
@@ -447,7 +453,7 @@ class PengawasanController extends Controller
                     'komentar_pm' => $request->komentar,
                     'updated_at' => Carbon::now()
                     ]);
-                    DB::table('konsultasi')->where('id', $request->id)->update([
+                    DB::table('konsultasi')->where('kode', $request->kode)->update([
                         'is_status' => 1,
                         'updated_at' => Carbon::now()
                     ]);
@@ -463,7 +469,7 @@ class PengawasanController extends Controller
     public function post2(Request $request)
     {
         $checkdata = DB::table('pelatihan')
-                    ->where('id', $request->id)
+                    ->where('kode', $request->kode)
                     ->first();
         
         if($checkdata == null) {
@@ -491,7 +497,7 @@ class PengawasanController extends Controller
             ]);
 
             $data = DB::table('pelatihan')
-                    ->select('id')
+                    ->select('kode')
                     ->where('kode', $request->kode)
                     ->first();  
 
@@ -550,7 +556,7 @@ class PengawasanController extends Controller
                 'komentar' => 'required',
             ]);
 
-           DB::table('pelatihan')->where('id', $request->id)->update([
+           DB::table('pelatihan')->where('kode', $request->kode)->update([
             'pengawai' => $request->pegawai,
             'judul' => $request->judul,
             'penjelasan' => $request->penjelasan,
@@ -560,7 +566,7 @@ class PengawasanController extends Controller
             'updated_at' => Carbon::now()
             ]); 
 
-            DB::table('approvel_pelatihan')->where('pelatihan', $request->id)->update([
+            DB::table('approvel_pelatihan')->where('pelatihan', $request->kode)->update([
                 'status_pembuat' => 1,
                 'tanggal_pembuat' => Carbon::now()->format('d/m/yy'),
                 'jam_pembuat' => Carbon::now()->format('H:m'),
@@ -568,7 +574,7 @@ class PengawasanController extends Controller
                 'updated_at' => Carbon::now()
             ]);
 
-            DB::table('pelatihan')->where('id', $request->id)->update([
+            DB::table('pelatihan')->where('kode', $request->kode)->update([
                 'is_prosess' => 1,
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
@@ -581,7 +587,7 @@ class PengawasanController extends Controller
     public function approve2(Request $request)
     {
         $data =  DB::table('approvel_pelatihan as auk')
-                ->where('auk.pelatihan', $request->id)
+                ->where('auk.pelatihan', $request->kode)
                 ->first();
 
         // $this->validate($request, 
@@ -592,9 +598,9 @@ class PengawasanController extends Controller
         // ]);
 
         if($request->has('kirim')) {
-            if($data->pelatihan == $request->id) {
+            if($data->pelatihan == $request->kode) {
                 if($data->users_anggota == Auth::user()->id) {
-                    DB::table('approvel_pelatihan')->where('pelatihan', $request->id)->update([
+                    DB::table('approvel_pelatihan')->where('pelatihan', $request->kode)->update([
                     'users_ketua' => $request->ketua,
                     'status_anggota' => 2,
                     'tanggal_anggota' => Carbon::now()->format('d/m/yy'),
@@ -602,13 +608,13 @@ class PengawasanController extends Controller
                     'komentar_anggota' => $request->komentar,
                     'updated_at' => Carbon::now()
                     ]);
-                    DB::table('pelatihan')->where('id', $request->id)->update([
+                    DB::table('pelatihan')->where('kode', $request->kode)->update([
                         'nomor_st' => $request->nomor_st,
                         'updated_at' => Carbon::now()
                     ]);
                      return redirect(route('pengawasan'))->with(['success' => 'Asistensi Berhasil di Setujui']);
                 }elseif($data->users_ketua == Auth::user()->id) {
-                    DB::table('approvel_pelatihan')->where('pelatihan', $request->id)->update([
+                    DB::table('approvel_pelatihan')->where('pelatihan', $request->kode)->update([
                     'users_pt' => 2,
                     'users_pm' => 3,
                     'status_ketua' => 2,
@@ -619,7 +625,7 @@ class PengawasanController extends Controller
                     ]);
                      return redirect(route('pengawasan'))->with(['success' => 'Asistensi Berhasil di Setujui']);
                 }elseif($data->users_pt == Auth::user()->id) {
-                    DB::table('approvel_pelatihan')->where('pelatihan', $request->id)->update([
+                    DB::table('approvel_pelatihan')->where('pelatihan', $request->kode)->update([
                     'status_pt' => 2,
                     'tanggal_pt' => Carbon::now()->format('d/m/yy'),
                     'jam_pt' => Carbon::now()->format('H:m'),
@@ -628,14 +634,14 @@ class PengawasanController extends Controller
                     ]);
                      return redirect(route('pengawasan'))->with(['success' => 'Asistensi Berhasil di Setujui']);
                 }elseif($data->users_pm == Auth::user()->id) {
-                    DB::table('approvel_pelatihan')->where('pelatihan', $request->id)->update([
+                    DB::table('approvel_pelatihan')->where('pelatihan', $request->kode)->update([
                     'status_pm' => 2,
                     'tanggal_pm' => Carbon::now()->format('d/m/yy'),
                     'jam_pm' => Carbon::now()->format('H:m'),
                     'komentar_pm' => $request->komentar,
                     'updated_at' => Carbon::now()
                     ]);
-                    DB::table('pelatihan')->where('id', $request->id)->update([
+                    DB::table('pelatihan')->where('kode', $request->kode)->update([
                         'is_prosess' => 2,
                         'updated_at' => Carbon::now()
                     ]);
@@ -646,9 +652,9 @@ class PengawasanController extends Controller
                 
             }
         } elseif($request->has('kembali')) {
-            if($data->pelatihan == $request->id) {
+            if($data->pelatihan == $request->kode) {
                 if($data->users_anggota == Auth::user()->id) {
-                    DB::table('approvel_pelatihan')->where('pelatihan', $request->id)->update([
+                    DB::table('approvel_pelatihan')->where('pelatihan', $request->kode)->update([
                     'users_ketua' => $request->ketua,
                     'status_pembuat' => 4,
                     'status_anggota' => 3,
@@ -657,13 +663,13 @@ class PengawasanController extends Controller
                     'komentar_anggota' => $request->komentar,
                     'updated_at' => Carbon::now()
                     ]);
-                    DB::table('pelatihan')->where('id', $request->id)->updated([
+                    DB::table('pelatihan')->where('kode', $request->kode)->updated([
                         'nomor_st' => $request->nomor_st,
                         'updated_at' => Carbon::now()
                     ]);
                      return redirect(route('pengawasan'))->with(['success' => 'Asistensi Berhasil di Setujui']);
                 }elseif($data->users_ketua == Auth::user()->id) {
-                    DB::table('approvel_pelatihan')->where('pelatihan', $request->id)->update([
+                    DB::table('approvel_pelatihan')->where('pelatihan', $request->kode)->update([
                     'status_pembuat' => 4,
                     'users_pt' => 2,
                     'users_pm' => 3,
@@ -673,13 +679,13 @@ class PengawasanController extends Controller
                     'komentar_ketua' => $request->komentar,
                     'updated_at' => Carbon::now()
                     ]);
-                    DB::table('pelatihan')->where('id', $request->id)->update([
+                    DB::table('pelatihan')->where('kode', $request->kode)->update([
                         'is_status' => 0,
                         'updated_at' => Carbon::now()
                     ]);
                      return redirect(route('pengawasan'))->with(['success' => 'Asistensi Berhasil di Setujui']);
                 }elseif($data->users_pt == Auth::user()->id) {
-                    DB::table('approvel_pelatihan')->where('pelatihan', $request->id)->update([
+                    DB::table('approvel_pelatihan')->where('pelatihan', $request->kode)->update([
                     'status_ketua' => 4,
                     'status_pt' => 3,
                     'tanggal_pt' => Carbon::now()->format('d/m/yy'),
@@ -689,7 +695,7 @@ class PengawasanController extends Controller
                     ]);
                      return redirect(route('pengawasan'))->with(['success' => 'Asistensi Berhasil di Setujui']);
                 }elseif($data->users_pm == Auth::user()->id) {
-                    DB::table('approvel_pelatihan')->where('pelatihan', $request->id)->update([
+                    DB::table('approvel_pelatihan')->where('pelatihan', $request->kode)->update([
                     'status_pt' => 4,
                     'status_pm' => 3,
                     'tanggal_pm' => Carbon::now()->format('d/m/yy'),
@@ -697,7 +703,7 @@ class PengawasanController extends Controller
                     'komentar_pm' => $request->komentar,
                     'updated_at' => Carbon::now()
                     ]);
-                    DB::table('konsultasi')->where('id', $request->id)->update([
+                    DB::table('konsultasi')->where('kode', $request->kode)->update([
                         'is_status' => 1,
                         'updated_at' => Carbon::now()
                     ]);
@@ -713,7 +719,7 @@ class PengawasanController extends Controller
     public function post3(Request $request)
     {
         $checkdata = DB::table('koordinasi')
-                    ->where('id', $request->id)
+                    ->where('kode', $request->kode)
                     ->first();
         
         if($checkdata == null) {
@@ -748,7 +754,7 @@ class PengawasanController extends Controller
                 ]);
 
             $data = DB::table('koordinasi')
-                    ->select('id')
+                    ->select('kode')
                     ->where('kode', $request->kode)
                     ->first(); 
 
@@ -800,7 +806,7 @@ class PengawasanController extends Controller
                 'komentar' => 'required',
             ]);
 
-           DB::table('koordinasi')->where('id', $request->id)->update([
+           DB::table('koordinasi')->where('kode', $request->kode)->update([
             'pengawai' => $request->ketua,
             'judul' => $request->nomor_st,
             'penjelasan' => $request->temuan_sebab,
@@ -810,7 +816,7 @@ class PengawasanController extends Controller
             'updated_at' => Carbon::now()
             ]); 
 
-            DB::table('approvel_koordinasi')->where('koordinasi', $request->id)->update([
+            DB::table('approvel_koordinasi')->where('koordinasi', $request->kode)->update([
                 'status_pembuat' => 1,
                 'tanggal_pembuat' => Carbon::now()->format('d/m/yy'),
                 'jam_pembuat' => Carbon::now()->format('H:m'),
@@ -825,7 +831,7 @@ class PengawasanController extends Controller
                     'updated_at' => Carbon::now()
                 ]);
 
-            DB::table('koordinasi')->where('id', $request->id)->update([
+            DB::table('koordinasi')->where('kode', $request->kode)->update([
                 'is_prosess' => 1,
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
@@ -839,7 +845,7 @@ class PengawasanController extends Controller
     public function approve3(Request $request)
     {
         $data =  DB::table('approvel_koordinasi as auk')
-                ->where('auk.koordinasi', $request->id)
+                ->where('auk.koordinasi', $request->kode)
                 ->first();
 
         // $this->validate($request, 
@@ -850,9 +856,9 @@ class PengawasanController extends Controller
         // ]);
 
         if($request->has('kirim')) {
-            if($data->koordinasi == $request->id) {
+            if($data->koordinasi == $request->kode) {
                 if($data->users_anggota == Auth::user()->id) {
-                    DB::table('approvel_koordinasi')->where('koordinasi', $request->id)->update([
+                    DB::table('approvel_koordinasi')->where('koordinasi', $request->kode)->update([
                     'users_ketua' => $request->ketua,
                     'status_anggota' => 2,
                     'tanggal_anggota' => Carbon::now()->format('d/m/yy'),
@@ -860,14 +866,14 @@ class PengawasanController extends Controller
                     'komentar_anggota' => $request->komentar,
                     'updated_at' => Carbon::now()
                     ]);
-                    DB::table('koordinasi')->where('id', $request->id)->update([
+                    DB::table('koordinasi')->where('kode', $request->kode)->update([
                         'nomor_st' => $request->nomor_st,
                         'updated_at' => Carbon::now()
                     ]);
                     
                      return redirect(route('pengawasan'))->with(['success' => 'Sosialisasi Berhasil di Setujui']);
                 }elseif($data->users_ketua == Auth::user()->id) {
-                    DB::table('approvel_koordinasi')->where('koordinasi', $request->id)->update([
+                    DB::table('approvel_koordinasi')->where('koordinasi', $request->kode)->update([
                     'users_pt' => 2,
                     'users_pm' => 3,
                     'status_ketua' => 2,
@@ -878,7 +884,7 @@ class PengawasanController extends Controller
                     ]);
                      return redirect(route('pengawasan'))->with(['success' => 'Sosialisasi Berhasil di Setujui']);
                 }elseif($data->users_pt == Auth::user()->id) {
-                    DB::table('approvel_koordinasi')->where('koordinasi', $request->id)->update([
+                    DB::table('approvel_koordinasi')->where('koordinasi', $request->kode)->update([
                     'status_pt' => 2,
                     'tanggal_pt' => Carbon::now()->format('d/m/yy'),
                     'jam_pt' => Carbon::now()->format('H:m'),
@@ -887,14 +893,14 @@ class PengawasanController extends Controller
                     ]);
                      return redirect(route('pengawasan'))->with(['success' => 'Sosialisasi Berhasil di Setujui']);
                 }elseif($data->users_pm == Auth::user()->id) {
-                    DB::table('approvel_koordinasi')->where('koordinasi', $request->id)->update([
+                    DB::table('approvel_koordinasi')->where('koordinasi', $request->kode)->update([
                     'status_pm' => 2,
                     'tanggal_pm' => Carbon::now()->format('d/m/yy'),
                     'jam_pm' => Carbon::now()->format('H:m'),
                     'komentar_pm' => $request->komentar,
                     'updated_at' => Carbon::now()
                     ]);
-                    DB::table('koordinasi')->where('id', $request->id)->update([
+                    DB::table('koordinasi')->where('kode', $request->kode)->update([
                         'is_prosess' => 2,
                         'updated_at' => Carbon::now()
                     ]);
@@ -905,9 +911,9 @@ class PengawasanController extends Controller
                 
             }
         } elseif($request->has('kembali')) {
-            if($data->koordinasi == $request->id) {
+            if($data->koordinasi == $request->kode) {
                 if($data->users_anggota == Auth::user()->id) {
-                    DB::table('approvel_koordinasi')->where('koordinasi', $request->id)->update([
+                    DB::table('approvel_koordinasi')->where('koordinasi', $request->kode)->update([
                     'users_ketua' => $request->ketua,
                     'status_pembuat' => 4,
                     'status_anggota' => 3,
@@ -916,13 +922,13 @@ class PengawasanController extends Controller
                     'komentar_anggota' => $request->komentar,
                     'updated_at' => Carbon::now()
                     ]);
-                    DB::table('pelatihan')->where('id', $request->id)->update([
+                    DB::table('pelatihan')->where('kode', $request->kode)->update([
                         'nomor_st' => $request->nomor_st,
                         'updated_at' => Carbon::now()
                     ]);
                      return redirect(route('pengawasan'))->with(['success' => 'Konsultasi Berhasil di Setujui']);
                 }elseif($data->users_ketua == Auth::user()->id) {
-                    DB::table('approvel_koordinasi')->where('koordinasi', $request->id)->update([
+                    DB::table('approvel_koordinasi')->where('koordinasi', $request->kode)->update([
                     'status_pembuat' => 4,
                     'users_pt' => 2,
                     'users_pm' => 3,
@@ -932,13 +938,13 @@ class PengawasanController extends Controller
                     'komentar_ketua' => $request->komentar,
                     'updated_at' => Carbon::now()
                     ]);
-                    DB::table('koordinasi')->where('id', $request->id)->update([
+                    DB::table('koordinasi')->where('kode', $request->kode)->update([
                         'is_status' => 0,
                         'updated_at' => Carbon::now()
                     ]);
                      return redirect(route('pengawasan'))->with(['success' => 'Koordinasi Berhasil di Setujui']);
                 }elseif($data->users_pt == Auth::user()->id) {
-                    DB::table('approvel_koordinasi')->where('koordinasi', $request->id)->update([
+                    DB::table('approvel_koordinasi')->where('koordinasi', $request->kode)->update([
                     'status_ketua' => 4,
                     'status_pt' => 3,
                     'tanggal_pt' => Carbon::now()->format('d/m/yy'),
@@ -948,7 +954,7 @@ class PengawasanController extends Controller
                     ]);
                      return redirect(route('pengawasan'))->with(['success' => 'Koordinasi Berhasil di Setujui']);
                 }elseif($data->users_pm == Auth::user()->id) {
-                    DB::table('approvel_koordinasi')->where('koordinasi', $request->id)->update([
+                    DB::table('approvel_koordinasi')->where('koordinasi', $request->kode)->update([
                     'status_pt' => 4,
                     'status_pm' => 3,
                     'tanggal_pm' => Carbon::now()->format('d/m/yy'),
@@ -956,7 +962,7 @@ class PengawasanController extends Controller
                     'komentar_pm' => $request->komentar,
                     'updated_at' => Carbon::now()
                     ]);
-                    DB::table('koordinasi')->where('id', $request->id)->update([
+                    DB::table('koordinasi')->where('kode', $request->kode)->update([
                         'is_status' => 1,
                         'updated_at' => Carbon::now()
                     ]);

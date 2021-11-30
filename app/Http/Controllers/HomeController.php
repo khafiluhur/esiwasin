@@ -55,6 +55,16 @@ class HomeController extends Controller
         foreach ($year as $key => $value) {
             $user[] = User::where(\DB::raw("DATE_FORMAT(created_at, '%Y')"),$value)->count();
         }
+
+        // $test = DB::table('audit')
+        //         ->select('created_by', DB::raw('count(*) as total'))
+        //         ->groupBy('created_by')
+        //         ->get();
+        // $test = DB::table('audit')
+        //         // ->select('created_at', DB::raw('count(*) as total'))
+        //         ->groupBy('created_by')
+        //         ->get();
+        // dd($test);
         // dd($user);
 
         $page = "home"; 

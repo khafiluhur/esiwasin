@@ -17,11 +17,14 @@ class CreateUsersTable extends Migration
             $table->bigIncrements('id');
             $table->string('nip');
             $table->string('nama');
+            $table->string('penugasan')->nullable();
+            $table->string('total_penugasan')->nullable();
             $table->integer('jabatan');
             $table->integer('level');
             $table->integer('group');
             $table->boolean('is_active')->default(0);
             $table->string('password');
+            $table->boolean('is_logging')->default(0);
             $table->rememberToken();
             $table->timestamps();
         });

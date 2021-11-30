@@ -33,7 +33,6 @@
         <div class="form-group">
             <label for="nomor_st">Nomor ST</label><span class="text-danger">*</span>
             <input class="form-control" type="text" id="nomor_st" name="nomor_st" placeholder="Input Nomor Surat Tugas" value="{{$data2->nomor_st}}">
-            <input type="hidden" id="id" name="id" value="{{$data2->id}}">
         </div> 
     </div>
     @elseif(Auth::user()->level == 3)
@@ -50,7 +49,6 @@
         <div class="form-group">
             <label for="nomor_st">Nomor ST</label><span class="text-danger">*</span>
             <input class="form-control" type="text" id="nomor_st" name="nomor_st" placeholder="Input Nomor Surat Tugas" value="{{$data2->nomor_st}}">
-            <input type="hidden" id="id" name="id" value="{{$data2->id}}">
         </div> 
     </div>
     @elseif(Auth::user()->level == 4)
@@ -67,7 +65,6 @@
         <div class="form-group">
             <label for="nomor_st">Nomor ST</label><span class="text-danger">*</span>
             <input class="form-control" type="text" id="nomor_st" name="nomor_st" placeholder="Input Nomor Surat Tugas" value="{{$data2->nomor_st}}">
-            <input type="hidden" id="id" name="id" value="{{$data2->id}}">
         </div> 
     </div>
     @else
@@ -78,14 +75,13 @@
                 <select class="custom-select" id="ketua" name="ketua">
                     <option value="0">Pilih Nama Ketua Tim</option>
                     @foreach($anggota as $u)
-                    <option value="{{ $u->id }}" {{ ( $u->id == $data2->id_ketua ) ? 'selected' : '' }}>{{ $u->nama }}</option>
+                    <option value="{{ $u->id }}" {{ ( $u->id == $data2->id_users_ketua ) ? 'selected' : '' }}>{{ $u->nama }}</option>
                     @endforeach
                 </select>
             </div>
             <div class="form-group">
                 <label for="nomor_st">Nomor ST</label><span class="text-danger">*</span>
                 <input class="form-control" type="text" id="nomor_st" name="nomor_st" placeholder="Input Nomor Surat Tugas" value="{{$data2->nomor_st}}">
-                <input type="hidden" id="id" name="id" value="{{$data2->id}}">
             </div> 
         </div>
         @else
@@ -102,7 +98,6 @@
             <div class="form-group">
                 <label for="nomor_st">Nomor ST</label><span class="text-danger">*</span>
                 <input class="form-control" type="text" id="nomor_st" name="nomor_st" placeholder="Input Nomor Surat Tugas">
-                <input type="hidden" id="id" name="id" value="{{$data2->id}}">
             </div> 
         </div>
         @endif
@@ -114,6 +109,7 @@
         <div class="form-group">
             <label for="example-textarea-input">Penjelasan</label>
             <textarea class="form-control" id="example-textarea-input" name="example-textarea-input" rows="4" disabled>{{ $data2->penjelasan }}</textarea>
+            <input type="hidden" id="kode" name="kode" value="{{$data2->kode}}">
         </div>
     </div> 
     <div class="col-12">

@@ -1,5 +1,5 @@
-<form class="text-center" action="{{ route('konsultasi.pengawasan')}}" method="POST">
-@csrf
+<form class="text-center" action="{{ route('konsultasi.pengawasan')}}" method="POST" enctype="multipart/form-data">
+    {{ csrf_field() }}
 
 <h3 style="text-align: center">Konsultasi</h3>
 
@@ -17,7 +17,7 @@
         <div class="form-group">
             <label for="wizard-simple-lastname">Judul Konsultasi</label><span class="text-danger">*</span>
             <input class="form-control" type="text" id="nomor_st" name="nomor_st" value="{{ $data1->judul }}">
-            <input class="form-control" type="hidden" id="id" name="id" value="{{ $data1->id }}">
+            <input class="form-control" type="hidden" id="kode" name="kode" value="{{ $data1->kode }}">
         </div>
     </div>
 </div>

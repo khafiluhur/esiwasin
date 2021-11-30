@@ -32,7 +32,7 @@
         <div class="form-group">
             <label for="nomor_st">Nomor ST</label>
             <input class="form-control" type="text" id="nomor_st" name="nomor_st" value="{{ $data3->nomor_st }}" disabled>
-            <input class="form-control" type="hidden" id="id" name="id" value="{{ $data3->id }}">
+            <input class="form-control" type="hidden" id="kode2" name="kode" value="{{ $data3->kode }}">
         </div>
     </div>
     <div class="col-6 float-right">

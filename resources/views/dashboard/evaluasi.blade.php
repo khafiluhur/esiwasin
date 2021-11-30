@@ -67,7 +67,7 @@
                             @elseif($data1->id_pm == Auth::user()->id)
                                 @include('partial.evaluasi.sakip.form_setuju')      
                             @elseif($data1->created_by == Auth::user()->id)
-                                @if($data1->is_prosess == 1)
+                                @if($data1->is_status == 1)
                                     @include('partial.evaluasi.sakip.form_default') 
                                 @else
                                     @include('partial.evaluasi.sakip.form_field')
@@ -93,7 +93,7 @@
                             @elseif($data2->id_pm == Auth::user()->id)
                                 @include('partial.evaluasi.reformasi.form_setuju')      
                             @elseif($data2->created_by == Auth::user()->id)
-                                @if($data2->is_prosess == 1)
+                                @if($data2->is_status == 1)
                                     @include('partial.evaluasi.reformasi.form_default') 
                                 @else
                                     @include('partial.evaluasi.reformasi.form_field')
@@ -119,7 +119,7 @@
                             @elseif($data3->id_pm == Auth::user()->id)
                                 @include('partial.evaluasi.spip.form_setuju')      
                             @elseif($data3->created_by == Auth::user()->id)
-                                @if($data3->is_prosess == 1)
+                                @if($data3->is_status == 1)
                                     @include('partial.evaluasi.spip.form_default') 
                                 @else
                                     @include('partial.evaluasi.spip.form_field')
@@ -145,7 +145,7 @@
                             @elseif($data4->id_pm == Auth::user()->id)
                                 @include('partial.evaluasi.iacm.form_setuju')      
                             @elseif($data4->created_by == Auth::user()->id)
-                                @if($data4->is_prosess == 1)
+                                @if($data4->is_status == 1)
                                     @include('partial.evaluasi.iacm.form_default') 
                                 @else
                                     @include('partial.evaluasi.iacm.form_field')

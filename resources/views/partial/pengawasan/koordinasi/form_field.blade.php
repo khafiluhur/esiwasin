@@ -17,7 +17,7 @@
         <div class="form-group">
             <label for="wizard-simple-lastname">Judul Sosialisasi</label>
             <input class="form-control" type="text" id="judul" name="judul" value="{{ $data3->judul }}">
-            <input class="form-control" type="hidden" id="id" name="id" value="{{ $data3->id }}">
+            <input class="form-control" type="hidden" id="kode" name="kode" value="{{ $data3->kode }}">
         </div>
     </div>
 </div>

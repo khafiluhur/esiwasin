@@ -42,30 +42,30 @@
     <div class="row">
         <div class="col-md-12">
             <div class="js-wizard-simple block">
-                <ul class="nav nav-tabs nav-tabs-block nav-justified" role="tablist">
+                <ul class="nav nav-tabs nav-tabs-block nav-justified">
                     <li class="nav-item">
-                        <a class="nav-link active" href="#wizard-simple-step1" data-toggle="tab">Laporan Hasil Audit</a>
+                        <a class="nav-link active">Laporan Hasil Audit</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#wizard-simple-step2" data-toggle="tab">Laporan Hasil Reviu</a>
+                        <a class="nav-link" href="{{ route('table.reviu.laporan') }}">Laporan Hasil Reviu</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#wizard-simple-step3" data-toggle="tab">Laporan Hasil Evaluasi</a>
+                        <a class="nav-link" href="{{ route('table.evaluasi.laporan') }}">Laporan Hasil Evaluasi</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#wizard-simple-step4" data-toggle="tab">Laporan Hasil Pemantauan</a>
+                        <a class="nav-link" href="{{ route('table.pemantauan.laporan') }}">Laporan Hasil Pemantauan</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#wizard-simple-step6" data-toggle="tab">Laporan Hasil Pengawasan</a>
+                        <a class="nav-link" href="{{ route('table.pengawasan.laporan') }}">Laporan Hasil Pengawasan</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#wizard-simple-step5" data-toggle="tab">Laporan Hasil Notulensi</a>
+                        <a class="nav-link" href="{{ route('table.notulensi.laporan') }}">Laporan Hasil Notulensi</a>
                     </li>
                 </ul>
 
                 <div class="block-content block-content-full tab-content px-md-5" style="min-height: 90%;">
 
-                    <div class="tab-pane active" id="wizard-simple-step1" role="tabpanel">
+                    <div class="tab-pane active">
                         <form action="{{ route('audit.cari.laporan') }}" method="GET">
                             <h3 style="text-align: center">Laporan Hasil Audit</h3>
                             <div class="col-12">
@@ -106,50 +106,48 @@
                             </div>
                         </form>
                     
-                        <div class="mt-5">
-                            <div class="block">
-                                <div class="mb-3 text-center">
-                                </div>
-                                <div class="block-content block-content-full">
-                                    <table class="table table-bordered table-striped table-vcenter js-dataTable-full">
-                                        <thead>
-                                            <tr>
-                                                <th class="text-center">Audit</th>
-                                                <th>Periode Audit</th>
-                                                <th class="d-none d-sm-table-cell">Anggota Tim</th>
-                                                <th class="d-none d-sm-table-cell">Ketua Tim</th>
-                                                <th class="d-none d-sm-table-cell">Laporan</th>
-                                                <th class="d-none d-sm-table-cell">Download</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @foreach ($audit as $u)
-                                            <tr>
-                                                <td class="text-center font-size-sm">
+                            <div class="mt-5">
+                                <div class="block">
+                                    <div class="mb-3 text-center">
+                                    </div>
+                                    <div class="block-content block-content-full">
+                                        <table class="table table-bordered table-striped table-vcenter js-dataTable-full">
+                                            <thead>
+                                                <tr>
+                                                    <th class="text-center">Audit</th>
+                                                    <th>Periode Audit</th>
+                                                    <th class="d-none d-sm-table-cell">Anggota Tim</th>
+                                                    <th class="d-none d-sm-table-cell">Ketua Tim</th>
+                                                    <th class="d-none d-sm-table-cell">Laporan</th>
+                                                    <th class="d-none d-sm-table-cell">Download</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach ($audit as $u)
+                                                <tr>
+                                                    <td class="text-center font-size-sm">
                                                         <a href="{{route('detail.pkpt.dokumentasi', ['id' => $u->id_pkpt])}}">
-                                                        {{ $u->nama_pkpt }}
-                                                    </a> 
-                                                </td>
-                                                <td class="font-w600 font-size-sm">{{ $u->tanggal_audit_from }} s/d {{$u->tanggal_audit_to}}</td>
-                                                <td class="d-none d-sm-table-cell font-size-sm">{{ $u->created_by }}</td>
-                                                <td class="d-none d-sm-table-cell">{{ $u->ketua }}</td>
-                                                <td class="d-none d-sm-table-cell">
-                                                    <a href="{{route('audit.laporan', ['id' => $u->audit])}}">unduh laporan</a>
-                                                    <input class="form-control" type="hidden" id="jenis" name="jenis" value="{{$u->jenis}}">
-                                                </td>
-                                                <td>
-                                                    <a href="{{route('audit.download.laporan', ['id' => $u->audit ]) }}">unduh dokumen</a>
-                                                </td>
-                                            </tr>
-                                            @endforeach
-                                        </tbody>
-                                    </table>
+                                                            {{ $u->nama_pkpt }}
+                                                        </a> 
+                                                    </td>
+                                                    <td class="font-w600 font-size-sm">{{ $u->tanggal_audit_from }} s/d {{$u->tanggal_audit_to}}</td>
+                                                    <td class="d-none d-sm-table-cell font-size-sm">{{ $u->created_by }}</td>
+                                                    <td class="d-none d-sm-table-cell">{{ $u->ketua }}</td>
+                                                    {{-- <td class="d-none d-sm-table-cell">
+                                                        <a href="{{route('audit.laporan', ['id' => $u->audit])}}">unduh laporan</a>
+                                                        <input class="form-control" type="hidden" id="jenis" name="jenis" value="{{$u->jenis}}">
+                                                    </td> --}}
+                                                    <td>
+                                                        <a href="{{route('audit.download.laporan', ['id' => $u->audit ]) }}">unduh dokumen</a>
+                                                    </td>
+                                                </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        
                     </div>
-                </div>
             </div>
         </div>
     </div>

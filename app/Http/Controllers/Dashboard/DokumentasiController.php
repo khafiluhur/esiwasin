@@ -65,7 +65,7 @@ class DokumentasiController extends Controller
     public function post1(Request $request)
     {
         $checkdata = DB::table('pengajuan_nodim')
-                    ->where('id', $request->id)
+                    ->where('kode', $request->kode)
                     ->first();
         
         if($checkdata == null) {
@@ -84,16 +84,10 @@ class DokumentasiController extends Controller
                 'tembusan' => 'required'
                 ]);
                 
-                    // dd($request->dasar);
-                foreach ($request->dasar  as $dasar) {
-                    
-                        // dd($key);
+                foreach ($request->dasar  as $dasar => $value) {
                         DasarNodin::create([
                             'kode_nodin' => $request->kode,
-                            'dasar' => $dasar
-                        ]);
-                    
-                    
+                            'dasar' => $value]);
                 }
 
                 DB::table('pengajuan_nodim')->insert([
@@ -117,7 +111,7 @@ class DokumentasiController extends Controller
                 ]);
 
                 $data = DB::table('pengajuan_nodim')
-                        ->select('id')
+                        ->select('kode')
                         ->where('kode', $request->kode)
                         ->first();                        
 
@@ -152,6 +146,7 @@ class DokumentasiController extends Controller
                         ->leftjoin('users as ud', 'ud.id', '=', 'pk.dari')
                         ->where('pk.kode', $request->kode)
                         ->first();
+                // dd($audit);
                         
                 $landasan_hukum = DB::table('dasar_nodins')
                                   ->where('kode_nodin', $audit->kode)
@@ -219,7 +214,7 @@ class DokumentasiController extends Controller
                                   ->where('kode_nodin', $audit->kode)
                                   ->get();
                 
-                $templateProcessor = new TemplateProcessor(public_path('template/nodin.docx'));
+                $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor(public_path('template/nodin.docx'));
                 $templateProcessor->setValue('title', "Dokumentasi Nodin");
                 $templateProcessor->setValue('nomor', $audit->nomor_nodim);
                 $templateProcessor->setValue('kepada', $audit->kepada);
@@ -265,10 +260,10 @@ class DokumentasiController extends Controller
                 'tahun_kepsesjen' => 'required'
                 ]);
 
-                foreach ($request->landasan as $dasar) {
+                foreach ($request->landasan as $dasar => $value) {
                     LandasanHukumKepsesjen::create([
                         'kode_kepsesjen' => $request->kode,
-                        'landasan_hukum' => $dasar
+                        'landasan_hukum' => $value
                     ]);
                 }
 
@@ -482,10 +477,10 @@ class DokumentasiController extends Controller
 
                 // dd($request->peserta);
 
-                foreach ($request->peserta as $peserta) {
+                foreach ($request->peserta as $peserta => $value) {
                     PesertaNotulen::create([
                         'kode_notulen' => $request->kode,
-                        'users' => $peserta
+                        'users' => $value
                     ]);
                 }
 

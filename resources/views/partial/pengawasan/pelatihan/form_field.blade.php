@@ -17,7 +17,7 @@
         <div class="form-group">
             <label for="wizard-simple-lastname">Judul Assitensi</label><span class="text-danger">*</span>
             <input class="form-control" type="text" id="judul" name="judul" value="{{ $data2->judul }}">
-            <input class="form-control" type="hidden" id="id" name="id" value="{{ $data2->id }}">
+            <input class="form-control" type="hidden" id="kode" name="kode" value="{{ $data2->kode }}">
         </div>
     </div>
 </div>

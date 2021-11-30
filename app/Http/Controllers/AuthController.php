@@ -33,12 +33,17 @@ class AuthController extends Controller
         ]);
         if (Auth::attempt(['nip' => $request->nip, 'password' => $request->password])) {
             $data = User::where('nip', $request->nip)->first();
-            if($data->is_active == 1) {
-                DB::update('update users set updated_at = ? where id = ?',[Carbon::now(), $data->id]);
-                return redirect()->route('home');    
+            if($data->is_logging == 0) {
+                if($data->is_active == 1) {
+                    DB::update('update users set updated_at = ?, is_logging = ? where id = ?',[Carbon::now(), 1, $data->id]);
+                    return redirect()->route('home');    
+                } else {
+                    return back()->with('alert', 'Akun Belum Aktif.');
+                }
             } else {
-                return back()->with('alert', 'Akun Belum Aktif.');
+                return back()->with('alert', 'Akun Anda Sudah Masuk di perangkat lain.'); 
             }
+            
         }else{
             return back()->with('alert', 'No Induk Pegawai dan Password Tidak Ditemukan.');
         }
@@ -103,7 +108,7 @@ class AuthController extends Controller
     public function logout()
     {
         $data = Auth::user();
-        DB::update('update users set updated_at = ? where id = ?',[Carbon::now(), $data->id]);
+        DB::update('update users set updated_at = ?, is_logging = ? where id = ?',[Carbon::now(), 0, $data->id, 0]);
         return redirect()->route('index');
     }
     //

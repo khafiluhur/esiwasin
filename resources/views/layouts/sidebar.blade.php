@@ -98,7 +98,7 @@
             @if($permission->laporan == 1)
             @else
             <li class="nav-main-item">
-                <a <?php if($page == "laporan") echo "class='nav-main-link active'";?>  class="nav-main-link" href="{{ url('/laporan') }}">
+                <a <?php if($page == "laporan") echo "class='nav-main-link active'";?>  class="nav-main-link" href="{{ route('table.audit.laporan') }}">
                     <i class="nav-main-link-icon si si-book-open text-white"></i>
                     <span class="nav-main-link-name text-white">Laporan</span>
                 </a>
