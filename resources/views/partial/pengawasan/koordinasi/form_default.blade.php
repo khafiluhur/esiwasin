@@ -23,7 +23,7 @@
             <input class="form-control" type="text" id="judul" name="judul" placeholder="Input Judul Sosialisasi" value="{{ old('judul') }}">
             <input class="form-control" type="hidden" id="kode14" name="kode" value="{{rand()}}">
         </div>
-        <div class="form-group">
+        {{--  <div class="form-group">
             <label for="nomor_st">Penyerapan</label><span class="text-danger">*</span>
             <select class="custom-select" id="pkpt" name="pkpt">
                 <option value="">Pilih Penyerapan</option>
@@ -31,7 +31,7 @@
                 <option value="{{ $u->id }}" {{ old('pkpt') == $u->id ? 'selected' : '' }}>{{ $u->kegiatan }} (@currency($u->saldo)) </option>
                 @endforeach
             </select>
-        </div>
+        </div>  --}}
     </div>
 </div>
 
@@ -54,7 +54,7 @@
 <div id="columkoordinasi3" style="display: none" class="block">
     <div class="block-header">
         <div class="col-12">
-            <h3 class="block-title">Progress Approvel</h3>
+            <h3 class="block-title">Progress Approval</h3>
         </div>
     </div>
     <div class="block-content">

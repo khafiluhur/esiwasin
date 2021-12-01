@@ -47,19 +47,19 @@
                         <a class="nav-link active">Laporan Hasil Audit</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('table.reviu.laporan') }}">Laporan Hasil Reviu</a>
+                        <a class="nav-link" href="{{ url('/laporan/laporan_reviu') }}">Laporan Hasil Reviu</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('table.evaluasi.laporan') }}">Laporan Hasil Evaluasi</a>
+                        <a class="nav-link" href="{{ url('/laporan/laporan_evaluasi') }}">Laporan Hasil Evaluasi</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('table.pemantauan.laporan') }}">Laporan Hasil Pemantauan</a>
+                        <a class="nav-link" href="{{ url('/laporan/laporan_pemantauan') }}">Laporan Hasil Pemantauan</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('table.pengawasan.laporan') }}">Laporan Hasil Pengawasan</a>
+                        <a class="nav-link" href="{{ url('/laporan/laporan_pengawasan') }}">Laporan Hasil Pengawasan</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('table.notulensi.laporan') }}">Laporan Hasil Notulensi</a>
+                        <a class="nav-link" href="{{ url('/laporan/notulensi') }}">Laporan Hasil Notulensi</a>
                     </li>
                 </ul>
 
@@ -133,10 +133,10 @@
                                                     <td class="font-w600 font-size-sm">{{ $u->tanggal_audit_from }} s/d {{$u->tanggal_audit_to}}</td>
                                                     <td class="d-none d-sm-table-cell font-size-sm">{{ $u->created_by }}</td>
                                                     <td class="d-none d-sm-table-cell">{{ $u->ketua }}</td>
-                                                    {{-- <td class="d-none d-sm-table-cell">
-                                                        <a href="{{route('audit.laporan', ['id' => $u->audit])}}">unduh laporan</a>
-                                                        <input class="form-control" type="hidden" id="jenis" name="jenis" value="{{$u->jenis}}">
-                                                    </td> --}}
+                                                    <td class="d-none d-sm-table-cell">
+                                                        {{--  <a href="{{route('audit.laporan', ['id' => $u->audit])}}">unduh laporan</a>
+                                                        <input class="form-control" type="hidden" id="jenis" name="jenis" value="{{$u->jenis}}">  --}}
+                                                    </td>
                                                     <td>
                                                         <a href="{{route('audit.download.laporan', ['id' => $u->audit ]) }}">unduh dokumen</a>
                                                     </td>

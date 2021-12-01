@@ -45,7 +45,7 @@
                         <a class="nav-link active" href="#konsultasi" data-toggle="tab">Konsultasi</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#pelatiahan" data-toggle="tab">Sosialisai</a>
+                        <a class="nav-link" href="#pelatiahan" data-toggle="tab">Sosialisasi</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#koordinasi" data-toggle="tab">Asistensi</a>
@@ -61,7 +61,7 @@
                 <div class="block-content block-content-full tab-content px-md-5" style="min-height: 90%;">
 
                     <div class="tab-pane active" id="konsultasi" role="tabpanel">
-                    @if(!$pkpt_konsultasi->isEmpty())
+                    {{--  @if(!$pkpt_konsultasi->isEmpty())  --}}
                         @if($data1)
                             @if($data1->id_anggota == Auth::user()->id)
                                 @include('partial.pengawasan.konsultasi.form_setuju') 
@@ -79,13 +79,13 @@
                         @else
                             @include('partial.pengawasan.konsultasi.form_default')
                         @endif
-                    @else
+                    {{--  @else
                     <h3 class="text-center m-lg-7"> Belum ada Penyerapan Dana Untuk Pengawasan Konsultasi <h3>
-                    @endif
+                    @endif  --}}
                     </div>
 
                     <div class="tab-pane" id="koordinasi" role="tabpanel">
-                    @if(!$pkpt_asistensi->isEmpty())
+                    {{--  @if(!$pkpt_asistensi->isEmpty())  --}}
                         @if($data2)
                             @if($data2->id_anggota == Auth::user()->id)
                                 @include('partial.pengawasan.pelatihan.form_setuju') 
@@ -103,13 +103,13 @@
                         @else
                             @include('partial.pengawasan.pelatihan.form_default')
                         @endif
-                    @else
+                    {{--  @else
                     <h3 class="text-center m-lg-7"> Belum ada Penyerapan Dana Untuk Pengawasan Asistensi <h3>
-                    @endif
+                    @endif  --}}
                     </div>
 
                     <div class="tab-pane" id="pelatiahan" role="tabpanel">
-                    @if(!$pkpt_sosialisasi->isEmpty())
+                    {{--  @if(!$pkpt_sosialisasi->isEmpty())  --}}
                         @if($data3)
                             @if($data3->id_anggota == Auth::user()->id)
                                 @include('partial.pengawasan.koordinasi.form_setuju')
@@ -127,19 +127,19 @@
                         @else
                             @include('partial.pengawasan.koordinasi.form_default')
                         @endif
-                    @else
+                    {{--  @else
                     <h3 class="text-center m-lg-7"> Belum ada Penyerapan Dana Untuk Pengawasan Sosialisasi <h3>
-                    @endif
+                    @endif  --}}
                     </div>  
                     
                     <div class="tab-pane" id="reformasi" role="tabpanel">
-                    @if(!$pkpt_rbzi->isEmpty())
+                    {{--  @if(!$pkpt_rbzi->isEmpty())  --}}
                         <form action="{{ route('reformasi.pengawasan') }}" method="POST" enctype="multipart/form-data">
                             {{ csrf_field() }}
                             <h3 style="text-align: center">Laporan UPG, Benturan Kepentingan, WBS, TPKN, DUMAS</h3>
                             <div class="col-12">
                                 <div class="col-6 float-left">
-                                    <div class="form-group">
+                                    {{--  <div class="form-group">
                                         <label for="nomor_st">Penyerapan</label><span class="text-danger">*</span>
                                         <select class="custom-select" id="pkpt" name="pkpt">
                                             <option value="">Pilih Penyerapan</option>
@@ -147,14 +147,19 @@
                                             <option value="{{ $u->id }}" {{ old('pkpt') == $u->id ? 'selected' : '' }}>{{ $u->kegiatan }} (@currency($u->saldo)) </option>
                                             @endforeach
                                         </select>
-                                    </div>
+                                    </div>  --}}
                                     <div class="form-group">
                                         <label>Jenis Laporan</label><span class="text-danger">*</span>
                                         <select class="custom-select" id="jenis" name="jenis">
                                             <option value="0">Pilih Jenis Laporan</option>
-                                            @foreach($jenis as $u)
-                                            <option value="{{$u->id}}">{{$u->nama}}</option>
-                                            @endforeach
+                                            <option value="1">Laporan UPG</option>
+                                            <option value="2">Benturan Kepentingan</option>
+                                            <option value="3">Laporan WBS</option>
+                                            <option value="4">Laporan TPKN</option>
+                                            <option value="4">Laporan DUMAS</option>
+                                            {{--  @foreach($jenis as $u)  --}}
+                                            {{--  <option value="{{$u->id}}">{{$u->nama}}</option>  --}}
+                                            {{--  @endforeach  --}}
                                         </select>
                                     </div>
                                     <div class="form-group">
@@ -213,19 +218,19 @@
                             </div>
 
                         </form>
-                    @else
+                    {{--  @else
                     <h3 class="text-center m-lg-7"> Belum ada Penyerapan Dana Untuk Pengawasan RBZI <h3>
-                    @endif
+                    @endif  --}}
                     </div>
 
                     <div class="tab-pane" id="sakip" role="tabpanel">
-                    @if(!$pkpt_sakip->isEmpty())
+                    {{--  @if(!$pkpt_sakip->isEmpty())  --}}
                         <form action="{{route('sakip.pengawasan')}}" method="POST" enctype="multipart/form-data">
                             {{ csrf_field() }}
                             <h3 style="text-align: center">Sistem Akuntabilitas Kinerja Instansi Pemerintah</h3>
                             <div class="col-12">
                                 <div class="col-6 float-left">
-                                    <div class="form-group">
+                                    {{--  <div class="form-group">
                                         <label for="nomor_st">Penyerapan</label><span class="text-danger">*</span>
                                         <select class="custom-select" id="pkpt" name="pkpt">
                                             <option value="">Pilih Penyerapan</option>
@@ -233,7 +238,7 @@
                                             <option value="{{ $u->id }}" {{ old('pkpt') == $u->id ? 'selected' : '' }}>{{ $u->kegiatan }} (@currency($u->saldo)) </option>
                                             @endforeach
                                         </select>
-                                    </div>
+                                    </div>  --}}
                                     <div class="form-group">
                                         <label>Jenis Laporan</label><span class="text-danger">*</span>
                                         <select class="custom-select" id="jenis" name="jenis">
@@ -297,9 +302,9 @@
                                 </div>
                             </div>
                         </form>
-                    @else
+                    {{--  @else
                     <h3 class="text-center m-lg-7"> Belum ada Penyerapan Dana Untuk Pengawasan SAKIP <h3>
-                    @endif
+                    @endif  --}}
                     </div>
 
                 </div>

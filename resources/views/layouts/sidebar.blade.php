@@ -28,7 +28,7 @@
             
             @if($permission->dashboard == 1)
             @else
-<li class="nav-main-item">
+            <li class="nav-main-item">
                 <a <?php if($page == "home") echo "class='nav-main-link active'";?> class="nav-main-link" href="{{route('home')}}">
                     <i class="nav-main-link-icon si si-speedometer text-white"></i>
                     <span class="nav-main-link-name text-white">Dashboard</span>
@@ -77,12 +77,15 @@
             </li>
             @endif
 
+            @if($permission->pengawasan_lainnya == 1)
+            @else
             <li class="nav-main-item">
                 <a <?php if($page == "pengawasan") echo "class='nav-main-link active'";?>  class="nav-main-link" href="{{ url('/pengawasan') }}">
                     <i class="nav-main-link-icon si si-layers text-white"></i>
                     <span class="nav-main-link-name text-white">Pengawasan Lainnya</span>
                 </a>
             </li>
+            @endif
 
             <li class="nav-main-heading"></li>
             @if($permission->dokumentasi == 1)

@@ -219,6 +219,7 @@ class PengawasanController extends Controller
                 'kode' => $request->kode,
                 'pegawai' => Auth::user()->id,
                 'judul' => $request->judul,
+                'tanggal' => $request->tanggal,
                 'penjelasan' => $request->penjelasan,
                 'nomor_st' => 0,
                 'is_prosess' => 1,

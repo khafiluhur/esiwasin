@@ -43,22 +43,22 @@
             <div class="js-wizard-simple block">
                 <ul class="nav nav-tabs nav-tabs-block nav-justified">
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('table.audit.laporan') }}">Laporan Hasil Audit</a>
+                        <a class="nav-link" href="{{ url('/laporan/laporan_audit') }}">Laporan Hasil Audit</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link active">Laporan Hasil Reviu</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('table.evaluasi.laporan') }}">Laporan Hasil Evaluasi</a>
+                        <a class="nav-link" href="{{ url('/laporan/laporan_evaluasi') }}">Laporan Hasil Evaluasi</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('table.pemantauan.laporan') }}">Laporan Hasil Pemantauan</a>
+                        <a class="nav-link" href="{{ url('/laporan/laporan_pemantauan') }}">Laporan Hasil Pemantauan</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('table.pengawasan.laporan') }}">Laporan Hasil Pengawasan</a>
+                        <a class="nav-link" href="{{ url('/laporan/laporan_pengawasan') }}">Laporan Hasil Pengawasan</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('table.notulensi.laporan') }}">Laporan Hasil Notulensi</a>
+                        <a class="nav-link" href="{{ url('/laporan/notulensi') }}">Laporan Hasil Notulensi</a>
                     </li>
                 </ul>
 
@@ -128,8 +128,8 @@
                                                 <td class="d-none d-sm-table-cell font-size-sm">{{ $a->created_by }}</td>
                                                 <td class="d-none d-sm-table-cell">{{ $a->ketua }}</td>
                                                 <td class="d-none d-sm-table-cell">
-                                                    <a  href="{{route('reviu.laporan', ['id' => $a->reviu])}}">unduh laporan</a>
-                                                    <input class="form-control" type="hidden" id="jenis" name="jenis" value="{{$a->jenis}}">
+                                                    {{--  <a  href="{{route('reviu.laporan', ['id' => $a->reviu])}}">unduh laporan</a>
+                                                    <input class="form-control" type="hidden" id="jenis" name="jenis" value="{{$a->jenis}}">  --}}
                                                 </td>
                                                 <td>
                                                     <a href="{{ route('reviu.download.laporan', ['id' => $a->reviu ]) }}">unduh dokumen</a>

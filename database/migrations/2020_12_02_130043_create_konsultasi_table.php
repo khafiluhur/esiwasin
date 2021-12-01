@@ -18,6 +18,7 @@ class CreateKonsultasiTable extends Migration
             $table->integer('kode');
             $table->integer('pegawai');
             $table->string('nomor_st');
+            $table->string('tanggal');
             $table->text('judul');
             $table->text('penjelasan');
             $table->integer('created_by');

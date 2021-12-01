@@ -6,6 +6,9 @@
 <div id="colum1" class="col-12">
     <div class="col-6 float-left">
         <div class="form-group">
+            <input class="form-control" type="date" id="tanggal" name="tanggal" placeholder="Input Tanggal" value="{{ $data1->tanggal }}" disabled>
+        </div>
+        <div class="form-group">
             <label>Nama Pegawai</label>
             <select class="custom-select" id="pegawai" name="pegawai" disabled>
                 <option value="0">Pilih Nama Pegawai</option>
@@ -123,7 +126,7 @@
 <div id="colum3" class="block">
     <div class="block-header">
         <div class="col-12">
-            <h3 class="block-title">Progress Approvel</h3>
+            <h3 class="block-title">Progress Approval</h3>
         </div>
     </div>
     <div class="block-content">

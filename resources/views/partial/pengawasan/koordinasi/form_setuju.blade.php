@@ -123,7 +123,7 @@
 <div id="columkoordinasi3" class="block">
     <div class="block-header">
         <div class="col-12">
-            <h3 class="block-title">Progress Approvel</h3>
+            <h3 class="block-title">Progress Approval</h3>
         </div>
     </div>
     <div class="block-content">
