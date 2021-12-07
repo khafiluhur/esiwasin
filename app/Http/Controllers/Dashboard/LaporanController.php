@@ -642,40 +642,40 @@ class LaporanController extends Controller
     //     }
     // }
 
-    // public function downloadGet1($id)
-    // {
-    //     $permission = DB::table('users as u')
-    //             ->select('u.*', 'p.*')
-    //             ->join('permission as p', 'p.nip', '=', 'u.nip')
-    //             ->where('u.nip', Auth::user()->nip)
-    //             ->first();
-    //     $checkjenis = DB::table('audit')->where('audit', $id)->first();
-    //     if($checkjenis->jenis == 1) {
-    //         $checkkode = DB::table('audit_keuangan')->select('kode')->where('kode', $checkjenis->audit)->first();
-    //         $data = DB::table('kertas_audit_keuangans as kak')
-    //                 ->select('kak.*', 'a.jenis')
-    //                 ->join('audit as a', 'a.audit', '=', 'kak.kode_audit_keuangan')
-    //                 ->where('kode_audit_keuangan', $checkkode->kode)
-    //                 ->get();
-    //     } elseif ($checkjenis->jenis == 2) {
-    //         $checkkode = DB::table('audit_kinerja')->select('kode')->where('kode', $checkjenis->audit)->first();
-    //         $data = DB::table('kertas_audit_kinerjas as kak')
-    //                 ->select('kak.*', 'a.jenis')
-    //                 ->join('audit as a', 'a.audit', '=', 'kak.kode_audit_kinerja')
-    //                 ->where('kode_audit_kinerja', $checkkode->kode)
-    //                 ->get();
-    //     } else {
-    //         $checkkode = DB::table('audit_tujuan_tertentu')->select('kode')->where('kode', $checkjenis->audit)->first();
-    //         $data = DB::table('kertas_audit_tujuan_tertntus as kak')
-    //                 ->select('kak.*', 'a.jenis')
-    //                 ->join('audit as a', 'a.audit', '=', 'kak.kode_audit_tujuan_tertentu')
-    //                 ->where('kode_audit_tujuan_tertentu', $checkkode->kode)
-    //                 ->get();
-    //     }
+    public function downloadGet1($id)
+    {
+        $permission = DB::table('users as u')
+                ->select('u.*', 'p.*')
+                ->join('permission as p', 'p.nip', '=', 'u.nip')
+                ->where('u.nip', Auth::user()->nip)
+                ->first();
+        $checkjenis = DB::table('audit')->where('audit', $id)->first();
+        if($checkjenis->jenis == 1) {
+            $checkkode = DB::table('audit_keuangan')->select('kode')->where('kode', $checkjenis->audit)->first();
+            $data = DB::table('kertas_audit_keuangans as kak')
+                    ->select('kak.*', 'a.jenis')
+                    ->join('audit as a', 'a.audit', '=', 'kak.kode_audit_keuangan')
+                    ->where('kode_audit_keuangan', $checkkode->kode)
+                    ->get();
+        } elseif ($checkjenis->jenis == 2) {
+            $checkkode = DB::table('audit_kinerja')->select('kode')->where('kode', $checkjenis->audit)->first();
+            $data = DB::table('kertas_audit_kinerjas as kak')
+                    ->select('kak.*', 'a.jenis')
+                    ->join('audit as a', 'a.audit', '=', 'kak.kode_audit_kinerja')
+                    ->where('kode_audit_kinerja', $checkkode->kode)
+                    ->get();
+        } else {
+            $checkkode = DB::table('audit_tujuan_tertentu')->select('kode')->where('kode', $checkjenis->audit)->first();
+            $data = DB::table('kertas_audit_tujuan_tertntus as kak')
+                    ->select('kak.*', 'a.jenis')
+                    ->join('audit as a', 'a.audit', '=', 'kak.kode_audit_tujuan_tertentu')
+                    ->where('kode_audit_tujuan_tertentu', $checkkode->kode)
+                    ->get();
+        }
 
-    //     $page = "laporan";
-    //     return view('partial.audit.download', compact('data', 'page', 'permission'));
-    // }
+        $page = "laporan";
+        return view('partial.audit.download', compact('data', 'page', 'permission'));
+    }
 
     // public function cari1(Request $request)
     // {
@@ -1345,48 +1345,48 @@ class LaporanController extends Controller
     //     return view('partial.reviu.detail', compact('page', 'audit', 'title', 'anggota', 'permission'));
     // }
 
-    //  public function downloadGet2($id)
-    // {
-    //     $permission = DB::table('users as u')
-    //             ->select('u.*', 'p.*')
-    //             ->join('permission as p', 'p.nip', '=', 'u.nip')
-    //             ->where('u.nip', Auth::user()->nip)
-    //             ->first();
-    //     $checkjenis = DB::table('reviu')->where('reviu', $id)->first();
+     public function downloadGet2($id)
+    {
+        $permission = DB::table('users as u')
+                ->select('u.*', 'p.*')
+                ->join('permission as p', 'p.nip', '=', 'u.nip')
+                ->where('u.nip', Auth::user()->nip)
+                ->first();
+        $checkjenis = DB::table('reviu')->where('reviu', $id)->first();
         
-    //     if($checkjenis->jenis == 1) {
-    //         $checkkode = DB::table('reviu_laporan_keuangan')->select('kode')->where('kode', $checkjenis->reviu)->first();
-    //         $data = DB::table('kertas_reviu_keuangans as kak')
-    //                 ->select('kak.*', 'a.jenis')
-    //                 ->join('reviu as a', 'a.reviu', '=', 'kak.kode_reviu_keuangan')
-    //                 ->where('kode_reviu_keuangan', $checkkode->kode)
-    //                 ->get();
-    //     } elseif ($checkjenis->jenis == 2) {
-    //         $checkkode = DB::table('reviu_kegiatan_anggaran')->select('kode')->where('kode', $checkjenis->reviu)->first();
-    //         $data = DB::table('kertas_reviu_anggarans as kak')
-    //                 ->select('kak.*', 'a.jenis')
-    //                 ->join('reviu as a', 'a.reviu', '=', 'kak.kode_reviu_anggaran')
-    //                 ->where('kode_reviu_anggaran', $checkkode->kode)
-    //                 ->get();
-    //     } elseif ($checkjenis->jenis == 3) {
-    //         $checkkode = DB::table('reviu_lakip')->select('kode')->where('kode', $checkjenis->reviu)->first();
-    //         $data = DB::table('kertas_reviu_lakips as kak')
-    //                 ->select('kak.*', 'a.jenis')
-    //                 ->join('reviu as a', 'a.reviu', '=', 'kak.kode_reviu_lakip')
-    //                 ->where('kode_reviu_lakip', $checkkode->kode)
-    //                 ->get();
-    //     } else {
-    //         $checkkode = DB::table('reviu_rkbmn')->select('kode')->where('kode', $checkjenis->reviu)->first();
-    //         $data = DB::table('kertas_reviu_rkbmns as kak')
-    //                 ->select('kak.*', 'a.jenis')
-    //                 ->join('reviu as a', 'a.reviu', '=', 'kak.kode_reviu_rkbmn')
-    //                 ->where('kode_reviu_rkbmn', $checkkode->kode)
-    //                 ->get();
-    //     }
+        if($checkjenis->jenis == 1) {
+            $checkkode = DB::table('reviu_laporan_keuangan')->select('kode')->where('kode', $checkjenis->reviu)->first();
+            $data = DB::table('kertas_reviu_keuangans as kak')
+                    ->select('kak.*', 'a.jenis')
+                    ->join('reviu as a', 'a.reviu', '=', 'kak.kode_reviu_keuangan')
+                    ->where('kode_reviu_keuangan', $checkkode->kode)
+                    ->get();
+        } elseif ($checkjenis->jenis == 2) {
+            $checkkode = DB::table('reviu_kegiatan_anggaran')->select('kode')->where('kode', $checkjenis->reviu)->first();
+            $data = DB::table('kertas_reviu_anggarans as kak')
+                    ->select('kak.*', 'a.jenis')
+                    ->join('reviu as a', 'a.reviu', '=', 'kak.kode_reviu_anggaran')
+                    ->where('kode_reviu_anggaran', $checkkode->kode)
+                    ->get();
+        } elseif ($checkjenis->jenis == 3) {
+            $checkkode = DB::table('reviu_lakip')->select('kode')->where('kode', $checkjenis->reviu)->first();
+            $data = DB::table('kertas_reviu_lakips as kak')
+                    ->select('kak.*', 'a.jenis')
+                    ->join('reviu as a', 'a.reviu', '=', 'kak.kode_reviu_lakip')
+                    ->where('kode_reviu_lakip', $checkkode->kode)
+                    ->get();
+        } else {
+            $checkkode = DB::table('reviu_rkbmn')->select('kode')->where('kode', $checkjenis->reviu)->first();
+            $data = DB::table('kertas_reviu_rkbmns as kak')
+                    ->select('kak.*', 'a.jenis')
+                    ->join('reviu as a', 'a.reviu', '=', 'kak.kode_reviu_rkbmn')
+                    ->where('kode_reviu_rkbmn', $checkkode->kode)
+                    ->get();
+        }
 
-    //     $page = "laporan";
-    //     return view('partial.reviu.download', compact('data', 'page', 'permission'));
-    // }
+        $page = "laporan";
+        return view('partial.reviu.download', compact('data', 'page', 'permission'));
+    }
 
     // public function downloadLaporan2($id)
     // {
@@ -1932,47 +1932,47 @@ class LaporanController extends Controller
     //     return view('partial.evaluasi.detail', compact('page', 'audit', 'title', 'anggota', 'permission'));
     // }
 
-    // public function downloadGet3($id)
-    // {
-    //     $permission = DB::table('users as u')
-    //             ->select('u.*', 'p.*')
-    //             ->join('permission as p', 'p.nip', '=', 'u.nip')
-    //             ->where('u.nip', Auth::user()->nip)
-    //             ->first();
-    //     $checkjenis = DB::table('evaluasi')->where('evaluasi', $id)->first();
+    public function downloadGet3($id)
+    {
+        $permission = DB::table('users as u')
+                ->select('u.*', 'p.*')
+                ->join('permission as p', 'p.nip', '=', 'u.nip')
+                ->where('u.nip', Auth::user()->nip)
+                ->first();
+        $checkjenis = DB::table('evaluasi')->where('evaluasi', $id)->first();
         
-    //     if($checkjenis->jenis == 1) {
-    //         $checkkode = DB::table('evaluasi_sakip')->select('kode')->where('kode', $checkjenis->evaluasi)->first();
-    //         $data = DB::table('kertas_evaluasi_sakips as kak')
-    //                 ->select('kak.*', 'a.jenis')
-    //                 ->join('evaluasi as a', 'a.evaluasi', '=', 'kak.kode_evaluasi_sakip')
-    //                 ->where('kode_evaluasi_sakip', $checkkode->kode)
-    //                 ->get();
-    //     } elseif ($checkjenis->jenis == 2) {
-    //         $checkkode = DB::table('evaluasi_reformasi_birokrasi')->select('kode')->where('kode', $checkjenis->evaluasi)->first();
-    //         $data = DB::table('kertas_evaluasi_reformasis as kak')
-    //                 ->select('kak.*', 'a.jenis')
-    //                 ->join('evaluasi as a', 'a.evaluasi', '=', 'kak.kode_evaluasi_reformasi')
-    //                 ->where('kode_evaluasi_reformasi', $checkkode->kode)
-    //                 ->get();
-    //     } elseif ($checkjenis->jenis == 3) {
-    //         $checkkode = DB::table('evaluasi_spip')->select('kode')->where('kode', $checkjenis->evaluasi)->first();
-    //         $data = DB::table('kertas_evaluasi_spips as kak')
-    //                 ->select('kak.*', 'a.jenis')
-    //                 ->join('evaluasi as a', 'a.evaluasi', '=', 'kak.kode_evaluasi_spip')
-    //                 ->where('kode_evaluasi_spip', $checkkode->kode)
-    //                 ->get();
-    //     } else {
-    //         $checkkode = DB::table('evaluasi_iacm')->select('kode')->where('kode', $checkjenis->evaluasi)->first();
-    //         $data = DB::table('kertas_evaluasi_iacms as kak')
-    //                 ->select('kak.*', 'a.jenis')
-    //                 ->join('evaluasi as a', 'a.evaluasi', '=', 'kak.kode_evaluasi_iacm')
-    //                 ->where('kode_evaluasi_iacm', $checkkode->kode)
-    //                 ->get();
-    //     }
-    //     $page = "laporan";
-    //     return view('partial.evaluasi.download', compact('data', 'page', 'permission'));
-    // }
+        if($checkjenis->jenis == 1) {
+            $checkkode = DB::table('evaluasi_sakip')->select('kode')->where('kode', $checkjenis->evaluasi)->first();
+            $data = DB::table('kertas_evaluasi_sakips as kak')
+                    ->select('kak.*', 'a.jenis')
+                    ->join('evaluasi as a', 'a.evaluasi', '=', 'kak.kode_evaluasi_sakip')
+                    ->where('kode_evaluasi_sakip', $checkkode->kode)
+                    ->get();
+        } elseif ($checkjenis->jenis == 2) {
+            $checkkode = DB::table('evaluasi_reformasi_birokrasi')->select('kode')->where('kode', $checkjenis->evaluasi)->first();
+            $data = DB::table('kertas_evaluasi_reformasis as kak')
+                    ->select('kak.*', 'a.jenis')
+                    ->join('evaluasi as a', 'a.evaluasi', '=', 'kak.kode_evaluasi_reformasi')
+                    ->where('kode_evaluasi_reformasi', $checkkode->kode)
+                    ->get();
+        } elseif ($checkjenis->jenis == 3) {
+            $checkkode = DB::table('evaluasi_spip')->select('kode')->where('kode', $checkjenis->evaluasi)->first();
+            $data = DB::table('kertas_evaluasi_spips as kak')
+                    ->select('kak.*', 'a.jenis')
+                    ->join('evaluasi as a', 'a.evaluasi', '=', 'kak.kode_evaluasi_spip')
+                    ->where('kode_evaluasi_spip', $checkkode->kode)
+                    ->get();
+        } else {
+            $checkkode = DB::table('evaluasi_iacm')->select('kode')->where('kode', $checkjenis->evaluasi)->first();
+            $data = DB::table('kertas_evaluasi_iacms as kak')
+                    ->select('kak.*', 'a.jenis')
+                    ->join('evaluasi as a', 'a.evaluasi', '=', 'kak.kode_evaluasi_iacm')
+                    ->where('kode_evaluasi_iacm', $checkkode->kode)
+                    ->get();
+        }
+        $page = "laporan";
+        return view('partial.evaluasi.download', compact('data', 'page', 'permission'));
+    }
 
     // public function downloadLaporan3($id)
     // {
@@ -2401,49 +2401,49 @@ class LaporanController extends Controller
     //     return view('partial.pemantauan.detail', compact('page', 'audit', 'title', 'anggota', 'permission'));
     // }
 
-    // public function downloadGet4($id)
-    // {
-    //     $permission = DB::table('users as u')
-    //             ->select('u.*', 'p.*')
-    //             ->join('permission as p', 'p.nip', '=', 'u.nip')
-    //             ->where('u.nip', Auth::user()->nip)
-    //             ->first();
+    public function downloadGet4($id)
+    {
+        $permission = DB::table('users as u')
+                ->select('u.*', 'p.*')
+                ->join('permission as p', 'p.nip', '=', 'u.nip')
+                ->where('u.nip', Auth::user()->nip)
+                ->first();
 
-    //     $checkjenis = DB::table('pemantauan')
-    //                 ->where('pemantauan', $id)->first();
+        $checkjenis = DB::table('pemantauan')
+                    ->where('pemantauan', $id)->first();
         
-    //     if($checkjenis->jenis == 1) {
-    //         $checkkode = DB::table('pemantauan_bpk')->select('kode')->where('kode', $checkjenis->pemantauan)->first();
-    //         $data = DB::table('pemantauan_bpk as kak')
-    //                 ->select('kak.*', 'a.jenis')
-    //                 ->join('pemantauan as a', 'a.pemantauan', '=', 'kak.kode')
-    //                 ->where('kode', $checkkode->kode)
-    //                 ->get();
-    //     } elseif ($checkjenis->jenis == 2) {
-    //         $checkkode = DB::table('pemantauan_lha')->select('kode')->where('kode', $checkjenis->pemantauan)->first();
-    //         $data = DB::table('pemantauan_lha as kak')
-    //                 ->select('kak.*', 'a.jenis')
-    //                 ->join('pemantauan as a', 'a.pemantauan', '=', 'kak.kode')
-    //                 ->where('kode', $checkkode->kode)
-    //                 ->get();
-    //     } elseif ($checkjenis->jenis == 3) {
-    //         $checkkode = DB::table('pemantauan_spip')->select('kode')->where('kode', $checkjenis->pemantauan)->first();
-    //         $data = DB::table('pemantauan_spip as kak')
-    //                 ->select('kak.*', 'a.jenis')
-    //                 ->join('pemantauan as a', 'a.pemantauan', '=', 'kak.kode')
-    //                 ->where('kode', $checkkode->kode)
-    //                 ->get();
-    //     } else {
-    //         $checkkode = DB::table('pemantauan_lhkasn')->select('kode')->where('kode', $checkjenis->pemantauan)->first();
-    //         $data = DB::table('pemantauan_lhkasn as kak')
-    //                 ->select('kak.*', 'a.jenis')
-    //                 ->join('pemantauan as a', 'a.pemantauan', '=', 'kak.kode')
-    //                 ->where('kode', $checkkode->kode)
-    //                 ->get();
-    //     }
-    //     $page = "laporan";
-    //     return view('partial.pemantauan.download', compact('data', 'page', 'permission'));
-    // }
+        if($checkjenis->jenis == 1) {
+            $checkkode = DB::table('pemantauan_bpk')->select('kode')->where('kode', $checkjenis->pemantauan)->first();
+            $data = DB::table('pemantauan_bpk as kak')
+                    ->select('kak.*', 'a.jenis')
+                    ->join('pemantauan as a', 'a.pemantauan', '=', 'kak.kode')
+                    ->where('kode', $checkkode->kode)
+                    ->get();
+        } elseif ($checkjenis->jenis == 2) {
+            $checkkode = DB::table('pemantauan_lha')->select('kode')->where('kode', $checkjenis->pemantauan)->first();
+            $data = DB::table('pemantauan_lha as kak')
+                    ->select('kak.*', 'a.jenis')
+                    ->join('pemantauan as a', 'a.pemantauan', '=', 'kak.kode')
+                    ->where('kode', $checkkode->kode)
+                    ->get();
+        } elseif ($checkjenis->jenis == 3) {
+            $checkkode = DB::table('pemantauan_spip')->select('kode')->where('kode', $checkjenis->pemantauan)->first();
+            $data = DB::table('pemantauan_spip as kak')
+                    ->select('kak.*', 'a.jenis')
+                    ->join('pemantauan as a', 'a.pemantauan', '=', 'kak.kode')
+                    ->where('kode', $checkkode->kode)
+                    ->get();
+        } else {
+            $checkkode = DB::table('pemantauan_lhkasn')->select('kode')->where('kode', $checkjenis->pemantauan)->first();
+            $data = DB::table('pemantauan_lhkasn as kak')
+                    ->select('kak.*', 'a.jenis')
+                    ->join('pemantauan as a', 'a.pemantauan', '=', 'kak.kode')
+                    ->where('kode', $checkkode->kode)
+                    ->get();
+        }
+        $page = "laporan";
+        return view('partial.pemantauan.download', compact('data', 'page', 'permission'));
+    }
 
     // public function downloadLaporan4($id)
     // {
@@ -2798,35 +2798,35 @@ class LaporanController extends Controller
     //     return view('partial.pengawasan.detail', compact('page', 'audit', 'title', 'anggota', 'permission'));
     // }
 
-    // public function downloadGet6($id)
-    // {
-    //     $permission = DB::table('users as u')
-    //             ->select('u.*', 'p.*')
-    //             ->join('permission as p', 'p.nip', '=', 'u.nip')
-    //             ->where('u.nip', Auth::user()->nip)
-    //             ->first();
-    //     $checkjenis = DB::table('pengawasan')
-    //                 ->where('pengawasan', $id)->first();
-    //     if($checkjenis->jenis == 4) {
-    //         $checkkode = DB::table('reformasi_birokrasi')->select('kode')->where('kode', $checkjenis->pengawasan)->first();
-    //         $data = DB::table('kertas_reformasis as kak')
-    //                 ->select('kak.*', 'a.jenis')
-    //                 ->join('pengawasan as a', 'a.pengawasan', '=', 'kak.kode_reformasi')
-    //                 ->where('kak.kode_reformasi', $checkkode->kode)
-    //                 ->get();
-    //     } elseif($checkjenis->jenis == 5) {
-    //         $checkkode = DB::table('sakip')->select('kode')->where('kode', $checkjenis->pengawasan)->first();
-    //         $data = DB::table('kertas_sakips as kak')
-    //                 ->select('kak.*', 'a.jenis')
-    //                 ->join('pengawasan as a', 'a.pengawasan', '=', 'kak.kode_sakip')
-    //                 ->where('kak.kode_sakip', $checkkode->kode)
-    //                 ->get();
-    //     } else {
-    //         $data = [];
-    //     }
-    //     $page = "laporan";
-    //     return view('partial.pengawasan.download', compact('data', 'page', 'permission'));
-    // }
+    public function downloadGet6($id)
+    {
+        $permission = DB::table('users as u')
+                ->select('u.*', 'p.*')
+                ->join('permission as p', 'p.nip', '=', 'u.nip')
+                ->where('u.nip', Auth::user()->nip)
+                ->first();
+        $checkjenis = DB::table('pengawasan')
+                    ->where('pengawasan', $id)->first();
+        if($checkjenis->jenis == 4) {
+            $checkkode = DB::table('reformasi_birokrasi')->select('kode')->where('kode', $checkjenis->pengawasan)->first();
+            $data = DB::table('kertas_reformasis as kak')
+                    ->select('kak.*', 'a.jenis')
+                    ->join('pengawasan as a', 'a.pengawasan', '=', 'kak.kode_reformasi')
+                    ->where('kak.kode_reformasi', $checkkode->kode)
+                    ->get();
+        } elseif($checkjenis->jenis == 5) {
+            $checkkode = DB::table('sakip')->select('kode')->where('kode', $checkjenis->pengawasan)->first();
+            $data = DB::table('kertas_sakips as kak')
+                    ->select('kak.*', 'a.jenis')
+                    ->join('pengawasan as a', 'a.pengawasan', '=', 'kak.kode_sakip')
+                    ->where('kak.kode_sakip', $checkkode->kode)
+                    ->get();
+        } else {
+            $data = [];
+        }
+        $page = "laporan";
+        return view('partial.pengawasan.download', compact('data', 'page', 'permission'));
+    }
 
     // public function downloadLaporan6($id)
     // {

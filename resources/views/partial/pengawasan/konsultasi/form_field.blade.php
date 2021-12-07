@@ -69,6 +69,15 @@
                             <td>{{ $data1->jam_pembuat }}</td>
                             <td class="text-center">{{ $data1->komentar_pembuat }}</td>
                         </tr>
+                        @if($data1->komentar_anggota)
+                        <tr>
+                            <td class="text-center">{{ $data1->users_anggota }}</td>
+                            <td class="font-w600 font-size-sm">{{ $data1->status_anggota }}</td>
+                            <td class="font-size-sm">{{ $data1->tanggal_anggota }}</td>
+                            <td>{{ $data1->jam_anggota }}</td>
+                            <td class="text-center">{{ $data1->komentar_anggota }}</td>
+                        </tr>
+                        @endif
                         @if($data1->komentar_ketua)
                         <tr>
                             <td class="text-center">{{ $data1->users_ketua }}</td>

@@ -7,7 +7,7 @@ use Auth;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use App\Rules\MatchOldPassword;
+// use App\Rules\MatchOldPassword;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 
@@ -82,11 +82,11 @@ class AuthController extends Controller
 
     public function changePassword(Request $request)
     {
-        $request->validate([
-            'current_password' => ['required', new MatchOldPassword],
-            'new_password' => ['required'],
-            'new_confirm_password' => ['same:new_password'],
-        ]);
+        // $request->validate([
+        //     'current_password' => ['required'],
+        //     'new_password' => ['required'],
+        //     'new_confirm_password' => ['same:new_password'],
+        // ]);
 
         User::find(auth()->user()->id)->update(['password'=> Hash::make($request->new_password)]);
    
@@ -108,7 +108,8 @@ class AuthController extends Controller
     public function logout()
     {
         $data = Auth::user();
-        DB::update('update users set updated_at = ?, is_logging = ? where id = ?',[Carbon::now(), 0, $data->id, 0]);
+        // dd($data);
+        DB::update('update users set updated_at = ?, is_logging = ? where id = ?',[Carbon::now(), 0, $data->id]);
         return redirect()->route('index');
     }
     //

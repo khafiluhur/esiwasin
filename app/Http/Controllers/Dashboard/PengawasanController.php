@@ -90,6 +90,7 @@ class PengawasanController extends Controller
                 ->where('ak.is_prosess', 1)
                 ->orderBy('ak.created_at', 'desc')
                 ->first();
+        // dd($data1);
         ## Pengaawasan Pelatiahan ##
         $data2 = DB::table('pelatihan as ak')
                 ->select(
@@ -272,12 +273,12 @@ class PengawasanController extends Controller
                 'updated_at' => Carbon::now()
             ]);
 
-            DB::table('foreign_pkpt')->insert([
-                    'kode' => $request->kode,
-                    'pkpt' => $request->pkpt,
-                    'created_at' => Carbon::now(),
-                    'updated_at' => Carbon::now()
-                ]);
+            // DB::table('foreign_pkpt')->insert([
+            //         'kode' => $request->kode,
+            //         'pkpt' => $request->pkpt,
+            //         'created_at' => Carbon::now(),
+            //         'updated_at' => Carbon::now()
+            //     ]);
 
             DB::table('pengawasan')->insert([
                 'pengawasan' => $request->kode,
@@ -317,12 +318,12 @@ class PengawasanController extends Controller
                 'updated_at' => Carbon::now()
             ]);
 
-            DB::table('foreign_pkpt')->insert([
-                    'kode' => $request->kode,
-                    'pkpt' => $request->pkpt,
-                    'created_at' => Carbon::now(),
-                    'updated_at' => Carbon::now()
-                ]);
+            // DB::table('foreign_pkpt')->insert([
+            //         'kode' => $request->kode,
+            //         'pkpt' => $request->pkpt,
+            //         'created_at' => Carbon::now(),
+            //         'updated_at' => Carbon::now()
+            //     ]);
 
             DB::table('konsultasi')->where('id', $request->id)->update([
                 'is_prosess' => 1,
@@ -533,12 +534,12 @@ class PengawasanController extends Controller
                 'updated_at' => Carbon::now()
             ]);
 
-            DB::table('foreign_pkpt')->insert([
-                    'kode' => $request->kode,
-                    'pkpt' => $request->pkpt,
-                    'created_at' => Carbon::now(),
-                    'updated_at' => Carbon::now()
-                ]);
+            // DB::table('foreign_pkpt')->insert([
+            //         'kode' => $request->kode,
+            //         'pkpt' => $request->pkpt,
+            //         'created_at' => Carbon::now(),
+            //         'updated_at' => Carbon::now()
+            //     ]);
 
             DB::table('pengawasan')->insert([
                 'pengawasan' => $request->kode,
@@ -747,12 +748,12 @@ class PengawasanController extends Controller
                 'updated_at' => Carbon::now()
             ]);
 
-            DB::table('foreign_pkpt')->insert([
-                    'kode' => $request->kode,
-                    'pkpt' => $request->pkpt,
-                    'created_at' => Carbon::now(),
-                    'updated_at' => Carbon::now()
-                ]);
+            // DB::table('foreign_pkpt')->insert([
+            //         'kode' => $request->kode,
+            //         'pkpt' => $request->pkpt,
+            //         'created_at' => Carbon::now(),
+            //         'updated_at' => Carbon::now()
+            //     ]);
 
             $data = DB::table('koordinasi')
                     ->select('kode')
@@ -825,12 +826,12 @@ class PengawasanController extends Controller
                 'updated_at' => Carbon::now()
             ]);
 
-            DB::table('foreign_pkpt')->insert([
-                    'kode' => $request->kode,
-                    'pkpt' => $request->pkpt,
-                    'created_at' => Carbon::now(),
-                    'updated_at' => Carbon::now()
-                ]);
+            // DB::table('foreign_pkpt')->insert([
+            //         'kode' => $request->kode,
+            //         'pkpt' => $request->pkpt,
+            //         'created_at' => Carbon::now(),
+            //         'updated_at' => Carbon::now()
+            //     ]);
 
             DB::table('koordinasi')->where('kode', $request->kode)->update([
                 'is_prosess' => 1,
@@ -1010,12 +1011,12 @@ class PengawasanController extends Controller
             'updated_at' => Carbon::now()
         ]); 
 
-        DB::table('foreign_pkpt')->insert([
-            'kode' => $request->kode,
-            'pkpt' => $request->pkpt,
-            'created_at' => Carbon::now(),
-            'updated_at' => Carbon::now()
-        ]);
+        // DB::table('foreign_pkpt')->insert([
+        //     'kode' => $request->kode,
+        //     'pkpt' => $request->pkpt,
+        //     'created_at' => Carbon::now(),
+        //     'updated_at' => Carbon::now()
+        // ]);
         
         DB::table('pengawasan')->insert([
             'pengawasan' => $request->kode,
@@ -1062,12 +1063,12 @@ class PengawasanController extends Controller
             'updated_at' => Carbon::now()
         ]);
 
-        DB::table('foreign_pkpt')->insert([
-            'kode' => $request->kode,
-            'pkpt' => $request->pkpt,
-            'created_at' => Carbon::now(),
-            'updated_at' => Carbon::now()
-        ]);
+        // DB::table('foreign_pkpt')->insert([
+        //     'kode' => $request->kode,
+        //     'pkpt' => $request->pkpt,
+        //     'created_at' => Carbon::now(),
+        //     'updated_at' => Carbon::now()
+        // ]);
         
         DB::table('pengawasan')->insert([
             'pengawasan' => $request->kode,
