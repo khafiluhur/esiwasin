@@ -513,18 +513,20 @@ class EvaluasiController extends Controller
                     'updated_at' => Carbon::now()
                     ]);
                      return redirect(route('evaluasi'))->with(['success' => 'Evaluasi SAKIP Berhasil di Setujui']);
-                }elseif($data->users_pt == Auth::user()->id) {
+                }elseif(Auth::user()->level == 3 && Auth::user()->is_active == 1) {
                     DB::table('approvel_evaluasi_sakip')->where('evaluasi_sakip', $request->kode)->update([
                     'status_pt' => 2,
+                    'users_pt' => Auth::user()->id,
                     'tanggal_pt' => Carbon::now()->format('d/m/yy'),
                     'jam_pt' => Carbon::now()->format('H:m'),
                     'komentar_pt' => $request->komentar,
                     'updated_at' => Carbon::now()
                     ]);
                      return redirect(route('evaluasi'))->with(['success' => 'Evaluasi SAKIP Berhasil di Setujui']);
-                }elseif($data->users_pm == Auth::user()->id) {
+                }elseif(Auth::user()->level == 4 && Auth::user()->is_active == 1) {
                     DB::table('approvel_evaluasi_sakip')->where('evaluasi_sakip', $request->kode)->update([
                     'status_pm' => 2,
+                    'users_pm' => Auth::user()->id,
                     'tanggal_pm' => Carbon::now()->format('d/m/yy'),
                     'jam_pm' => Carbon::now()->format('H:m'),
                     'komentar_pm' => $request->komentar,
@@ -898,18 +900,20 @@ class EvaluasiController extends Controller
                     'updated_at' => Carbon::now()
                     ]);
                      return redirect(route('evaluasi'))->with(['success' => 'Evaluasi Reformasi Birokrasi Berhasil di Setujui']);
-                }elseif($data->users_pt == Auth::user()->id) {
+                }elseif(Auth::user()->level == 3 && Auth::user()->is_active == 1) {
                     DB::table('approvel_evaluasi_reformasi_birokrasi')->where('evaluasi_sakip', $request->kode)->update([
                     'status_pt' => 2,
+                    'users_pt' => Auth::user()->id,
                     'tanggal_pt' => Carbon::now()->format('d/m/yy'),
                     'jam_pt' => Carbon::now()->format('H:m'),
                     'komentar_pt' => $request->komentar,
                     'updated_at' => Carbon::now()
                     ]);
                      return redirect(route('evaluasi'))->with(['success' => 'Evaluasi Reformasi Birokrasi Berhasil di Setujui']);
-                }elseif($data->users_pm == Auth::user()->id) {
+                }elseif(Auth::user()->level == 4 && Auth::user()->is_active == 1) {
                     DB::table('approvel_evaluasi_reformasi_birokrasi')->where('evaluasi_sakip', $request->kode)->update([
                     'status_pm' => 2,
+                    'users_pm' => Auth::user()->id,
                     'tanggal_pm' => Carbon::now()->format('d/m/yy'),
                     'jam_pm' => Carbon::now()->format('H:m'),
                     'komentar_pm' => $request->komentar,
@@ -1285,18 +1289,20 @@ class EvaluasiController extends Controller
                     'updated_at' => Carbon::now()
                     ]);
                      return redirect(route('evaluasi'))->with(['success' => 'Evaluasi SPIP Berhasil di Setujui']);
-                }elseif($data->users_pt == Auth::user()->id) {
+                }elseif(Auth::user()->level == 3 && Auth::user()->is_active == 1) {
                     DB::table('approvel_evaluasi_spip')->where('evaluasi_spip', $request->kode)->update([
                     'status_pt' => 2,
+                    'users_pt' => Auth::user()->id,
                     'tanggal_pt' => Carbon::now()->format('d/m/yy'),
                     'jam_pt' => Carbon::now()->format('H:m'),
                     'komentar_pt' => $request->komentar,
                     'updated_at' => Carbon::now()
                     ]);
                      return redirect(route('evaluasi'))->with(['success' => 'Evaluasi SPIP Berhasil di Setujui']);
-                }elseif($data->users_pm == Auth::user()->id) {
+                }elseif(Auth::user()->level == 4 && Auth::user()->is_active == 1) {
                     DB::table('approvel_evaluasi_spip')->where('evaluasi_spip', $request->kode)->update([
                     'status_pm' => 2,
+                    'users_pm' => Auth::user()->id,
                     'tanggal_pm' => Carbon::now()->format('d/m/yy'),
                     'jam_pm' => Carbon::now()->format('H:m'),
                     'komentar_pm' => $request->komentar,
@@ -1667,18 +1673,20 @@ class EvaluasiController extends Controller
                     'updated_at' => Carbon::now()
                     ]);
                      return redirect(route('evaluasi'))->with(['success' => 'Evaluasi IACM Berhasil di Setujui']);
-                }elseif($data->users_pt == Auth::user()->id) {
+                }elseif(Auth::user()->level == 3 && Auth::user()->is_active == 1) {
                     DB::table('approvel_evaluasi_iacm')->where('evaluasi_iacm', $request->kode)->update([
                     'status_pt' => 2,
+                    'users_pt' => Auth::user()->id,
                     'tanggal_pt' => Carbon::now()->format('d/m/yy'),
                     'jam_pt' => Carbon::now()->format('H:m'),
                     'komentar_pt' => $request->komentar,
                     'updated_at' => Carbon::now()
                     ]);
                      return redirect(route('evaluasi'))->with(['success' => 'Evaluasi IACM Berhasil di Setujui']);
-                }elseif($data->users_pm == Auth::user()->id) {
+                }elseif(Auth::user()->level == 4 && Auth::user()->is_active == 1) {
                     DB::table('approvel_evaluasi_iacm')->where('evaluasi_iacm', $request->kode)->update([
                     'status_pm' => 2,
+                    'users_pm' => Auth::user()->id,
                     'tanggal_pm' => Carbon::now()->format('d/m/yy'),
                     'jam_pm' => Carbon::now()->format('H:m'),
                     'komentar_pm' => $request->komentar,

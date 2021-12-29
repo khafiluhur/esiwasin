@@ -62,11 +62,31 @@
                     @if(!$pkpt_keuangan->isEmpty())
                          @if($data1)
                             @if($data1->ketua == Auth::user()->id)
-                                @include('partial.reviu.keuangan.form_setuju')
-                            @elseif($data1->id_pt == Auth::user()->id)
-                                @include('partial.reviu.keuangan.form_setuju') 
-                            @elseif($data1->id_pm == Auth::user()->id)
-                                @include('partial.reviu.keuangan.form_setuju')      
+                                @if($data1->id_status_ketua == 2)
+                                    @include('partial.reviu.keuangan.form_default') 
+                                @else
+                                    @include('partial.reviu.keuangan.form_setuju')
+                                @endif
+                            @elseif(Auth::user()->level == 3 && Auth::user()->is_active == 1)
+                                @if($data1->id_status_pt == 2)
+                                    @include('partial.reviu.keuangan.form_default')
+                                @else
+                                    @if ($data1->id_status_ketua == 2)
+                                        @include('partial.reviu.keuangan.form_setuju') 
+                                    @else
+                                        @include('partial.reviu.keuangan.form_default')
+                                    @endif
+                                @endif 
+                            @elseif(Auth::user()->level == 4 && Auth::user()->is_active == 1)
+                                @if($data1->status_pm == 2)
+                                    @include('partial.reviu.keuangan.form_default')
+                                @else
+                                    @if ($data1->id_status_pt == 2)
+                                        @include('partial.reviu.keuangan.form_setuju')
+                                    @else
+                                        @include('partial.reviu.keuangan.form_default')
+                                    @endif 
+                                @endif    
                             @elseif($data1->created_by == Auth::user()->id)
                                 @if($data1->is_status == 1)
                                     @include('partial.reviu.keuangan.form_default') 
@@ -88,11 +108,31 @@
                     @if(!$pkpt_anggaran->isEmpty())
                         @if($data2)
                             @if($data2->ketua == Auth::user()->id)
-                                @include('partial.reviu.anggaran.form_setuju')
-                            @elseif($data2->id_pt == Auth::user()->id)
-                                @include('partial.reviu.anggaran.form_setuju') 
-                            @elseif($data2->id_pm == Auth::user()->id)
-                                @include('partial.reviu.anggaran.form_setuju')      
+                                @if($data2->id_status_ketua == 2)
+                                    @include('partial.reviu.anggaran.form_default') 
+                                @else
+                                    @include('partial.reviu.anggaran.form_setuju')
+                                @endif
+                            @elseif(Auth::user()->level == 3 && Auth::user()->is_active == 1)
+                                @if($data2->id_status_pt == 2)
+                                    @include('partial.reviu.anggaran.form_default')
+                                @else
+                                    @if ($data2->id_status_ketua == 2)
+                                        @include('partial.reviu.anggaran.form_setuju') 
+                                    @else
+                                        @include('partial.reviu.anggaran.form_default')
+                                    @endif
+                                @endif 
+                            @elseif(Auth::user()->level == 4 && Auth::user()->is_active == 1)
+                                @if($data2->status_pm == 2)
+                                    @include('partial.reviu.anggaran.form_default')
+                                @else
+                                    @if ($data2->id_status_pt == 2)
+                                        @include('partial.reviu.anggaran.form_setuju')
+                                    @else
+                                        @include('partial.reviu.anggaran.form_default')
+                                    @endif 
+                                @endif      
                             @elseif($data2->created_by == Auth::user()->id)
                                 @if($data2->is_status == 1)
                                     @include('partial.reviu.anggaran.form_default') 
@@ -114,11 +154,31 @@
                     @if(!$pkpt_lakip->isEmpty())
                         @if($data3)
                             @if($data3->ketua == Auth::user()->id)
-                                @include('partial.reviu.lakip.form_setuju')
-                            @elseif($data3->id_pt == Auth::user()->id)
-                                @include('partial.reviu.lakip.form_setuju') 
-                            @elseif($data3->id_pm == Auth::user()->id)
-                                @include('partial.reviu.lakip.form_setuju')      
+                                @if($data3->id_status_ketua == 2)
+                                    @include('partial.reviu.lakip.form_default') 
+                                @else
+                                    @include('partial.reviu.lakip.form_setuju')
+                                @endif
+                            @elseif(Auth::user()->level == 3 && Auth::user()->is_active == 1)
+                                @if($data3->id_status_pt == 2)
+                                    @include('partial.reviu.lakip.form_default')
+                                @else
+                                    @if ($data3->id_status_ketua == 2)
+                                        @include('partial.reviu.lakip.form_setuju') 
+                                    @else
+                                        @include('partial.reviu.lakip.form_default')
+                                    @endif
+                                @endif 
+                            @elseif(Auth::user()->level == 4 && Auth::user()->is_active == 1)
+                                @if($data3->status_pm == 2)
+                                    @include('partial.reviu.lakip.form_default')
+                                @else
+                                    @if ($data3->id_status_pt == 2)
+                                        @include('partial.reviu.lakip.form_setuju')
+                                    @else
+                                        @include('partial.reviu.lakip.form_default')
+                                    @endif 
+                                @endif     
                             @elseif($data3->created_by == Auth::user()->id)
                                 @if($data3->is_status == 1)
                                     @include('partial.reviu.lakip.form_default') 
@@ -140,11 +200,31 @@
                     @if(!$pkpt_rkbmn->isEmpty())
                         @if($data4)
                             @if($data4->ketua == Auth::user()->id)
-                                @include('partial.reviu.rkbmn.form_setuju')
-                            @elseif($data4->id_pt == Auth::user()->id)
-                                @include('partial.reviu.rkbmn.form_setuju') 
-                            @elseif($data4->id_pm == Auth::user()->id)
-                                @include('partial.reviu.rkbmn.form_setuju')      
+                                @if($data4->id_status_ketua == 2)
+                                    @include('partial.reviu.rkbmn.form_default') 
+                                @else
+                                    @include('partial.reviu.rkbmn.form_setuju')
+                                @endif
+                            @elseif(Auth::user()->level == 3 && Auth::user()->is_active == 1)
+                                @if($data4->id_status_pt == 2)
+                                    @include('partial.reviu.rkbmn.form_default')
+                                @else
+                                    @if ($data4->id_status_ketua == 2)
+                                        @include('partial.reviu.rkbmn.form_setuju') 
+                                    @else
+                                        @include('partial.reviu.rkbmn.form_default')
+                                    @endif
+                                @endif 
+                            @elseif(Auth::user()->level == 4 && Auth::user()->is_active == 1)
+                                @if($data4->status_pm == 2)
+                                    @include('partial.reviu.rkbmn.form_default')
+                                @else
+                                    @if ($data4->id_status_pt == 2)
+                                        @include('partial.reviu.rkbmn.form_setuju')
+                                    @else
+                                        @include('partial.reviu.rkbmn.form_default')
+                                    @endif 
+                                @endif     
                             @elseif($data4->created_by == Auth::user()->id)
                                 @if($data4->is_status == 1)
                                     @include('partial.reviu.rkbmn.form_default') 

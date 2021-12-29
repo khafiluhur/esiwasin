@@ -58,10 +58,26 @@
                                 @else
                                     @include('partial.audit.keuangan.form_setuju')
                                 @endif
-                            @elseif($data1->id_pt == Auth::user()->id)
-                                @include('partial.audit.keuangan.form_setuju') 
-                            @elseif($data1->id_pm == Auth::user()->id)
-                                @include('partial.audit.keuangan.form_setuju')      
+                            @elseif(Auth::user()->level == 3 && Auth::user()->is_active == 1)
+                                @if($data1->id_status_pt == 2)
+                                    @include('partial.audit.keuangan.form_default')
+                                @else
+                                    @if ($data1->id_status_ketua == 2)
+                                        @include('partial.audit.keuangan.form_setuju') 
+                                    @else
+                                        @include('partial.audit.keuangan.form_default')
+                                    @endif
+                                @endif
+                            @elseif(Auth::user()->level == 4 && Auth::user()->is_active == 1)
+                                @if($data1->status_pm == 2)
+                                    @include('partial.audit.keuangan.form_default')
+                                @else
+                                    @if ($data1->id_status_pt == 2)
+                                        @include('partial.audit.keuangan.form_setuju')
+                                    @else
+                                        @include('partial.audit.keuangan.form_default')
+                                    @endif 
+                                @endif      
                             @elseif($data1->created_by == Auth::user()->id)
                                 @if($data1->is_status == 1)
                                     @include('partial.audit.keuangan.form_default') 
@@ -83,11 +99,31 @@
                     @if(!$pkpt_kinerja->isEmpty())
                         @if($data2)
                             @if($data2->ketua == Auth::user()->id)
-                                @include('partial.audit.kinerja.form_setuju')
-                            @elseif($data2->id_pt == Auth::user()->id)
-                                @include('partial.audit.kinerja.form_setuju') 
-                            @elseif($data2->id_pm == Auth::user()->id)
-                                @include('partial.audit.kinerja.form_setuju')      
+                                @if($data2->id_status_ketua == 2)
+                                    @include('partial.audit.kinerja.form_default') 
+                                @else
+                                    @include('partial.audit.kinerja.form_setuju')
+                                @endif
+                            @elseif(Auth::user()->level == 3 && Auth::user()->is_active == 1)
+                                @if($data2->id_status_ketua == 2)
+                                    @include('partial.audit.kinerja.form_default')
+                                @else
+                                    @if ($data2->id_status_ketua == 2)
+                                        @include('partial.audit.kinerja.form_setuju')
+                                    @else
+                                        @include('partial.audit.kinerja.form_default')
+                                    @endif
+                                @endif 
+                            @elseif(Auth::user()->level == 4 && Auth::user()->is_active == 1)
+                                @if($data2->id_status_pt == 2)
+                                    @include('partial.audit.kinerja.form_default')
+                                @else
+                                    @if ($data2->id_status_ketua == 2)
+                                        @include('partial.audit.kinerja.form_setuju')
+                                    @else
+                                        @include('partial.audit.kinerja.form_default')
+                                    @endif
+                                @endif      
                             @elseif($data2->created_by == Auth::user()->id)
                                 @if($data2->is_status == 1)
                                     @include('partial.audit.kinerja.form_default') 
@@ -109,11 +145,31 @@
                     @if(!$pkpt_tujuan->isEmpty())
                         @if($data3)
                             @if($data3->ketua == Auth::user()->id)
-                                @include('partial.audit.tujuan_tertentu.form_setuju')
+                                @if($data3->id_status_ketua == 2)
+                                    @include('partial.audit.tujuan_tertentu.form_default') 
+                                @else
+                                    @include('partial.audit.tujuan_tertentu.form_setuju')
+                                @endif
                             @elseif($data3->id_pt == Auth::user()->id)
-                                @include('partial.audit.tujuan_tertentu.form_setuju') 
+                                @if($data3->id_status_ketua == 2)
+                                    @include('partial.audit.tujuan_tertentu.form_default')
+                                @else
+                                    @if ($data3->id_status_ketua == 2)
+                                        @include('partial.audit.tujuan_tertentu.form_setuju')
+                                    @else
+                                        @include('partial.audit.tujuan_tertentu.form_default')
+                                    @endif
+                                @endif
                             @elseif($data3->id_pm == Auth::user()->id)
-                                @include('partial.audit.tujuan_tertentu.form_setuju')      
+                                @if($data3->id_status_pt == 2)
+                                    @include('partial.audit.kinerja.form_default')
+                                @else
+                                    @if ($data3->id_status_ketua == 2)
+                                        @include('partial.audit.kinerja.form_setuju')
+                                    @else
+                                        @include('partial.audit.kinerja.form_default')
+                                    @endif
+                                @endif  
                             @elseif($data3->created_by == Auth::user()->id)
                                 @if($data3->is_status == 1)
                                     @include('partial.audit.tujuan_tertentu.form_default') 

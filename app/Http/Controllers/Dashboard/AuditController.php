@@ -572,25 +572,24 @@ class AuditController extends Controller
                     'updated_at' => Carbon::now()
                     ]);
                      return redirect(route('audit'))->with(['success' => 'Audit Keuangan Berhasil di Setujui']);
-                }elseif($data->users_pt == Auth::user()->id) {
+                }elseif(Auth::user()->level == 3 && Auth::user()->is_active == 1) {
                     DB::table('approvel_audit_keuangan')->where('audit_keuangan', $request->kode)->update([
                     'status_pt' => 2,
+                    'users_pt' => Auth::user()->id,
                     'tanggal_pt' => Carbon::now()->format('d/m/yy'),
                     'jam_pt' => Carbon::now()->format('H:m'),
                     'komentar_pt' => $request->komentar,
                     'updated_at' => Carbon::now()
                     ]);
                      return redirect(route('audit'))->with(['success' => 'Audit Keuangan Berhasil di Setujui']);
-                }elseif($data->users_pm == Auth::user()->id) {
+                }elseif(Auth::user()->level == 4 && Auth::user()->is_active == 1) {
                     DB::table('approvel_audit_keuangan')->where('audit_keuangan', $request->kode)->update([
                     'status_pm' => 2,
+                    'users_pm' => Auth::user()->id,
                     'tanggal_pm' => Carbon::now()->format('d/m/yy'),
                     'jam_pm' => Carbon::now()->format('H:m'),
                     'komentar_pm' => $request->komentar,
                     'updated_at' => Carbon::now()
-                    ]);
-                    DB::table('users')->where('id', Auth::user()->id)->update([
-                        
                     ]);
                      DB::table('audit')->where('audit', $request->kode)->update([
                         'is_prosess' => 2,
@@ -598,7 +597,7 @@ class AuditController extends Controller
                         'created_at' => Carbon::now(),
                         'updated_at' => Carbon::now()
                     ]);
-                    DB::table('audit_keuangan')->where('id', $request->kode)->update([
+                    DB::table('audit_keuangan')->where('kode', $request->kode)->update([
                         'is_prosess' => 2,
                         'updated_at' => Carbon::now()
                     ]);
@@ -1007,18 +1006,20 @@ class AuditController extends Controller
                     'updated_at' => Carbon::now()
                     ]);
                      return redirect(route('audit'))->with(['success' => 'Audit Kinerja Berhasil di Setujui']);
-                }elseif($data->users_pt == Auth::user()->id) {
+                }elseif(Auth::user()->level == 3 && Auth::user()->is_active == 1) {
                     DB::table('approvel_audit_kinerja')->where('audit_kinerja', $request->kode)->update([
                     'status_pt' => 2,
+                    'users_pt' => Auth::user()->id,
                     'tanggal_pt' => Carbon::now()->format('d/m/yy'),
                     'jam_pt' => Carbon::now()->format('H:m'),
                     'komentar_pt' => $request->komentar,
                     'updated_at' => Carbon::now()
                     ]);
                      return redirect(route('audit'))->with(['success' => 'Audit Kinerja Berhasil di Setujui']);
-                }elseif($data->users_pm == Auth::user()->id) {
+                }elseif(Auth::user()->level == 4 && Auth::user()->is_active == 1) {
                     DB::table('approvel_audit_kinerja')->where('audit_kinerja', $request->kode)->update([
                     'status_pm' => 2,
+                    'users_pm' => Auth::user()->id,
                     'tanggal_pm' => Carbon::now()->format('d/m/yy'),
                     'jam_pm' => Carbon::now()->format('H:m'),
                     'komentar_pm' => $request->komentar,

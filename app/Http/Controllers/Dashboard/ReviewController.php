@@ -511,18 +511,20 @@ class ReviewController extends Controller
                     'updated_at' => Carbon::now()
                     ]);
                      return redirect(route('reviu'))->with(['success' => 'Reviu Laporan Keuangan Berhasil di Setujui']);
-                }elseif($data->users_pt == Auth::user()->id) {
+                }elseif(Auth::user()->level == 3 && Auth::user()->is_active == 1) {
                     DB::table('approvel_reviu_laporan_keuangan')->where('reviu_laporan_keuangan', $request->kode)->update([
                     'status_pt' => 2,
+                    'users_pt' => Auth::user()->id,
                     'tanggal_pt' => Carbon::now()->format('d/m/yy'),
                     'jam_pt' => Carbon::now()->format('H:m'),
                     'komentar_pt' => $request->komentar,
                     'updated_at' => Carbon::now()
                     ]);
                      return redirect(route('reviu'))->with(['success' => 'Reviu Laporan Keuangan Berhasil di Setujui']);
-                }elseif($data->users_pm == Auth::user()->id) {
+                }elseif(Auth::user()->level == 4 && Auth::user()->is_active == 1) {
                     DB::table('approvel_reviu_laporan_keuangan')->where('reviu_laporan_keuangan', $request->kode)->update([
                     'status_pm' => 2,
+                    'users_pm' => Auth::user()->id,
                     'tanggal_pm' => Carbon::now()->format('d/m/yy'),
                     'jam_pm' => Carbon::now()->format('H:m'),
                     'komentar_pm' => $request->komentar,
@@ -893,18 +895,20 @@ class ReviewController extends Controller
                     'updated_at' => Carbon::now()
                     ]);
                      return redirect(route('reviu'))->with(['success' => 'Reviu Kegiatan Anggaran Berhasil di Setujui']);
-                }elseif($data->users_pt == Auth::user()->id) {
+                }elseif(Auth::user()->level == 3 && Auth::user()->is_active == 1) {
                     DB::table('approvel_reviu_kegiatan_anggaran')->where('reviu_kegiatan_anggaran', $request->kode)->update([
                     'status_pt' => 2,
+                    'users_pt' => Auth::user()->id,
                     'tanggal_pt' => Carbon::now()->format('d/m/yy'),
                     'jam_pt' => Carbon::now()->format('H:m'),
                     'komentar_pt' => $request->komentar,
                     'updated_at' => Carbon::now()
                     ]);
                      return redirect(route('reviu'))->with(['success' => 'Reviu Kegiatan Anggaran Berhasil di Setujui']);
-                }elseif($data->users_pm == Auth::user()->id) {
+                }elseif(Auth::user()->level == 4 && Auth::user()->is_active == 1) {
                     DB::table('approvel_reviu_kegiatan_anggaran')->where('reviu_kegiatan_anggaran', $request->kode)->update([
                     'status_pm' => 2,
+                    'users_pm' => Auth::user()->id,
                     'tanggal_pm' => Carbon::now()->format('d/m/yy'),
                     'jam_pm' => Carbon::now()->format('H:m'),
                     'komentar_pm' => $request->komentar,
@@ -1260,10 +1264,12 @@ class ReviewController extends Controller
         if($request->has('kirim')) {
             
             if($data->reviu_lakip == $request->kode) {
+                $checkUserPt = DB::table('users')->where('level','=',3)->where('is_active','=',1)->first();
+                $checkUserPm = DB::table('users')->where('level','=',4)->where('is_active','=',1)->first();
                 if($data->users_ketua == Auth::user()->id) {
                     DB::table('approvel_reviu_lakip')->where('reviu_lakip', $request->kode)->update([
-                    'users_pt' => 2,
-                    'users_pm' => 3,
+                    'users_pt' => $checkUserPt->id,
+                    'users_pm' => $checkUserPm->id,
                     'status_ketua' => 2,
                     'tanggal_ketua' => Carbon::now()->format('d/m/yy'),
                     'jam_ketua' => Carbon::now()->format('H:m'),
@@ -1271,18 +1277,20 @@ class ReviewController extends Controller
                     'updated_at' => Carbon::now()
                     ]);
                      return redirect(route('reviu'))->with(['success' => 'Reviu LAKIP Berhasil di Setujui']);
-                }elseif($data->users_pt == Auth::user()->id) {
+                }elseif(Auth::user()->level == 3 && Auth::user()->is_active == 1) {
                     DB::table('approvel_reviu_lakip')->where('reviu_lakip', $request->kode)->update([
                     'status_pt' => 2,
+                    'users_pt' => Auth::user()->id,
                     'tanggal_pt' => Carbon::now()->format('d/m/yy'),
                     'jam_pt' => Carbon::now()->format('H:m'),
                     'komentar_pt' => $request->komentar,
                     'updated_at' => Carbon::now()
                     ]);
                      return redirect(route('reviu'))->with(['success' => 'Reviu LAKIP Berhasil di Setujui']);
-                }elseif($data->users_pm == Auth::user()->id) {
+                }elseif(Auth::user()->level == 4 && Auth::user()->is_active == 1) {
                     DB::table('approvel_reviu_lakip')->where('reviu_lakip', $request->kode)->update([
                     'status_pm' => 2,
+                    'users_pm' => Auth::user()->id,
                     'tanggal_pm' => Carbon::now()->format('d/m/yy'),
                     'jam_pm' => Carbon::now()->format('H:m'),
                     'komentar_pm' => $request->komentar,
@@ -1656,18 +1664,20 @@ class ReviewController extends Controller
                     'updated_at' => Carbon::now()
                     ]);
                     return redirect(route('reviu'))->with(['success' => 'Reviu RKBMN Berhasil di Setujui']);
-                }elseif($data->users_pt == Auth::user()->id) {
+                }elseif(Auth::user()->level == 3 && Auth::user()->is_active == 1) {
                     DB::table('approvel_reviu_rkbmn')->where('reviu_rkbmn', $request->kode)->update([
                     'status_pt' => 2,
+                    'users_pt' => Auth::user()->id,
                     'tanggal_pt' => Carbon::now()->format('d/m/yy'),
                     'jam_pt' => Carbon::now()->format('H:m'),
                     'komentar_pt' => $request->komentar,
                     'updated_at' => Carbon::now()
                     ]);
                     return redirect(route('reviu'))->with(['success' => 'Reviu RKBMN Berhasil di Setujui']);
-                }elseif($data->users_pm == Auth::user()->id) {
+                }elseif(Auth::user()->level == 4 && Auth::user()->is_active == 1) {
                     DB::table('approvel_reviu_rkbmn')->where('reviu_rkbmn', $request->kode)->update([
                     'status_pm' => 2,
+                    'users_pm' => Auth::user()->id,
                     'tanggal_pm' => Carbon::now()->format('d/m/yy'),
                     'jam_pm' => Carbon::now()->format('H:m'),
                     'komentar_pm' => $request->komentar,
