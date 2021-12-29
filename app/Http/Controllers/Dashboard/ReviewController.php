@@ -499,9 +499,11 @@ class ReviewController extends Controller
         if($request->has('kirim')) {
             if($data->reviu_laporan_keuangan == $request->kode) {
                 if($data->users_ketua == Auth::user()->id) {
+                    $checkUserPt = DB::table('users')->where('level','=',3)->where('is_active','=',1)->first();
+                    $checkUserPm = DB::table('users')->where('level','=',4)->where('is_active','=',1)->first();
                     DB::table('approvel_reviu_laporan_keuangan')->where('reviu_laporan_keuangan', $request->kode)->update([
-                    'users_pt' => 2,
-                    'users_pm' => 3,
+                    'users_pt' => $checkUserPt->id,
+                    'users_pm' => $checkUserPm->id,
                     'status_ketua' => 2,
                     'tanggal_ketua' => Carbon::now()->format('d/m/yy'),
                     'jam_ketua' => Carbon::now()->format('H:m'),
@@ -879,9 +881,11 @@ class ReviewController extends Controller
         if($request->has('kirim')) {
             if($data->reviu_kegiatan_anggaran == $request->kode) {
                 if($data->users_ketua == Auth::user()->id) {
+                    $checkUserPt = DB::table('users')->where('level','=',3)->where('is_active','=',1)->first();
+                    $checkUserPm = DB::table('users')->where('level','=',4)->where('is_active','=',1)->first();
                     DB::table('approvel_reviu_kegiatan_anggaran')->where('reviu_kegiatan_anggaran', $request->kode)->update([
-                    'users_pt' => 2,
-                    'users_pm' => 3,
+                    'users_pt' => $checkUserPt->id,
+                    'users_pm' => $checkUserPm->id,
                     'status_ketua' => 2,
                     'tanggal_ketua' => Carbon::now()->format('d/m/yy'),
                     'jam_ketua' => Carbon::now()->format('H:m'),
@@ -1640,9 +1644,11 @@ class ReviewController extends Controller
         if($request->has('kirim')) {
             if($data->reviu_rkbm == $request->kode) {
                 if($data->users_ketua == Auth::user()->id) {
+                    $checkUserPt = DB::table('users')->where('level','=',3)->where('is_active','=',1)->first();
+                    $checkUserPm = DB::table('users')->where('level','=',4)->where('is_active','=',1)->first();
                     DB::table('approvel_reviu_rkbmn')->where('reviu_rkbmn', $request->kode)->update([
-                    'users_pt' => 2,
-                    'users_pm' => 3,
+                    'users_pt' => $checkUserPt->id,
+                    'users_pm' => $checkUserPm->id,
                     'status_ketua' => 2,
                     'tanggal_ketua' => Carbon::now()->format('d/m/yy'),
                     'jam_ketua' => Carbon::now()->format('H:m'),

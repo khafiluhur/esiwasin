@@ -501,9 +501,11 @@ class EvaluasiController extends Controller
         if($request->has('kirim')) {
             if($data->evaluasi_sakip == $request->kode) {
                 if($data->users_ketua == Auth::user()->id) {
+                    $checkUserPt = DB::table('users')->where('level','=',3)->where('is_active','=',1)->first();
+                    $checkUserPm = DB::table('users')->where('level','=',4)->where('is_active','=',1)->first();
                     DB::table('approvel_evaluasi_sakip')->where('evaluasi_sakip', $request->kode)->update([
-                    'users_pt' => 2,
-                    'users_pm' => 3,
+                    'users_pt' => $checkUserPt->id,
+                    'users_pm' => $checkUserPm->id,
                     'status_ketua' => 2,
                     'tanggal_ketua' => Carbon::now()->format('d/m/yy'),
                     'jam_ketua' => Carbon::now()->format('H:m'),
@@ -884,9 +886,11 @@ class EvaluasiController extends Controller
         if($request->has('kirim')) {
             if($data->evaluasi_reformasi_birokrasi == $request->kode) {
                 if($data->users_ketua == Auth::user()->id) {
+                    $checkUserPt = DB::table('users')->where('level','=',3)->where('is_active','=',1)->first();
+                    $checkUserPm = DB::table('users')->where('level','=',4)->where('is_active','=',1)->first();
                     DB::table('approvel_evaluasi_reformasi_birokrasi')->where('evaluasi_reformasi_birokrasi', $request->kode)->update([
-                    'users_pt' => 2,
-                    'users_pm' => 3,
+                    'users_pt' => $checkUserPt->id,
+                    'users_pm' => $checkUserPm->id,
                     'status_ketua' => 2,
                     'tanggal_ketua' => Carbon::now()->format('d/m/yy'),
                     'jam_ketua' => Carbon::now()->format('H:m'),
@@ -1269,9 +1273,11 @@ class EvaluasiController extends Controller
         if($request->has('kirim')) {
             if($data->evaluasi_spip == $request->kode) {
                 if($data->users_ketua == Auth::user()->id) {
+                    $checkUserPt = DB::table('users')->where('level','=',3)->where('is_active','=',1)->first();
+                    $checkUserPm = DB::table('users')->where('level','=',4)->where('is_active','=',1)->first();
                     DB::table('approvel_evaluasi_spip')->where('evaluasi_spip', $request->kode)->update([
-                    'users_pt' => 2,
-                    'users_pm' => 3,
+                    'users_pt' => $checkUserPt->id,
+                    'users_pm' => $checkUserPm->id,
                     'status_ketua' => 2,
                     'tanggal_ketua' => Carbon::now()->format('d/m/yy'),
                     'jam_ketua' => Carbon::now()->format('H:m'),
@@ -1649,9 +1655,11 @@ class EvaluasiController extends Controller
         if($request->has('kirim')) {
             if($data->evaluasi_iacm == $request->kode) {
                 if($data->users_ketua == Auth::user()->id) {
+                    $checkUserPt = DB::table('users')->where('level','=',3)->where('is_active','=',1)->first();
+                    $checkUserPm = DB::table('users')->where('level','=',4)->where('is_active','=',1)->first();
                     DB::table('approvel_evaluasi_iacm')->where('evaluasi_iacm', $request->kode)->update([
-                    'users_pt' => 2,
-                    'users_pm' => 3,
+                    'users_pt' => $checkUserPt->id,
+                    'users_pm' => $checkUserPm->id,
                     'status_ketua' => 2,
                     'tanggal_ketua' => Carbon::now()->format('d/m/yy'),
                     'jam_ketua' => Carbon::now()->format('H:m'),
