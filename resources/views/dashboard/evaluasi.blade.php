@@ -7,6 +7,8 @@
 <link rel="stylesheet" href="{{asset('/js/plugins/ion-rangeslider/css/ion.rangeSlider.css')}}">
 <link rel="stylesheet" href="{{asset('/js/plugins/dropzone/dist/min/dropzone.min.css')}}">
 <link rel="stylesheet" href="{{asset('/js/plugins/flatpickr/flatpickr.min.css')}}">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+
 @endsection
 
 @section('content')
@@ -61,16 +63,16 @@
                     @if(!$pkpt_sakip->isEmpty())
                         @if($data1)
                             @if($data1->ketua == Auth::user()->id)
-                                @if($data1->id_status_ketua == 2)
+                                @if($data1->status_ketua == 2)
                                     @include('partial.evaluasi.sakip.form_default') 
                                 @else
                                     @include('partial.evaluasi.sakip.form_setuju')
                                 @endif
                             @elseif(Auth::user()->level == 3 && Auth::user()->is_active == 1)
-                                @if($data1->id_status_pt == 2)
+                                @if($data1->status_pt == 2)
                                     @include('partial.evaluasi.sakip.form_default')
                                 @else
-                                    @if ($data1->id_status_ketua == 2)
+                                    @if ($data1->status_ketua == 2)
                                         @include('partial.evaluasi.sakip.form_setuju') 
                                     @else
                                         @include('partial.evaluasi.sakip.form_default')
@@ -80,7 +82,7 @@
                                 @if($data1->status_pm == 2)
                                     @include('partial.evaluasi.sakip.form_default')
                                 @else
-                                    @if ($data1->id_status_pt == 2)
+                                    @if ($data1->status_pt == 2)
                                         @include('partial.evaluasi.sakip.form_setuju')
                                     @else
                                         @include('partial.evaluasi.sakip.form_default')
@@ -107,16 +109,16 @@
                     @if(!$pkpt_rb->isEmpty())
                         @if($data2)
                             @if($data2->ketua == Auth::user()->id)
-                                @if($data2->id_status_ketua == 2)
+                                @if($data2->status_ketua == 2)
                                     @include('partial.evaluasi.reformasi.form_default') 
                                 @else
                                     @include('partial.evaluasi.reformasi.form_setuju')
                                 @endif
                             @elseif(Auth::user()->level == 3 && Auth::user()->is_active == 1)
-                                @if($data2->id_status_pt == 2)
+                                @if($data2->status_pt == 2)
                                     @include('partial.evaluasi.reformasi.form_default')
                                 @else
-                                    @if ($data2->id_status_ketua == 2)
+                                    @if ($data2->status_ketua == 2)
                                         @include('partial.evaluasi.reformasi.form_setuju') 
                                     @else
                                         @include('partial.evaluasi.reformasi.form_default')
@@ -126,7 +128,7 @@
                                 @if($data2->status_pm == 2)
                                     @include('partial.evaluasi.reformasi.form_default')
                                 @else
-                                    @if ($data2->id_status_pt == 2)
+                                    @if ($data2->status_pt == 2)
                                         @include('partial.evaluasi.reformasi.form_setuju')
                                     @else
                                         @include('partial.evaluasi.reformasi.form_default')
@@ -153,16 +155,16 @@
                     @if(!$pkpt_spip->isEmpty())
                         @if($data3)
                             @if($data3->ketua == Auth::user()->id)
-                                @if($data3->id_status_ketua == 2)
+                                @if($data3->status_ketua == 2)
                                     @include('partial.evaluasi.spip.form_default') 
                                 @else
                                     @include('partial.evaluasi.spip.form_setuju')
                                 @endif
                             @elseif(Auth::user()->level == 3 && Auth::user()->is_active == 1)
-                                @if($data3->id_status_pt == 2)
+                                @if($data3->status_pt == 2)
                                     @include('partial.evaluasi.spip.form_default')
                                 @else
-                                    @if ($data3->id_status_ketua == 2)
+                                    @if ($data3->status_ketua == 2)
                                         @include('partial.evaluasi.spip.form_setuju') 
                                     @else
                                         @include('partial.evaluasi.spip.form_default')
@@ -172,7 +174,7 @@
                                 @if($data3->status_pm == 2)
                                     @include('partial.evaluasi.spip.form_default')
                                 @else
-                                    @if ($data2->id_status_pt == 2)
+                                    @if ($data3->status_pt == 2)
                                         @include('partial.evaluasi.spip.form_setuju')
                                     @else
                                         @include('partial.evaluasi.spip.form_default')
@@ -199,26 +201,26 @@
                     @if(!$pkpt_iacm->isEmpty())
                         @if($data4)
                             @if($data4->ketua == Auth::user()->id)
-                                @if($data4->id_status_ketua == 2)
+                                @if($data4->status_ketua == 2)
                                     @include('partial.evaluasi.iacm.form_default') 
                                 @else
                                     @include('partial.evaluasi.iacm.form_setuju')
                                 @endif
-                            @elseif($data4->id_pt == Auth::user()->id)
-                                @if($data4->id_status_pt == 2)
+                            @elseif(Auth::user()->level == 3 && Auth::user()->is_active == 1)
+                                @if($data4->status_pt == 2)
                                     @include('partial.evaluasi.iacm.form_default')
                                 @else
-                                    @if ($data4->id_status_ketua == 2)
+                                    @if ($data4->status_ketua == 2)
                                         @include('partial.evaluasi.iacm.form_setuju') 
                                     @else
                                         @include('partial.evaluasi.iacm.form_default')
                                     @endif
                                 @endif
-                            @elseif($data4->id_pm == Auth::user()->id)
+                            @elseif(Auth::user()->level == 4 && Auth::user()->is_active == 1)
                                 @if($data4->status_pm == 2)
                                     @include('partial.evaluasi.iacm.form_default')
                                 @else
-                                    @if ($data2->id_status_pt == 2)
+                                    @if ($data4->id_status_pt == 2)
                                         @include('partial.evaluasi.iacm.form_setuju')
                                     @else
                                         @include('partial.evaluasi.iacm.form_default')

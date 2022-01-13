@@ -285,24 +285,24 @@
 
 @section('script')
 <script type="text/javascript">
-    $(document).ready(function() {
-      $("#add_dasar").click(function(){ 
-          var lsthmtl = $('#form_dasar:last').clone();
-          $(lsthmtl).insertAfter('#form_dasar:last');
-      });
-      $("#add_landasan").click(function(){ 
-          var lsthmtl = $('#form_landasan:last').clone();
-          $(lsthmtl).insertAfter('#form_landasan:last');
-      });
-      $("#add_peserta").click(function(){ 
-          var lsthmtl = $('#form_peserta:last').clone();
-          $(lsthmtl).insertAfter('#form_peserta:last');
-      });
-      $("body").on("click",".btn-danger",function(){ 
-          console.log("delete");
-          $(this).parents(".hdtuto").remove();
-      });
-    });
+    // $(document).ready(function() {
+    //   $("#add_dasar").click(function(){ 
+    //       var lsthmtl = $('#form_dasar:last').clone();
+    //       $(lsthmtl).insertAfter('#form_dasar:last');
+    //   });
+    //   $("#add_landasan").click(function(){ 
+    //       var lsthmtl = $('#form_landasan:last').clone();
+    //       $(lsthmtl).insertAfter('#form_landasan:last');
+    //   });
+    //   $("#add_peserta").click(function(){ 
+    //       var lsthmtl = $('#form_peserta:last').clone();
+    //       $(lsthmtl).insertAfter('#form_peserta:last');
+    //   });
+    //   $("body").on("click",".btn-danger",function(){ 
+    //       console.log("delete");
+    //       $(this).parents(".hdtuto").remove();
+    //   });
+    // });
 </script>
 <script src="{{asset('/js/plugins/jquery-bootstrap-wizard/bs4/jquery.bootstrap.wizard.min.js')}}"></script>
 <script src="{{asset('/js/plugins/jquery-validation/jquery.validate.min.js')}}"></script>

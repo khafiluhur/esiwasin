@@ -56,11 +56,11 @@
         </div> 
         <div class="form-group">
             <label for="nomor_st">Landasan Hukum</label><span class="text-danger">*</span>
-            <table class="table table-bordered" id="dynamicAddRemove">
+            <table class="" id="dynamicAddRemove2">
                 <tr>
                     <td><input type="text" name="landasan[0]" placeholder="Landasan Hukum" class="form-control" />
                     </td>
-                    <td><button name="add" id="dynamic-ar" class="btn btn-success" type="button"><i class="fas fa-plus"></i></button></td>
+                    <td><button name="add" id="dynamic-ar2" class="btn btn-success" type="button"><i class="fas fa-plus"></i></button></td>
                 </tr>
             </table>
             {{-- <div class="input-group custom-file hdtuto control-group lst increment" >
@@ -134,9 +134,9 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"></script>
 <script type="text/javascript">
     var i = 0;
-    $("#dynamic-ar").click(function () {
+    $("#dynamic-ar2").click(function () {
         ++i;
-        $("#dynamicAddRemove").append('<tr><td><input type="text" name="landasan[' + i +
+        $("#dynamicAddRemove2").append('<tr><td><input type="text" name="landasan[' + i +
             ']" placeholder="Landasan Hukum" class="form-control" /></td><td> <button class="btn btn-danger" type="button"><i class="fas fa-minus remove-input-field"></i></button></td></tr>'
             );
     });

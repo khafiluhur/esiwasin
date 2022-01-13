@@ -25,14 +25,14 @@
             @else
             <div class="form-group">
                 <label>Anggota Tim</label>
-                <input class="form-control" type="text" id="created_by" name="created_by" value="{{ $data1->users_pembuat }}" disabled>
+                <input class="form-control" type="text" id="created_by" name="created_by" value="{{ $data2->users_pembuat }}" disabled>
             </div>
         @endif
         @endif
         <div class="form-group">
             <label for="nomor_st">Nomor ST</label>
-            <input class="form-control" type="text" id="nomor_st" name="nomor_st" value="{{ $data1->nomor_st }}" disabled>
-            <input class="form-control" type="hidden" id="kode2" name="kode" value="{{ $data1->kode }}">
+            <input class="form-control" type="text" id="nomor_st" name="nomor_st" value="{{ $data2->nomor_st }}" disabled>
+            <input class="form-control" type="hidden" id="kode2" name="kode" value="{{ $data2->kode }}">
         </div>
     </div>
     <div class="col-6 float-right">
@@ -41,13 +41,13 @@
             <div class="">
                 <div class="form-group">
                     <div class="input-daterange input-group" data-date-format="dd/mm/yyyy" data-week-start="1" data-autoclose="true" data-today-highlight="true">
-                        <input type="text" class="form-control" id="tanggal_audit_from" name="tanggal_audit_from" placeholder="From" data-week-start="1" data-autoclose="true" data-today-highlight="true" value="{{ $data1->tanggal_reviu_from }}" disabled>
+                        <input type="text" class="form-control" id="tanggal_audit_from" name="tanggal_audit_from" placeholder="From" data-week-start="1" data-autoclose="true" data-today-highlight="true" value="{{ $data2->tanggal_reviu_from }}" disabled>
                         <div class="input-group-prepend input-group-append">
                             <span class="input-group-text font-w600">
                                 s/d
                             </span>
                         </div>
-                        <input type="text" class="form-control" id="tanggal_audit_to" name="tanggal_audit_to" placeholder="To" data-week-start="1" data-autoclose="true" data-today-highlight="true" value="{{ $data1->tanggal_reviu_to }}" disabled>
+                        <input type="text" class="form-control" id="tanggal_audit_to" name="tanggal_audit_to" placeholder="To" data-week-start="1" data-autoclose="true" data-today-highlight="true" value="{{ $data2->tanggal_reviu_to }}" disabled>
                     </div>
                 </div>    
             </div>
@@ -77,7 +77,7 @@
                     Penjelasan
                 </span>
             </div> 
-            <textarea class="form-control" id="temuan_sebab" name="temuan_sebab" rows="4" value="" disabled>{{ $data1->temuan_penjelasan_reviu }}</textarea>
+            <textarea class="form-control" id="temuan_sebab" name="temuan_sebab" rows="4" value="" disabled>{{ $data2->temuan_penjelasan_reviu }}</textarea>
         </div>
     </div>
 </div>   
@@ -114,37 +114,37 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td class="text-center">{{ $data1->users_pembuat }}</td>
-                            <td class="font-w600 font-size-sm">{{ $data1->status_pembuat }}</td>
-                            <td class="font-size-sm">{{ $data1->tanggal_pembuat }}</td>
-                            <td>{{ $data1->jam_pembuat }}</td>
-                            <td class="text-center">{{ $data1->komentar_pembuat }}</td>
+                            <td class="text-center">{{ $data2->users_pembuat }}</td>
+                            <td class="font-w600 font-size-sm">{{ $data2->status_pembuat }}</td>
+                            <td class="font-size-sm">{{ $data2->tanggal_pembuat }}</td>
+                            <td>{{ $data2->jam_pembuat }}</td>
+                            <td class="text-center">{{ $data2->komentar_pembuat }}</td>
                         </tr>
-                        @if($data1->komentar_ketua)
+                        @if($data2->komentar_ketua)
                         <tr>
-                            <td class="text-center">{{ $data1->users_ketua }}</td>
-                            <td class="font-w600 font-size-sm">{{ $data1->status_ketua }}</td>
-                            <td class="font-size-sm">{{ $data1->tanggal_ketua }}</td>
-                            <td>{{ $data1->jam_ketua }}</td>
-                            <td class="text-center">{{ $data1->komentar_ketua }}</td>
-                        </tr>
-                        @endif
-                        @if($data1->komentar_pt)
-                        <tr>
-                            <td class="text-center">{{ $data1->users_pt }}</td>
-                            <td class="font-w600 font-size-sm">{{ $data1->status_pt }}</td>
-                            <td class="font-size-sm">{{ $data1->tanggal_pt }}</td>
-                            <td>{{ $data1->jam_pt }}</td>
-                            <td class="text-center">{{ $data1->komentar_pt }}</td>
+                            <td class="text-center">{{ $data2->users_ketua }}</td>
+                            <td class="font-w600 font-size-sm">{{ $data2->status_ketua }}</td>
+                            <td class="font-size-sm">{{ $data2->tanggal_ketua }}</td>
+                            <td>{{ $data2->jam_ketua }}</td>
+                            <td class="text-center">{{ $data2->komentar_ketua }}</td>
                         </tr>
                         @endif
-                         @if($data1->komentar_pm)
+                        @if($data2->komentar_pt)
                         <tr>
-                            <td class="text-center">{{ $data1->users_pm }}</td>
-                            <td class="font-w600 font-size-sm">{{ $data1->status_pm }}</td>
-                            <td class="font-size-sm">{{ $data1->tanggal_pm }}</td>
-                            <td>{{ $data1->jam_pm }}</td>
-                            <td class="text-center">{{ $data1->komentar_pm }}</td>
+                            <td class="text-center">{{ $data2->users_pt }}</td>
+                            <td class="font-w600 font-size-sm">{{ $data2->status_pt }}</td>
+                            <td class="font-size-sm">{{ $data2->tanggal_pt }}</td>
+                            <td>{{ $data2->jam_pt }}</td>
+                            <td class="text-center">{{ $data2->komentar_pt }}</td>
+                        </tr>
+                        @endif
+                         @if($data2->komentar_pm)
+                        <tr>
+                            <td class="text-center">{{ $data2->users_pm }}</td>
+                            <td class="font-w600 font-size-sm">{{ $data2->status_pm }}</td>
+                            <td class="font-size-sm">{{ $data2->tanggal_pm }}</td>
+                            <td>{{ $data2->jam_pm }}</td>
+                            <td class="text-center">{{ $data2->komentar_pm }}</td>
                         </tr>
                         @endif
                     </tbody>

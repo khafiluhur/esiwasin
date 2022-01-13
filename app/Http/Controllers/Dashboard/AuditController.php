@@ -212,6 +212,7 @@ class AuditController extends Controller
                 ->where('ak.is_prosess', 1)
                 ->orderBy('created_at', 'desc')
                 ->first();
+        // dd($data3);
         if($data3) {
             $file3 = DB::table('kertas_audit_tujuan_tertntus')
                 ->where('kode_audit_tujuan_tertentu', $data3->kode)
@@ -256,7 +257,6 @@ class AuditController extends Controller
 
                 ## Form Kertas Kerja ##
                 'kertas_kerja' => 'required',
-                'kertas_kerja.*' => 'max:2000000',
 
                 ## Form Comment ##
                 'komentar' => 'required'
@@ -1158,7 +1158,7 @@ class AuditController extends Controller
                     $photo->move(public_path($folder),$photoname);
                     $data[] = $photoname;
                     KertasAuditTujuanTertntu::create([
-                        'audit_tujuan_tertentu' => $request->id,
+                        'audit_tujuan_tertentu' => $request->kode,
                         'kode_audit_tujuan_tertentu' => $request->kode,
                         'filename' => $photoname
                     ]);
@@ -1262,7 +1262,7 @@ class AuditController extends Controller
                         $photo->move(public_path($folder),$photoname);
                         $data[] = $photoname;
                         KertasAuditTujuanTertntu::create([
-                            'audit_tujuan_tertentu' => $request->id,
+                            'audit_tujuan_tertentu' => $request->kode,
                             'kode_audit_tujuan_tertentu' => $request->kode,
                             'filename' => $photoname
                         ]);
@@ -1319,7 +1319,7 @@ class AuditController extends Controller
                         $photo->move(public_path($folder),$photoname);
                         $data[] = $photoname;
                         KertasAuditTujuanTertntu::create([
-                            'audit_tujuan_tertentu' => $request->id,
+                            'audit_tujuan_tertentu' => $request->kode,
                             'kode_audit_tujuan_tertentu' => $request->kode,
                             'filename' => $photoname
                         ]);
@@ -1376,7 +1376,7 @@ class AuditController extends Controller
                         $photo->move(public_path($folder),$photoname);
                         $data[] = $photoname;
                         KertasAuditTujuanTertntu::create([
-                            'audit_tujuan_tertentu' => $request->id,
+                            'audit_tujuan_tertentu' => $request->kode,
                             'kode_audit_tujuan_tertentu' => $request->kode,
                             'filename' => $photoname
                         ]);

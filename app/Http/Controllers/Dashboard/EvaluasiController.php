@@ -39,6 +39,7 @@ class EvaluasiController extends Controller
         $pkpt_iacm = DB::table('input_pkpt')->where('jenis', 11)->get();
         
         ## Evaluasi SAKIP ##
+        
         $data1 = DB::table('evaluasi_sakip as ak')
                 ->select(
                     'ak.*', 
@@ -76,6 +77,7 @@ class EvaluasiController extends Controller
                 ->where('ak.is_prosess', 1)
                 ->orderBy('ak.created_at', 'desc')
                 ->first(); 
+        // dd($data1);
         if($data1) {
             $file1 = DB::table('kertas_evaluasi_sakips')
                 ->where('kode_evaluasi_sakip', $data1->kode)
@@ -244,7 +246,7 @@ class EvaluasiController extends Controller
                 'temuan_akibat' => 'required',
 
                 ## Form Kertas Kerja ##
-                'kertas_kerja' => 'required',
+                'kertas_kerja' => 'required|max:500000',
 
                 ## Form Comment ##
                 'komentar' => 'required'

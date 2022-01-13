@@ -51,7 +51,7 @@
                 <label>Kertas Kerja</label><span class="text-danger">*</span>
                 <div class="input-group custom-file hdtuto control-group lst increment">
                     <div class="col-10 float-left">
-                        <input type="file" id="kertas_kerja" name="kertas_kerja[]" class="myfrm form-control custom-file-input" data-toggle="custom-file-input" value="{{ old('kertas_kerja') }}" multiple="multiple">
+                        <input type="file" id="kertas_kerja" onchange="Filevalidation()" name="kertas_kerja[]" class="myfrm form-control custom-file-input" data-toggle="custom-file-input" value="{{ old('kertas_kerja') }}" multiple="multiple">
                         <label class="custom-file-label" for="kertas_kerja">Dokumen</label>
                     </div>
                     <div class="input-group-btn col-2 float-left"> 
@@ -60,7 +60,7 @@
                 </div>
                 <div class="clone input-group custom-file hdtuto control-group lst" id="upload_kertas_spip" style="margin-top:10px" >
                     <div class="col-10 float-left">
-                        <input type="file" id="kertas_kerja" name="kertas_kerja[]" class="myfrm form-control custom-file-input" data-toggle="custom-file-input" value="{{ old('kertas_kerja') }}" multiple="multiple">
+                        <input type="file" id="kertas_kerja" onchange="Filevalidation()" name="kertas_kerja[]" class="myfrm form-control custom-file-input" data-toggle="custom-file-input" value="{{ old('kertas_kerja') }}" multiple="multiple">
                         <label class="custom-file-label" for="kertas_kerja">Dokumen</label>
                     </div>
                     <div class="input-group-btn col-2 float-left"> 
@@ -145,3 +145,28 @@
     </div>
 </div>
 </form>
+
+<script>
+    Filevalidation = () => {
+        const fi = document.getElementById('kertas_kerja');
+        // Check if any file is selected.
+        if (fi.files.length > 0) {
+            for (const i = 0; i <= fi.files.length - 1; i++) {
+  
+                const fsize = fi.files.item(i).size;
+                const file = Math.round((fsize / 1024));
+                // The size of the file.
+                if (file >= 2048) {
+                    alert(
+                      "File terlalu besar, pilih file kurang dari 2mb");
+                // } else if (file < 2048) {
+                //     alert(
+                //       "File too small, please select a file greater than 2mb");
+                } else {
+                    document.getElementById('size').innerHTML = '<b>'
+                    + file + '</b> KB';
+                }
+            }
+        }
+    }
+</script>
